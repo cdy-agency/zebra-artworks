@@ -1,0 +1,86 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { Menu, X, Home } from "lucide-react";
+
+const navLinks = [
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Pricing", href: "/pricing" },
+];
+
+export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <header className="absolute top-0 left-0 right-0 z-50 px-6 pt-5">
+      <nav className="max-w-6xl mx-auto bg-background/90 backdrop-blur-md rounded-full px-6 py-3 flex items-center justify-between shadow-lg">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2">
+          <span className="bg-primary text-background rounded-lg p-1.5">
+            <Home size={18} />
+          </span>
+          <span className="text-foreground font-extrabold tracking-tight text-lg">
+            ZAG Rwanda
+          </span>
+        </Link>
+
+        {/* Desktop Nav Links */}
+        <ul className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <li key={link.label}>
+              <Link
+                href={link.href}
+                className="text-gray-mid font-medium hover:text-primary transition-colors duration-200 text-sm"
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA Button */}
+        <Link
+          href="/contact"
+          className="hidden md:inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-background font-semibold text-sm px-6 py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+        >
+          Contact Us
+        </Link>
+
+        {/* Mobile Menu Toggle */}
+        <button
+          className="md:hidden text-gray-mid hover:text-primary transition-colors"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </nav>
+
+      {/* Mobile Dropdown */}
+      {menuOpen && (
+        <div className="md:hidden max-w-6xl mx-auto mt-2 bg-background rounded-2xl shadow-xl px-6 py-4 flex flex-col gap-4">
+          {navLinks.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="text-gray-mid font-medium hover:text-primary transition-colors"
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link
+            href="/contact"
+            className="bg-primary text-background font-semibold text-sm px-6 py-2.5 rounded-full text-center"
+            onClick={() => setMenuOpen(false)}
+          >
+            Contact Us
+          </Link>
+        </div>
+      )}
+    </header>
+  );
+}
