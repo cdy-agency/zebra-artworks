@@ -15,14 +15,18 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 px-6 pt-5">
+    <header className="fixed top-0 left-0 right-0 z-50 px-6 pt-5">
       <nav className="max-w-6xl mx-auto bg-background/90 backdrop-blur-md rounded-full px-6 py-3 flex items-center justify-between shadow-lg">
+        
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link
+          href="/"
+          className="flex items-center gap-2 cursor-pointer hover:-translate-y-0.5 transition-all duration-200"
+        >
           <span className="bg-primary text-background rounded-lg p-1.5">
             <Home size={18} />
           </span>
-          <span className="text-foreground font-extrabold tracking-tight text-lg">
+          <span className="text-foreground font-extrabold tracking-tight text-lg hover:font-bold transition-all">
             ZAG Rwanda
           </span>
         </Link>
@@ -33,7 +37,7 @@ export default function Navbar() {
             <li key={link.label}>
               <Link
                 href={link.href}
-                className="text-gray-mid font-medium hover:text-primary transition-colors duration-200 text-sm"
+                className="text-gray-mid font-medium hover:text-primary hover:font-bold cursor-pointer transition-all duration-200 text-sm hover:-translate-y-0.5 inline-block"
               >
                 {link.label}
               </Link>
@@ -51,7 +55,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden text-gray-mid hover:text-primary transition-colors"
+          className="md:hidden text-gray-mid hover:text-primary transition-colors cursor-pointer"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -66,7 +70,7 @@ export default function Navbar() {
             <Link
               key={link.label}
               href={link.href}
-              className="text-gray-mid font-medium hover:text-primary transition-colors"
+              className="text-gray-mid font-medium hover:text-primary hover:font-bold cursor-pointer transition-all"
               onClick={() => setMenuOpen(false)}
             >
               {link.label}
@@ -74,7 +78,7 @@ export default function Navbar() {
           ))}
           <Link
             href="/contact"
-            className="bg-primary text-background font-semibold text-sm px-6 py-2.5 rounded-full text-center"
+            className="bg-primary text-background font-semibold text-sm px-6 py-2.5 rounded-full text-center hover:font-bold transition-all"
             onClick={() => setMenuOpen(false)}
           >
             Contact Us
