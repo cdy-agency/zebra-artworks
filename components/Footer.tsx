@@ -1,8 +1,16 @@
+"use client";
 
 import Link from "next/link";
+import { useState } from "react";
 // import { Facebook, Twitter, Linkedin } from "lucide-react";
 
 export default function Footer() {
+  const [open, setOpen] = useState<string | null>(null);
+
+  const toggle = (section: string) => {
+    setOpen(open === section ? null : section);
+  };
+
   return (
     <footer className="bg-gray-900 text-white py-12 px-6">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
@@ -34,7 +42,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="/about" className="hover:text-white transition">
-               Gallery
+                Gallery
               </Link>
             </li>
             <li>
@@ -45,16 +53,51 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Services */}
+        {/* Services (DROPDOWN ONLY CHANGED PART) */}
         <div>
           <h3 className="text-sm font-semibold mb-4 uppercase tracking-wide">
             Services
           </h3>
-          <ul className="space-y-2 text-gray-400 text-sm">
-            <li>interior design department</li>
-<li>architecture and construction departments</li>
-           
-          </ul>
+
+          {/* Interior Design */}
+          <div className="mb-3 border-b border-gray-700 pb-2">
+            <button
+              onClick={() => toggle("interior")}
+              className="w-full flex justify-between items-center text-gray-400 hover:text-white transition text-sm"
+            >
+              Interior Design Department
+              <span>{open === "interior" ? "−" : "+"}</span>
+            </button>
+
+            {open === "interior" && (
+              <ul className="mt-2 space-y-1 text-gray-400 text-sm pl-2">
+                <li>Commercial Spaces</li>
+                <li>Residential Spaces</li>
+                <li>Hotels and Apartments</li>
+                <li>Public and Private Offices</li>
+              </ul>
+            )}
+          </div>
+
+          {/* Architecture */}
+          <div className="border-b border-gray-700 pb-2">
+            <button
+              onClick={() => toggle("architecture")}
+              className="w-full flex justify-between items-center text-gray-400 hover:text-white transition text-sm"
+            >
+              Architecture & Construction
+              <span>{open === "architecture" ? "−" : "+"}</span>
+            </button>
+
+            {open === "architecture" && (
+              <ul className="mt-2 space-y-1 text-gray-400 text-sm pl-2">
+                <li>Architectural Plan</li>
+                <li>MEP Supplies</li>
+                <li>Construction</li>
+                <li>Materials Supply</li>
+              </ul>
+            )}
+          </div>
         </div>
 
         {/* Contact */}
