@@ -24,22 +24,22 @@ export default function Footer() {
           <ul className="space-y-2 text-gray-400 text-sm">
             <li>
               <Link href="/" className="hover:text-white transition">
-                Home
+                About
               </Link>
             </li>
             <li>
               <Link href="/projects" className="hover:text-white transition">
-                Projects
+                Services
               </Link>
             </li>
             <li>
               <Link href="/about" className="hover:text-white transition">
-                About Us
+               Gallery
               </Link>
             </li>
             <li>
               <Link href="/contact" className="hover:text-white transition">
-                Contact
+                Pricing
               </Link>
             </li>
           </ul>
