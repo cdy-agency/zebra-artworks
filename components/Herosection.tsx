@@ -1,28 +1,81 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
+
+const slides = [
+  {
+    image: "/interior1.jpg",
+    title: "Turning Houses into Homes,",
+    subtitle: "One Design at a Time",
+    desc: "With every project we undertake, we are committed to turning houses into homes, one design at a time.",
+  },
+  {
+    image: "/interior2.jpg",
+    title: "Modern Interior Spaces,",
+    subtitle: "Designed for Living",
+    desc: "We create beautiful and functional spaces tailored for comfort and everyday living.",
+  },
+  {
+    image: "/interior3.jpg",
+    title: "Architecture That Inspires,",
+    subtitle: "Built to Last",
+    desc: "Our architectural designs combine creativity and durability for long-lasting impact.",
+  },
+  {
+    image: "/interior4.jpg",
+    title: "Creative Designs,",
+    subtitle: "Professional Execution",
+    desc: "From concept to completion, we bring ideas to life with precision and excellence.",
+  },
+];
 
 export default function HeroSection() {
+  const [current, setCurrent] = useState(0);
+
+  // Auto slide
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/interior.jpg')" }}
-      />
 
-      {/* Dark Overlay */}
+      {/* Slides */}
+      {slides.map((slide, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+            index === current ? "opacity-100" : "opacity-0"
+          }`}
+          style={{ backgroundImage: `url(${slide.image})` }}
+        />
+      ))}
+
+      {/* Overlay */}
       <div className="absolute inset-0 bg-gray-dark/60" />
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-background leading-tight mb-6 tracking-tight">
-          Turning Houses into Homes,{" "}
-          <span className="block">One Design at a Time</span>
+
+        <h1
+          key={current}
+          className="text-4xl md:text-6xl font-extrabold text-background leading-tight mb-6 tracking-tight transition-all duration-500"
+        >
+          {slides[current].title}
+          <span className="block">{slides[current].subtitle}</span>
         </h1>
 
-        <p className="text-background/75 text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed font-light">
-          With every project we undertake, we are committed to turning houses
-          into homes, one design at a time.
+        <p
+          key={current + "-desc"}
+          className="text-background/75 text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed font-light transition-all duration-500"
+        >
+          {slides[current].desc}
         </p>
 
         <Link
@@ -35,6 +88,19 @@ export default function HeroSection() {
             className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
           />
         </Link>
+      </div>
+
+      {/* Dots */}
+      <div className="absolute bottom-6 flex gap-2 z-10">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`w-3 h-3 rounded-full ${
+              current === i ? "bg-primary" : "bg-white/50"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );

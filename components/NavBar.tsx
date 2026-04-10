@@ -5,10 +5,11 @@ import { useState } from "react";
 import { Menu, X, Home } from "lucide-react";
 
 const navLinks = [
-  { label: "About", href: "/about" },
+  { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Projects", href: "/projects" },
+  { label: "About Us", href: "/about" },
+  { label: "Career", href: "/career" },
 ];
 
 export default function Navbar() {
@@ -17,7 +18,7 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-6 pt-5">
       <nav className="max-w-6xl mx-auto bg-background/90 backdrop-blur-md rounded-full px-6 py-3 flex items-center justify-between shadow-lg">
-        
+
         {/* Logo */}
         <Link
           href="/"
@@ -26,7 +27,7 @@ export default function Navbar() {
           <span className="bg-primary text-background rounded-lg p-1.5">
             <Home size={18} />
           </span>
-          <span className="text-foreground font-extrabold tracking-tight text-lg hover:font-bold transition-all">
+          <span className="text-foreground font-extrabold tracking-tight text-lg">
             ZAG Rwanda
           </span>
         </Link>
@@ -37,7 +38,7 @@ export default function Navbar() {
             <li key={link.label}>
               <Link
                 href={link.href}
-                className="text-gray-mid font-medium hover:text-primary hover:font-bold cursor-pointer transition-all duration-200 text-sm hover:-translate-y-0.5 inline-block"
+                className="text-gray-mid font-medium hover:text-primary hover:font-bold transition-all duration-200 text-sm hover:-translate-y-0.5 inline-block"
               >
                 {link.label}
               </Link>
@@ -45,9 +46,9 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* CTA Button */}
+        {/* CTA Button (kept for quick access to contacts) */}
         <Link
-          href="/contact"
+          href="/contacts"
           className="hidden md:inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-background font-semibold text-sm px-6 py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5"
         >
           Contact Us
@@ -55,7 +56,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden text-gray-mid hover:text-primary transition-colors cursor-pointer"
+          className="md:hidden text-gray-mid hover:text-primary transition-colors"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -70,15 +71,16 @@ export default function Navbar() {
             <Link
               key={link.label}
               href={link.href}
-              className="text-gray-mid font-medium hover:text-primary hover:font-bold cursor-pointer transition-all"
+              className="text-gray-mid font-medium hover:text-primary hover:font-bold transition-all"
               onClick={() => setMenuOpen(false)}
             >
               {link.label}
             </Link>
           ))}
+
           <Link
-            href="/contact"
-            className="bg-primary text-background font-semibold text-sm px-6 py-2.5 rounded-full text-center hover:font-bold transition-all"
+            href="/contacts"
+            className="bg-primary text-background font-semibold text-sm px-6 py-2.5 rounded-full text-center"
             onClick={() => setMenuOpen(false)}
           >
             Contact Us

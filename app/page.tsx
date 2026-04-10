@@ -5,16 +5,18 @@ import InteriorGallery from "@/components/InteriorGallery";
 import ModernHero from "@/components/ModernHero";
 import FeedbackSection from "@/components/FeedbackSection";
 import Footer from "@/components/Footer";
+import CompanyIntro from "@/components/CompanyIntro";
 
 export default function Home() {
   return (
     <main>
       <Navbar />
       <HeroSection />
-      <ArchitectureSection />
+      {/* <ArchitectureSection /> */}
       <InteriorGallery/>
       <ModernHero/>
-      <FeedbackSection/>
+      {/* <FeedbackSection/> */}
+      <CompanyIntro/>
       <Footer/>
     </main>
   );
