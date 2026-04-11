@@ -48,7 +48,7 @@ export default function Navbar() {
 
         {/* CTA Button (kept for quick access to contacts) */}
         <Link
-          href="/contacts"
+          href="/contact"
           className="hidden md:inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-background font-semibold text-sm px-6 py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5"
         >
           Contact Us
