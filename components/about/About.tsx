@@ -1,133 +1,167 @@
 import Image from "next/image";
 import Navbar from "../NavBar";
+import Footer from "../Footer";
 
 export default function AboutPage() {
   return (
     <>
-    <Navbar/>
-    <main className="pt-28 px-6 bg-subtle min-h-screen">
+      <Navbar />
 
-      <div className="max-w-6xl mx-auto space-y-20">
+      <main className="bg-subtle">
 
-        {/* 🟢 HEADER */}
-        <section className="text-center space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground">
-            About Us
-          </h1>
+        {/* 🔵 HEADER with background image - covers behind navbar */}
+        <section className="relative text-center py-40 -mt-28">
 
-          <p className="text-gray-mid max-w-3xl mx-auto leading-relaxed">
-            Zebra Artworks Group – Building excellence in construction, interior
-            design, and architecture since 2019.
-          </p>
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <Image
+              src="/construction1.jpg"
+              alt="about us background"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/60"></div>
+          </div>
+
+          {/* Content */}
+          <div className="relative z-10 pt-28">
+            <h1 className="text-5xl font-bold text-white mb-4">
+              About Us
+            </h1>
+            <p className="text-white/80 max-w-2xl mx-auto">
+              Zebra Artworks Group – Building excellence in construction,
+              interior design, and architecture since 2019.
+            </p>
+          </div>
+
         </section>
 
-        {/* 🏢 STORY */}
-        <section className="bg-subtle border border-line p-8 rounded-2xl space-y-6">
-          <h2 className="text-2xl font-semibold text-foreground">
-            Our Story
-          </h2>
-
-          <div className="space-y-4 text-gray-mid leading-relaxed">
-            <p>
-              ZEBRA ARTWORKS GROUP embarked on its journey in May 2019, and by July
-              2020, it was formally registered, marking a milestone in its pursuit
-              of excellence within the construction industry.
-            </p>
-
-            <p>
-              Founded by Eng. Jean Victor ISHIMWE in Rwanda, our company was built
-              with passion to solve challenges in interior design and construction.
+        {/* 🔵 MISSION */}
+        <section className="bg-primary text-white py-16 px-6">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+            <h2 className="text-2xl font-bold">OUR MISSION</h2>
+            <p className="text-white/90 leading-relaxed">
+              At Zebra Artworks Group, we are dedicated to reshaping
+              architectural concepts, construction, and interior design
+              through sustainability, precision timing, and global
+              standard finishing.
             </p>
           </div>
         </section>
 
-        {/* 🎯 MISSION */}
-        <section className="bg-primary text-white p-8 rounded-2xl space-y-4 shadow-md">
-          <h2 className="text-2xl font-semibold">
-            Mission Statement
-          </h2>
-
-          <p className="text-white/90 leading-relaxed">
-            "At Zebra Artworks Group, we are dedicated to reshaping architectural
-            concepts, construction, and interior design through sustainability,
-            precision timing, and global standard finishing."
-          </p>
-        </section>
-
-        {/* 🌍 VISION */}
-        <section className="bg-subtle border border-line p-8 rounded-2xl space-y-4">
-          <h2 className="text-2xl font-semibold text-foreground">
-            Vision Statement
-          </h2>
-
-          <p className="text-gray-mid leading-relaxed">
-            "Our vision is to be recognized globally, especially in Africa, as a
-            leader in sustainable architectural and interior design, known for
-            quality and innovation."
-          </p>
-        </section>
-
-        {/* 👥 TEAM */}
-        <section className="space-y-10">
-          <h2 className="text-2xl font-semibold text-center text-foreground">
-            Our Team
-          </h2>
-
-          <div className="grid md:grid-cols-3 gap-6">
-
-            {/* Member 1 */}
-            <div className="bg-subtle border border-line p-6 rounded-2xl text-center hover:shadow-md transition">
-              <div className="w-24 h-24 mx-auto relative mb-4">
-                <Image
-                  src="/profile1.jpg"
-                  alt="Founder"
-                  fill
-                  className="rounded-full object-cover"
-                />
-              </div>
-              <h3 className="font-semibold text-foreground">
-                Eng. Jean Victor ISHIMWE
-              </h3>
-              <p className="text-gray-mid text-sm">Founder & CEO</p>
-            </div>
-
-            {/* Member 2 */}
-            <div className="bg-subtle border border-line p-6 rounded-2xl text-center hover:shadow-md transition">
-              <div className="w-24 h-24 mx-auto relative mb-4">
-                <Image
-                  src="/profile1.jpg"
-                  alt="Architect"
-                  fill
-                  className="rounded-full object-cover"
-                />
-              </div>
-              <h3 className="font-semibold text-foreground">
-                Project Architect
-              </h3>
-              <p className="text-gray-mid text-sm">Design Department</p>
-            </div>
-
-            {/* Member 3 */}
-            <div className="bg-subtle border border-line p-6 rounded-2xl text-center hover:shadow-md transition">
-              <div className="w-24 h-24 mx-auto relative mb-4">
-                <Image
-                  src="/profile1.jpg"
-                  alt="Engineer"
-                  fill
-                  className="rounded-full object-cover"
-                />
-              </div>
-              <h3 className="font-semibold text-foreground">
-                Site Engineer
-              </h3>
-              <p className="text-gray-mid text-sm">Construction Team</p>
-            </div>
-
+        {/* 🔵 VISION (with background image) */}
+        <section className="relative py-20">
+          <div className="absolute inset-0">
+            <Image
+              src="/interior1.jpg"
+              alt="vision"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/60"></div>
+          </div>
+          <div className="relative max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 text-white">
+            <h2 className="text-2xl font-bold">OUR VISION</h2>
+            <p className="leading-relaxed text-white/90">
+              Our vision is to be recognized globally, especially in
+              Africa, as a leader in sustainable architectural and
+              interior design, known for quality and innovation.
+            </p>
           </div>
         </section>
 
+        {/* 🔵 VALUES */}
+        <section className="py-20 px-6">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
+            <h2 className="text-2xl font-bold text-foreground">OUR VALUES</h2>
+            <ul className="space-y-3 text-gray-mid">
+              <li>– Excellence in every project</li>
+              <li>– Innovation in design</li>
+              <li>– Commitment to quality</li>
+              <li>– Customer satisfaction first</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* 🔵 TEAM (image row style with hover overlay) */}
+       <section className="grid md:grid-cols-4">
+
+  {/* Member 1 */}
+  <div className="relative h-80 overflow-hidden group">
+    <Image
+      src="/profile1.jpg"
+      alt="Jean Victor"
+      fill
+      className="object-cover object-top grayscale transition-transform duration-500 group-hover:scale-110"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-4">
+      <div>
+        <p className="text-white font-semibold text-sm">Mucyo Bruce</p>
+        <p className="text-white font-semibold text-sm">Jean Victor</p>
+        <p className="text-white/70 text-xs mt-1">CEO</p>
       </div>
-    </main>
+    </div>
+  </div>
+
+  {/* Member 2 */}
+  <div className="relative h-80 overflow-hidden group">
+    <Image
+      src="/profile2.jpg"
+      alt="Architect"
+      fill
+      className="object-cover object-top grayscale transition-transform duration-500 group-hover:scale-110"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-4">
+      <div>
+        <p className="text-white font-semibold text-sm">Mucyo Bruce</p>
+        <p className="text-white font-semibold text-sm">Architect</p>
+        <p className="text-white/70 text-xs mt-1">Design</p>
+      </div>
+    </div>
+  </div>
+
+  {/* Member 3 */}
+  <div className="relative h-80 overflow-hidden group">
+    <Image
+      src="/profile3.jpg"
+      alt="Engineer"
+      fill
+      className="object-cover object-top grayscale transition-transform duration-500 group-hover:scale-110"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-4">
+      <div>
+        <p className="text-white font-semibold text-sm">Mucyo Bruce</p>
+        <p className="text-white font-semibold text-sm">Engineer</p>
+        <p className="text-white/70 text-xs mt-1">Construction</p>
+      </div>
+    </div>
+  </div>
+
+  {/* Member 4 */}
+  <div className="relative h-80 overflow-hidden group">
+    <Image
+      src="/profile6.jpg"
+      alt="Manager"
+      fill
+      className="object-cover object-top grayscale transition-transform duration-500 group-hover:scale-110"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-4">
+      <div>
+        <p className="text-white font-semibold text-sm">Mucyo Bruce</p>
+        <p className="text-white font-semibold text-sm">Manager</p>
+        <p className="text-white/70 text-xs mt-1">Operations</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+        {/* 🔽 SPACE BEFORE FOOTER */}
+        <div className="pb-20"></div>
+
+      </main>
+
+      <Footer />
     </>
   );
 }
