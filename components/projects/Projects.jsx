@@ -1,16 +1,39 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import Navbar from "../NavBar";
 import Footer from "../Footer";
 
-const projects = [
-  { src: "/interior1.jpg", title: "Modern Interior Design" },
-  { src: "/interior2.jpg", title: "Office Workspace" },
-  { src: "/interior3.jpg", title: "Luxury Living Room" },
-  { src: "/interior4.jpg", title: "Commercial Space" },
-  { src: "/interior5.jpg", title: "Hotel Interior" },
-  { src: "/interior3.jpg", title: "Landscape Design" },
+/* ================= DATA ================= */
+
+const departments = [
+  {
+    id: "01",
+    title: "INTERIOR DESIGN",
+    subtitle: "Portfolio",
+    description:
+      "We craft interiors that merge aesthetics with function — from commercial lounges to private residences.",
+    projects: [
+      { src: "/interior1.jpg", title: "Commercial Spaces" },
+      { src: "/interior2.jpg", title: "Residential Spaces" },
+      { src: "/interior3.jpg", title: "Hotels & Apartments" },
+      { src: "/interior4.jpg", title: "Public & Private Offices" },
+    ],
+  },
+  {
+    id: "02",
+    title: "ARCHITECTURE & CONSTRUCTION",
+    subtitle: "Departments",
+    description:
+      "End-to-end build solutions — from architectural planning and MEP to full construction and materials supply.",
+    projects: [
+      { src: "/interior5.jpg", title: "Architectural Plan" },
+      { src: "/interior2.jpg", title: "MEP Supplies" },
+      { src: "/interior3.jpg", title: "Construction" },
+      { src: "/interior4.jpg", title: "Materials Supply" },
+    ],
+  },
 ];
 
 const clients = [
@@ -32,6 +55,98 @@ const clients = [
   "KIGALI PHONES KT",
 ];
 
+/* ================= DEPARTMENT ================= */
+
+function DepartmentSection({ dept }) {
+  const [active, setActive] = useState(0);
+  const current = dept.projects[active];
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 border border-line/40 rounded-lg overflow-hidden bg-gray-dark/5">
+      
+      {/* LEFT */}
+      <div className="flex flex-col justify-between p-8 border-b lg:border-b-0 lg:border-r border-line/40">
+        
+        <div className="space-y-2 mb-8">
+          <span className="text-primary font-mono text-xs tracking-widest uppercase">
+            {dept.id}
+          </span>
+
+          <h2 className="text-2xl font-extrabold text-foreground">
+            {dept.title}
+          </h2>
+
+          <p className="text-gray-mid text-xs uppercase tracking-widest">
+            {dept.subtitle}
+          </p>
+
+          <p className="text-gray-mid text-sm leading-relaxed pt-2 max-w-sm">
+            {dept.description}
+          </p>
+        </div>
+
+        <ul className="space-y-2">
+          {dept.projects.map((p, i) => (
+            <li key={i}>
+              <button
+                onClick={() => setActive(i)}
+                className={`w-full cursor-pointer text-left px-4 py-2 rounded-md text-sm flex items-center gap-3 transition
+                  ${
+                    active === i
+                      ? "bg-primary text-background"
+                      : "text-gray-mid hover:text-foreground hover:bg-gray-dark/10"
+                  }`}
+              >
+                <span
+                  className={`w-1.5 h-1.5 rounded-full ${
+                    active === i ? "bg-background" : "bg-gray-mid/40"
+                  }`}
+                />
+                {p.title}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* RIGHT */}
+      <div className="relative min-h-[300px] overflow-hidden">
+        <Image
+          key={current.src}
+          src={current.src}
+          alt={current.title}
+          fill
+          className="object-cover transition duration-700 hover:scale-105"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+
+        <div className="absolute bottom-5 left-5">
+          <span className="text-white/60 text-xs">
+            {dept.id} / {String(active + 1).padStart(2, "0")}
+          </span>
+          <p className="text-white font-semibold">{current.title}</p>
+        </div>
+
+        {/* dots */}
+        <div className="absolute top-4 right-4 flex gap-2">
+          {dept.projects.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              className={`w-2 h-2 rounded-full ${
+                active === i ? "bg-white" : "bg-white/40"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ================= PAGE ================= */
+
 export default function ProjectsPage() {
   return (
     <>
@@ -39,84 +154,43 @@ export default function ProjectsPage() {
 
       <main className="bg-subtle min-h-screen">
 
-        {/* 🔥 HERO SECTION (NEW) */}
-        <section className="relative w-full py-40 px-6 text-center overflow-hidden -mt-28">
-
-          {/* Background Image */}
+        {/* HERO */}
+        <section className="relative w-full py-40 text-center -mt-28">
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: "url('/interior2.jpg')" }}
           />
-
-          {/* Overlay */}
           <div className="absolute inset-0 bg-gray-dark/60" />
 
-          {/* Content */}
           <div className="relative z-10 pt-28">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-background">
-              Our Projects
+            <h1 className="text-5xl font-extrabold text-background">
+              OUR PROJECTS
             </h1>
-
-            <p className="text-background/80 mt-4 max-w-2xl mx-auto">
-              Explore our completed works in construction, architecture, and interior design.
-            </p>
           </div>
         </section>
 
         {/* CONTENT */}
-        <div className="max-w-6xl mx-auto px-6 pt-20 pb-32 space-y-20">
+        <div className="max-w-6xl  mx-auto px-6 pt-20 pb-32 space-y-10">
 
-          {/* 🖼️ PROJECT GALLERY */}
-          <section className="space-y-8">
-            <h2 className="text-2xl font-semibold text-foreground">
-              Portfolio
-            </h2>
+          {departments.map((dept) => (
+            <DepartmentSection key={dept.id} dept={dept} />
+          ))}
 
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-
-              {projects.map((project, index) => (
-                <div
-                  key={index}
-                  className="group relative overflow-hidden rounded-2xl bg-gray-dark/5 border border-line cursor-pointer hover:-translate-y-1 transition-all duration-300"
-                >
-                  <div className="relative h-64 w-full">
-                    <Image
-                      src={project.src}
-                      alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition duration-500"
-                    />
-                  </div>
-
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gray-dark/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                    <p className="text-white font-semibold text-center px-4">
-                      {project.title}
-                    </p>
-                  </div>
-                </div>
-              ))}
-
-            </div>
-          </section>
-
-          {/* 🤝 CLIENTS */}
-          <section className="space-y-8">
-            <h2 className="text-2xl font-semibold text-foreground text-center">
+          {/* CLIENTS */}
+          <section className="space-y-6 pt-6">
+            <span className="text-xs text-gray-mid uppercase">
               Recent Clients
-            </h2>
+            </span>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               {clients.map((client, index) => (
                 <div
                   key={index}
-                  className="bg-subtle border border-line rounded-xl py-4 px-3 text-center text-sm font-medium text-gray-mid hover:text-primary hover:border-primary transition"
+                  className="border border-line/40 rounded-md py-3 text-center text-xs text-gray-mid hover:text-primary hover:border-primary transition"
                 >
                   {client}
                 </div>
               ))}
-
             </div>
           </section>
 
