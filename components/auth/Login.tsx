@@ -122,7 +122,7 @@ export default function LoginPage() {
               </div>
 
               {/* Remember me + Forgot */}
-              <div className="flex items-center justify-between">
+              {/* <div className="flex items-center justify-between">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
@@ -138,7 +138,7 @@ export default function LoginPage() {
                 >
                   Forgot Password?
                 </Link>
-              </div>
+              </div> */}
 
               {/* Submit */}
               <button
@@ -153,12 +153,12 @@ export default function LoginPage() {
             {/* Register link */}
             <p className="text-center text-xs text-gray-mid mt-8">
               Don't have an account?{" "}
-              <Link
+              {/* <Link
                 href="/register"
                 className="text-primary font-semibold hover:text-[var(--color-primary-dark)] transition"
               >
                 Register
-              </Link>
+              </Link> */}
             </p>
 
           </div>
