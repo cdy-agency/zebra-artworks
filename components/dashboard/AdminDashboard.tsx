@@ -1,20 +1,18 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
+  Bell,
   LayoutDashboard,
   List,
-  Plus,
-  Bell,
-  Settings,
   LogOut,
+  Plus,
+  Settings,
 } from "lucide-react";
 
-// ─── Mock data (replace with real fetch when endpoints are ready) ───────────
 const MOCK_UNREAD = 5;
-const MOCK_USER = { fullName: "Admin Manager", role: "Administrator" };
-// ───────────────────────────────────────────────────────────────────────────
 
 type AdminSidebarProps = {
   fullName: string;
@@ -63,7 +61,7 @@ const getInitials = (name: string) =>
     .split(" ")
     .filter(Boolean)
     .slice(0, 2)
-    .map((p) => p[0]?.toUpperCase() ?? "")
+    .map((part) => part[0]?.toUpperCase() ?? "")
     .join("");
 
 const getTime = () =>
@@ -84,19 +82,14 @@ const getDate = () =>
 export default function AdminSidebar({ fullName }: AdminSidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
-  const [unread, setUnread] = useState(MOCK_UNREAD);
+  const [unread] = useState(MOCK_UNREAD);
   const [isLoggingOut, setLoggingOut] = useState(false);
   const [time, setTime] = useState(getTime());
 
-  // Tick clock every minute
   useEffect(() => {
     const id = setInterval(() => setTime(getTime()), 60_000);
     return () => clearInterval(id);
   }, []);
-
-  // Swap this for a real fetch when the endpoint exists:
-  // const fetchUnread = useCallback(async () => { ... }, []);
-  // useEffect(() => { fetchUnread(); ... }, [fetchUnread]);
 
   const handleLogout = async () => {
     try {
@@ -113,87 +106,50 @@ export default function AdminSidebar({ fullName }: AdminSidebarProps) {
 
   return (
     <aside
-      className="h-full flex flex-col bg-white border-r shrink-0"
-      style={{
-        width: 220,
-        borderColor: "rgba(0,0,0,0.08)",
-        fontFamily: "'Century Gothic','AppleGothic',Arial,sans-serif",
-      }}
+      className="flex h-full w-[220px] shrink-0 flex-col border-r border-line/10 bg-background text-foreground"
+      style={{ fontFamily: "'Century Gothic','AppleGothic',Arial,sans-serif" }}
     >
-      {/* Top accent bar */}
-      <div style={{ height: 3, background: "#005f75", flexShrink: 0 }} />
+      <div className="h-[3px] shrink-0 bg-primary" />
 
-      {/* ── Logo ── */}
-      <div
-        className="flex items-center gap-3 px-4 py-4"
-        style={{ borderBottom: "0.5px solid rgba(0,0,0,0.08)", flexShrink: 0 }}
-      >
-        {/* Logo mark */}
-        <div
-          className="relative flex items-center justify-center rounded-xl text-white font-bold text-xs shrink-0"
-          style={{ width: 34, height: 34, background: "#005f75", fontSize: 12 }}
-        >
+      <div className="flex shrink-0 items-center gap-3 border-b border-line/10 px-4 py-4">
+        <div className="relative flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-xl bg-primary text-xs font-bold text-background">
           KM
-          <span
-            className="absolute rounded-full border-2 border-white"
-            style={{
-              width: 9,
-              height: 9,
-              background: "#007a96",
-              bottom: -2,
-              right: -2,
-            }}
-          />
+          <span className="absolute right-[-2px] bottom-[-2px] h-[9px] w-[9px] rounded-full border-2 border-background bg-primary-light" />
         </div>
 
-        {/* Brand text */}
         <div>
           <p
+            className="text-foreground"
             style={{
               fontSize: 11,
               fontWeight: 700,
               letterSpacing: "0.08em",
               lineHeight: 1.2,
-              color: "#000",
             }}
           >
-            KASON <span style={{ color: "#005f75" }}>MOTORS</span>
+            KASON <span className="text-primary">MOTORS</span>
           </p>
           <p
-            style={{
-              fontSize: 10,
-              color: "#737373",
-              fontWeight: 500,
-              marginTop: 2,
-            }}
+            className="mt-[2px] text-gray-mid"
+            style={{ fontSize: 10, fontWeight: 500 }}
           >
             Admin Console
           </p>
         </div>
       </div>
 
-      {/* ── Search box (mirrors ClientWise) ── */}
-      <div
-        className="px-3 py-3"
-        style={{ borderBottom: "0.5px solid rgba(0,0,0,0.06)", flexShrink: 0 }}
-      >
-        <div
-          className="flex items-center gap-2 px-3 rounded-lg"
-          style={{
-            background: "#f5f5f5",
-            border: "0.5px solid rgba(0,0,0,0.08)",
-            height: 34,
-          }}
-        >
+      <div className="shrink-0 border-b border-line/10 px-3 py-3">
+        <div className="flex h-[34px] items-center gap-2 rounded-lg border border-line/10 bg-subtle px-3">
           <svg
             width="13"
             height="13"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#aaa"
+            stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            className="text-gray-mid/60"
           >
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -201,40 +157,34 @@ export default function AdminSidebar({ fullName }: AdminSidebarProps) {
           <input
             type="text"
             placeholder="Search"
-            style={{
-              border: "none",
-              background: "transparent",
-              outline: "none",
-              fontSize: 12,
-              color: "#555",
-              width: "100%",
-              fontFamily: "'Century Gothic','AppleGothic',Arial,sans-serif",
-            }}
+            className="w-full border-none bg-transparent text-[12px] text-gray-mid outline-none placeholder:text-gray-mid/70"
+            style={{ fontFamily: "'Century Gothic','AppleGothic',Arial,sans-serif" }}
           />
         </div>
       </div>
 
-      {/* ── Navigation ── */}
       <nav
-        className="flex-1 overflow-y-auto py-3 px-3"
-        style={{ scrollbarWidth: "thin", scrollbarColor: "#ddd transparent" }}
+        className="flex-1 overflow-y-auto px-3 py-3"
+        style={{
+          scrollbarWidth: "thin",
+          scrollbarColor: "rgba(115,115,115,0.35) transparent",
+        }}
       >
         {menuItems.map((group) => (
           <div key={group.group}>
             <p
-              className="px-2 mb-1"
+              className="mb-1 px-2 text-gray-mid"
               style={{
                 fontSize: 10,
                 fontWeight: 700,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: "#737373",
               }}
             >
               {group.group}
             </p>
 
-            <div className="flex flex-col" style={{ gap: 1 }}>
+            <div className="flex flex-col gap-px">
               {group.items.map((item) => {
                 const Icon = item.icon;
                 const isActive = pathname === item.href;
@@ -249,54 +199,23 @@ export default function AdminSidebar({ fullName }: AdminSidebarProps) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="flex items-center gap-3 rounded-lg transition-all duration-150"
-                    style={{
-                      padding: "9px 10px",
-                      fontSize: 13,
-                      fontWeight: 500,
-                      textDecoration: "none",
-                      background: isActive ? "#005f75" : "transparent",
-                      color: isActive ? "#fff" : "#737373",
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!isActive) {
-                        (e.currentTarget as HTMLElement).style.background =
-                          "#f5f5f5";
-                        (e.currentTarget as HTMLElement).style.color =
-                          "#005f75";
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isActive) {
-                        (e.currentTarget as HTMLElement).style.background =
-                          "transparent";
-                        (e.currentTarget as HTMLElement).style.color =
-                          "#737373";
-                      }
-                    }}
+                    className={`flex items-center gap-3 rounded-lg px-[10px] py-[9px] text-[13px] font-medium transition-colors duration-150 ${
+                      isActive
+                        ? "bg-primary text-background"
+                        : "text-gray-mid hover:bg-subtle hover:text-primary"
+                    }`}
+                    style={{ textDecoration: "none" }}
                   >
-                    <Icon
-                      size={15}
-                      strokeWidth={isActive ? 2.5 : 2}
-                      style={{ flexShrink: 0 }}
-                    />
-                    <span style={{ flex: 1 }}>{item.label}</span>
+                    <Icon size={15} strokeWidth={isActive ? 2.5 : 2} />
+                    <span className="flex-1">{item.label}</span>
 
                     {badgeVal && (
                       <span
-                        style={{
-                          fontSize: 9.5,
-                          fontWeight: 700,
-                          padding: "2px 6px",
-                          borderRadius: 99,
-                          lineHeight: 1.4,
-                          background:
-                            item.badge === "New"
-                              ? "rgba(0,95,117,0.1)"
-                              : "rgba(109,40,217,0.08)",
-                          color: item.badge === "New" ? "#005f75" : "#6d28d9",
-                          border: `0.5px solid ${item.badge === "New" ? "rgba(0,95,117,0.25)" : "rgba(109,40,217,0.2)"}`,
-                        }}
+                        className={`rounded-full border px-[6px] py-[2px] text-[9.5px] font-bold leading-[1.4] ${
+                          item.badge === "New"
+                            ? "border-primary/25 bg-primary/10 text-primary"
+                            : "border-primary-light/25 bg-primary-light/10 text-primary-light"
+                        }`}
                       >
                         {badgeVal}
                       </span>
@@ -309,26 +228,17 @@ export default function AdminSidebar({ fullName }: AdminSidebarProps) {
         ))}
       </nav>
 
-      {/* ── Footer: user card + time (mirrors ClientWise bottom) ── */}
-      <div
-        className="px-3 py-3 flex items-center gap-2.5"
-        style={{ borderTop: "0.5px solid rgba(0,0,0,0.08)", flexShrink: 0 }}
-      >
-        {/* Avatar */}
-        <div
-          className="rounded-full flex items-center justify-center text-white font-bold shrink-0"
-          style={{ width: 32, height: 32, background: "#005f75", fontSize: 11 }}
-        >
+      <div className="flex shrink-0 items-center gap-2.5 border-t border-line/10 px-3 py-3">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-[11px] font-bold text-background">
           {initials}
         </div>
 
-        {/* Name + time */}
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0 flex-1">
           <p
+            className="text-foreground"
             style={{
               fontSize: 12,
               fontWeight: 700,
-              color: "#000",
               lineHeight: 1.2,
               whiteSpace: "nowrap",
               overflow: "hidden",
@@ -337,33 +247,20 @@ export default function AdminSidebar({ fullName }: AdminSidebarProps) {
           >
             {fullName}
           </p>
-          <p style={{ fontSize: 10, color: "#737373", marginTop: 1 }}>
-            {time} &nbsp;·&nbsp; {getDate()}
+          <p className="mt-px text-[10px] text-gray-mid">
+            {time} · {getDate()}
           </p>
         </div>
 
-        {/* Logout */}
         <button
           onClick={handleLogout}
           disabled={isLoggingOut}
           title="Log Out"
-          className="flex items-center justify-center rounded-lg transition-all"
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-gray-mid transition-colors hover:bg-subtle hover:text-primary-dark disabled:cursor-not-allowed"
           style={{
-            width: 28,
-            height: 28,
             border: "none",
             background: "none",
             cursor: "pointer",
-            color: "#737373",
-            flexShrink: 0,
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.color = "#dc2626";
-            (e.currentTarget as HTMLElement).style.background = "#fff1f1";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.color = "#737373";
-            (e.currentTarget as HTMLElement).style.background = "none";
           }}
         >
           <LogOut size={14} />
