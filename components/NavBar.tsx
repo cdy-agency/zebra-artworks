@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X, Home } from "lucide-react";
+import { Menu, X, Home, UserCircle } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
   { label: "About Us", href: "/about" },
-  { label: "Career", href: "/career" },
 ];
 
 export default function Navbar() {
@@ -46,13 +45,27 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* CTA Button (kept for quick access to contacts) */}
-        <Link
-          href="/contact"
-          className="hidden md:inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-background font-semibold text-sm px-6 py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5"
-        >
-          Contact Us
-        </Link>
+        {/* Right side — Login icon + Contact button */}
+        <div className="hidden md:flex items-center gap-3">
+
+          {/* User / Login icon */}
+          <Link
+            href="/login"
+            aria-label="Login"
+            className="text-gray-mid hover:text-primary transition-all duration-200 hover:-translate-y-0.5 inline-flex"
+          >
+            <UserCircle size={26} />
+          </Link>
+
+          {/* Contact CTA */}
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-background font-semibold text-sm px-6 py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+          >
+            Contact Us
+          </Link>
+
+        </div>
 
         {/* Mobile Menu Toggle */}
         <button
@@ -78,8 +91,18 @@ export default function Navbar() {
             </Link>
           ))}
 
+          {/* Login link in mobile */}
           <Link
-            href="/contacts"
+            href="/login"
+            className="text-gray-mid font-medium hover:text-primary transition-all flex items-center gap-2"
+            onClick={() => setMenuOpen(false)}
+          >
+            <UserCircle size={18} />
+            Login
+          </Link>
+
+          <Link
+            href="/contact"
             className="bg-primary text-background font-semibold text-sm px-6 py-2.5 rounded-full text-center"
             onClick={() => setMenuOpen(false)}
           >
