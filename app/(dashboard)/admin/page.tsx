@@ -46,7 +46,7 @@ export default function AdminDashboardPage() {
           </a>
 
           <a
-            href="/admin/services"
+            href="/admin/manageservices"
             className="px-4 py-2 border border-line text-foreground rounded-md text-sm"
           >
             Manage Services
