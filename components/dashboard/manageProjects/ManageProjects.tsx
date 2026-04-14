@@ -199,7 +199,7 @@ function ProjectModal({ project, onSave, onClose }: { project?: Project | null; 
       <div className="bg-white rounded-t-2xl sm:rounded-lg w-full sm:max-w-xl max-h-[92vh] overflow-y-auto p-5 sm:p-6 space-y-4">
 
         <div className="flex items-center justify-between">
-          <h2 className="text-base sm:text-lg font-bold text-gray-900">{isEdit ? "Edit Project" : "Add New Project"}</h2>
+          <h2 className="text-base sm:text-lg font-bold text-gray-700">{isEdit ? "Edit Project" : "Add New Project"}</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-700"><X size={20} /></button>
         </div>
 
@@ -278,9 +278,9 @@ function ProjectModal({ project, onSave, onClose }: { project?: Project | null; 
         </div>
 
         <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-2 pt-2 border-t border-gray-100">
-          <button onClick={onClose} className="w-full sm:w-auto px-4 py-2 border border-gray-200 text-gray-700 rounded-md text-sm hover:opacity-80">Cancel</button>
+          <button onClick={onClose} className="w-full sm:w-auto px-4 py-2 border border-gray-200 text-gray-700 cursor-pointer rounded-md text-sm hover:opacity-80">Cancel</button>
           <button onClick={handleSave} disabled={!title.trim() || !category || !subcategory || isUploading || isSaving}
-            className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-md text-sm hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed">
+            className="w-full sm:w-auto px-4 py-2 bg-primary text-white rounded-md text-sm hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed">
             {isSaving ? "Saving…" : isEdit ? "Update Project" : "Save Project"}
           </button>
         </div>
@@ -332,7 +332,7 @@ export default function ManageProjectsPage() {
             <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Manage Projects</h1>
             <p className="text-xs sm:text-sm text-gray-500">Add, update, and manage all your projects.</p>
           </div>
-          <button onClick={() => { setEditTarget(null); setModalOpen(true); }} className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white rounded-md text-sm hover:opacity-90 shrink-0">
+          <button onClick={() => { setEditTarget(null); setModalOpen(true); }} className="flex items-center gap-1.5 px-4 py-2 bg-primary cursor-pointer text-white rounded-md text-sm  shrink-0">
             <Plus size={15} /> Add Project
           </button>
         </div>

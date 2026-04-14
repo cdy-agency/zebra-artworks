@@ -2,25 +2,43 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   LayoutDashboard,
   Image,
-  Briefcase,
   Mail,
   Settings,
   LogOut,
 } from "lucide-react";
 
-const menu = [
-  { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
-  { label: "Projects", href: "/admin/projects", icon: Image },
-  { label: "Services", href: "/admin/services", icon: Briefcase },
-  { label: "Messages", href: "/admin/messages", icon: Mail },
-  { label: "Settings", href: "/admin/settings", icon: Settings },
-];
-
 export default function AdminSidebar({ fullName }: { fullName: string }) {
   const pathname = usePathname();
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  useEffect(() => {
+    async function fetchUnread() {
+      try {
+        const res = await fetch("/api/messages/unread");
+        const data = await res.json();
+        setUnreadCount(data.unreadCount ?? 0);
+      } catch (err) {
+        console.error("Failed to fetch unread count:", err);
+      }
+    }
+
+    fetchUnread();
+
+    // Poll every 30 seconds for new messages
+    const interval = setInterval(fetchUnread, 30000);
+    return () => clearInterval(interval);
+  }, [pathname]); // re-fetch when navigating (e.g. after reading messages)
+
+  const menu = [
+    { label: "Dashboard", href: "/admin", icon: LayoutDashboard, badge: 0 },
+    { label: "Projects", href: "/admin/manageProjects", icon: Image, badge: 0 },
+    { label: "Messages", href: "/admin/messages", icon: Mail, badge: unreadCount },
+    { label: "Settings", href: "/admin/settings", icon: Settings, badge: 0 },
+  ];
 
   return (
     <aside className="w-[230px] border-r border-line/20 bg-background flex flex-col">
@@ -50,7 +68,14 @@ export default function AdminSidebar({ fullName }: { fullName: string }) {
               }`}
             >
               <Icon size={16} />
-              {item.label}
+              <span className="flex-1">{item.label}</span>
+
+              {/* Badge */}
+              {item.badge > 0 && (
+                <span className="bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center leading-none">
+                  {item.badge > 99 ? "99+" : item.badge}
+                </span>
+              )}
             </Link>
           );
         })}

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Navbar from "../NavBar";
 import Footer from "../Footer";
+import { supabase } from "@/lib/supabase";
 import type { Project } from "@/lib/supabase";
 
 function groupProjects(projects: Project[]) {
@@ -17,8 +18,13 @@ function groupProjects(projects: Project[]) {
 export const revalidate = 60;
 
 export default async function ProjectsPage() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/projects`, { next: { revalidate: 60 } });
-  const projects: Project[] = await res.json();
+  // ✅ Query Supabase directly — works at build time
+  const { data, error } = await supabase
+    .from("projects")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  const projects: Project[] = data ?? [];
   const grouped = groupProjects(projects);
   const clients = [...new Set(projects.map((p) => p.client).filter(Boolean))];
 
