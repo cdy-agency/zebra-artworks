@@ -37,7 +37,7 @@ export default function AdminSidebar({ fullName }: { fullName: string }) {
     { label: "Dashboard", href: "/admin", icon: LayoutDashboard, badge: 0 },
     { label: "Projects", href: "/admin/manageProjects", icon: Image, badge: 0 },
     { label: "Messages", href: "/admin/messages", icon: Mail, badge: unreadCount },
-    { label: "Settings", href: "/admin/settings", icon: Settings, badge: 0 },
+    // { label: "Settings", href: "/admin/settings", icon: Settings, badge: 0 },
   ];
 
   return (
