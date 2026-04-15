@@ -1,24 +1,51 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const [remember, setRemember] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error ?? "Login failed.");
+        return;
+      }
+
+      // Redirect based on role
+      router.push(data.redirect);
+      router.refresh();
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <main className="min-h-screen bg-subtle flex items-center justify-center p-4">
       <div className="w-full max-w-5xl bg-background rounded-3xl overflow-hidden shadow-xl flex flex-col md:flex-row min-h-[600px]">
 
-        {/* ── LEFT — image panel ── */}
+        {/* LEFT — image panel */}
         <div className="relative w-full md:w-1/2 min-h-[300px] md:min-h-0 flex-shrink-0">
           <Image
             src="/interior4.jpg"
@@ -27,10 +54,8 @@ export default function LoginPage() {
             className="object-cover"
             priority
           />
-          {/* dark overlay */}
           <div className="absolute inset-0 bg-gray-dark/40" />
 
-          {/* Logo top-left */}
           <div className="absolute top-6 left-6 flex items-center gap-2">
             <div className="w-9 h-9 rounded-full bg-background/90 flex items-center justify-center">
               <span className="text-primary font-extrabold text-sm">Z</span>
@@ -40,7 +65,6 @@ export default function LoginPage() {
             </span>
           </div>
 
-          {/* Bottom text */}
           <div className="absolute bottom-8 left-6 right-6">
             <h2 className="text-white text-2xl font-extrabold leading-snug">
               Transforming spaces,<br />shaping futures.
@@ -48,7 +72,6 @@ export default function LoginPage() {
             <p className="text-white/70 text-sm mt-2">
               Design and construction excellence across Rwanda.
             </p>
-            {/* dots */}
             <div className="flex items-center gap-2 mt-5">
               <span className="w-6 h-2 rounded-full bg-white" />
               <span className="w-2 h-2 rounded-full bg-white/40" />
@@ -57,20 +80,9 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* ── RIGHT — form panel ── */}
+        {/* RIGHT — form panel */}
         <div className="w-full md:w-1/2 flex flex-col justify-between px-8 py-10 relative">
 
-          {/* Sign in button top right */}
-          <div className="flex justify-end mb-6">
-            <Link
-              href="/login"
-              className="bg-gray-dark text-background text-sm font-semibold px-5 py-2 rounded-full hover:opacity-90 transition"
-            >
-              Sign in
-            </Link>
-          </div>
-
-          {/* Form content */}
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
 
             <h1 className="text-2xl font-extrabold text-foreground mb-1">
@@ -121,53 +133,26 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              {/* Remember me + Forgot */}
-              {/* <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={remember}
-                    onChange={() => setRemember(!remember)}
-                    className="w-4 h-4 accent-primary rounded"
-                  />
-                  <span className="text-sm text-gray-mid">Remember Me</span>
-                </label>
-                <Link
-                  href="/forgot-password"
-                  className="text-xs text-gray-mid hover:text-primary transition"
-                >
-                  Forgot Password?
-                </Link>
-              </div> */}
+              {/* Error */}
+              {error && (
+                <p className="text-red-500 text-sm">{error}</p>
+              )}
 
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-[var(--color-primary-dark)] hover:bg-[var(--color-primary-dark)]/80 text-white font-bold text-sm py-3.5 rounded-xl transition-all duration-300"
+                disabled={loading}
+                className="w-full bg-[var(--color-primary-dark)] hover:bg-[var(--color-primary-dark)]/80 text-white font-bold text-sm py-3.5 rounded-xl transition-all duration-300 disabled:opacity-60"
               >
-                Login
+                {loading ? "Signing in..." : "Login"}
               </button>
 
             </form>
-
-            {/* Register link */}
-            <p className="text-center text-xs text-gray-mid mt-8">
-              Don't have an account?{" "}
-              {/* <Link
-                href="/register"
-                className="text-primary font-semibold hover:text-[var(--color-primary-dark)] transition"
-              >
-                Register
-              </Link> */}
-            </p>
-
           </div>
 
-          {/* Footer */}
           <p className="text-center text-xs text-gray-mid mt-6">
             Copyright © ZAG Rwanda. All Rights Reserved.
           </p>
-
         </div>
       </div>
     </main>

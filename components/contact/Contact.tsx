@@ -43,7 +43,7 @@ export default function ContactPage() {
         setSuccess(true);
         setForm({ name: "", email: "", subject: "", message: "" });
       }
-    } catch (err) {
+    } catch {
       setError("Failed to send message. Please try again.");
     } finally {
       setLoading(false);
@@ -78,7 +78,7 @@ export default function ContactPage() {
             <div className="space-y-6">
               <h2 className="text-3xl font-bold text-foreground">Get In Touch</h2>
               <p className="text-gray-mid text-sm">
-                Have a project in mind? Reach out to us and let's build something amazing together.
+                Have a project in mind? Reach out to us and let&apos;s build something amazing together.
               </p>
 
               <form className="space-y-4" onSubmit={handleSubmit}>
@@ -125,7 +125,7 @@ export default function ContactPage() {
                 )}
                 {success && (
                   <p className="text-green-500 text-sm">
-                    ✅ Message sent successfully! We'll get back to you soon.
+                    Message sent successfully. We&apos;ll get back to you soon.
                   </p>
                 )}
 

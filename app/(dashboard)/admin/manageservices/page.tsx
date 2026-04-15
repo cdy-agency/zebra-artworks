@@ -1,8 +1,9 @@
 import ManageServicesPage from "@/components/dashboard/Manageservicespage/Manageservicespage"
-export default function (){
-    return(
-        <div>
-<ManageServicesPage/>
-        </div>
-    )
+
+export default function ManageServicesRoutePage() {
+  return (
+    <div>
+      <ManageServicesPage />
+    </div>
+  )
 }

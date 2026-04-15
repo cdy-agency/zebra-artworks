@@ -1,9 +1,9 @@
 import Contact from '@/components/contact/Contact'
 
-export default function (){
-    return(
-        <div>
-            <Contact/>
-        </div>
-    )
+export default function ContactRoutePage() {
+  return (
+    <div>
+      <Contact />
+    </div>
+  )
 }

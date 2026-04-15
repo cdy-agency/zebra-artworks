@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import Navbar from "../NavBar";
 import Footer from "../Footer";
 
@@ -194,7 +192,7 @@ export default function ServicesPage() {
               Ready to start your project?
             </h2>
             <p className="text-[#6b6b6b] mt-3 text-sm">
-              Let's turn your vision into reality with professional design and construction.
+              Let&apos;s turn your vision into reality with professional design and construction.
             </p>
           </div>
         </section>

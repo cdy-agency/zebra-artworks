@@ -24,6 +24,14 @@ type Service = {
   updatedAt: string;
 };
 
+type ServiceDraft = Omit<Service, "id">;
+
+type ServiceModalProps = {
+  service: Service | null;
+  onClose: () => void;
+  onSave: (service: ServiceDraft) => void;
+};
+
 // ─── Constants ─────────────────────────────────────
 
 const STORAGE_KEY = "zag_services_data";
@@ -54,11 +62,7 @@ function ServiceIcon({ name }: { name: string }) {
 
 // ─── Modal ─────────────────────────────────────────
 
-function ServiceModal({
-  service,
-  onSave,
-  onClose,
-}: any) {
+function ServiceModal({ service, onSave, onClose }: ServiceModalProps) {
   const [title, setTitle] = useState(service?.title || "");
 
   const handleSave = () => {
@@ -116,15 +120,25 @@ function ServiceModal({
 // ─── Main Page ─────────────────────────────────────
 
 export default function ManageServicesPage() {
-  const [services, setServices] = useState<Service[]>([]);
+  const [services, setServices] = useState<Service[]>(() => {
+    if (typeof window === "undefined") {
+      return [];
+    }
+
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      return [];
+    }
+
+    try {
+      return JSON.parse(raw) as Service[];
+    } catch {
+      return [];
+    }
+  });
   const [search, setSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [editTarget, setEditTarget] = useState<Service | null>(null);
-
-  useEffect(() => {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    setServices(raw ? JSON.parse(raw) : []);
-  }, []);
 
   useEffect(() => {
     saveServices(services);
@@ -144,10 +158,10 @@ export default function ManageServicesPage() {
     setModalOpen(true);
   };
 
-  const handleSave = (data: Service) => {
+  const handleSave = (data: ServiceDraft) => {
     if (editTarget) {
       setServices((prev) =>
-        prev.map((s) => (s.id === editTarget.id ? data : s))
+        prev.map((s) => (s.id === editTarget.id ? { ...data, id: editTarget.id } : s))
       );
     } else {
       setServices((prev) => [...prev, { ...data, id: Date.now() }]);

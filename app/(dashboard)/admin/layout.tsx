@@ -1,16 +1,21 @@
+// FILE: src/app/admin/layout.tsx
+
 import AdminSidebar from "@/components/dashboard/AdminDashboard";
 import AdminTopbar from "@/components/dashboard/AdminTopbar";
+import { requireAdminUser } from "@/lib/auth/session";
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const currentUser = await requireAdminUser();
+
   return (
     <div className="flex h-screen overflow-hidden bg-subtle">
-      
+
       {/* Sidebar */}
-      <AdminSidebar fullName="ZAG Rwanda" />
+      <AdminSidebar fullName={currentUser.fullName} email={currentUser.email} />
 
       {/* Content */}
       <div className="flex flex-1 flex-col overflow-hidden">

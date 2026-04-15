@@ -1,7 +1,9 @@
+// FILE: src/components/AdminSidebar.tsx
+
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   LayoutDashboard,
@@ -11,8 +13,15 @@ import {
   LogOut,
 } from "lucide-react";
 
-export default function AdminSidebar({ fullName }: { fullName: string }) {
+export default function AdminSidebar({
+  fullName,
+  email,
+}: {
+  fullName: string;
+  email: string;
+}) {
   const pathname = usePathname();
+  const router = useRouter();
   const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
@@ -27,11 +36,15 @@ export default function AdminSidebar({ fullName }: { fullName: string }) {
     }
 
     fetchUnread();
-
-    // Poll every 30 seconds for new messages
     const interval = setInterval(fetchUnread, 30000);
     return () => clearInterval(interval);
-  }, [pathname]); // re-fetch when navigating (e.g. after reading messages)
+  }, [pathname]);
+
+  async function handleLogout() {
+    await fetch("/api/logout", { method: "POST" });
+    router.push("/");
+    router.refresh();
+  }
 
   const menu = [
     { label: "Dashboard", href: "/admin", icon: LayoutDashboard, badge: 0 },
@@ -70,7 +83,6 @@ export default function AdminSidebar({ fullName }: { fullName: string }) {
               <Icon size={16} />
               <span className="flex-1">{item.label}</span>
 
-              {/* Badge */}
               {item.badge > 0 && (
                 <span className="bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center leading-none">
                   {item.badge > 99 ? "99+" : item.badge}
@@ -84,7 +96,11 @@ export default function AdminSidebar({ fullName }: { fullName: string }) {
       {/* User */}
       <div className="p-4 border-t border-line/20">
         <p className="text-sm font-semibold text-foreground">{fullName}</p>
-        <button className="mt-2 text-xs text-gray-mid hover:text-primary flex items-center gap-2">
+        <p className="text-xs text-gray-mid truncate">{email}</p>
+        <button
+          onClick={handleLogout}
+          className="mt-2 text-xs cursor-pointer text-gray-mid hover:text-primary flex items-center gap-2"
+        >
           <LogOut size={14} /> Logout
         </button>
       </div>

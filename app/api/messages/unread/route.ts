@@ -13,7 +13,9 @@ export async function GET() {
     }
 
     return NextResponse.json({ unreadCount: count ?? 0 });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Unable to load unread count";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

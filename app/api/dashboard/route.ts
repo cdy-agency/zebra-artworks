@@ -15,8 +15,10 @@ export async function GET() {
     }
 
     return NextResponse.json({ projectCount: count ?? 0 });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Dashboard API error";
     console.error("Dashboard API exception:", error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

@@ -73,6 +73,10 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 const inputCls = "w-full border border-gray-200 bg-white text-gray-900 rounded-md px-3 py-2 text-sm outline-none focus:border-blue-500 transition-colors placeholder:text-gray-400";
 
+function getErrorMessage(error: unknown, fallback: string) {
+  return error instanceof Error ? error.message : fallback;
+}
+
 // ─── Preview Thumb ────────────────────────────────────────────────────────────
 
 function PreviewThumb({ src, onRemove }: { src: string; onRemove: () => void }) {
@@ -138,7 +142,7 @@ function ProjectModal({ project, onSave, onClose }: { project?: Project | null; 
 
   useEffect(() => {
     if (!CATEGORIES[category]?.includes(subcategory)) setSubcategory("");
-  }, [category]);
+  }, [category, subcategory]);
 
   useEffect(() => {
     const h = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
@@ -186,8 +190,8 @@ function ProjectModal({ project, onSave, onClose }: { project?: Project | null; 
       );
       onSave();
       onClose();
-    } catch (e: any) {
-      setError(e.message);
+    } catch (error: unknown) {
+      setError(getErrorMessage(error, "Save failed."));
     } finally {
       setIsSaving(false);
     }

@@ -14,8 +14,10 @@ export async function GET() {
     }
 
     return NextResponse.json({ messages: data });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Unable to load messages";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
@@ -34,7 +36,9 @@ export async function PATCH(req: NextRequest) {
     }
 
     return NextResponse.json({ success: true });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Unable to update message";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
