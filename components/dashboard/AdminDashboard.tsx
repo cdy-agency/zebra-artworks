@@ -1,5 +1,4 @@
 // FILE: src/components/AdminSidebar.tsx
-
 "use client";
 
 import Link from "next/link";
@@ -9,8 +8,8 @@ import {
   LayoutDashboard,
   Image,
   Mail,
-  Settings,
   LogOut,
+  GalleryHorizontal, // ← added
 } from "lucide-react";
 
 export default function AdminSidebar({
@@ -47,10 +46,10 @@ export default function AdminSidebar({
   }
 
   const menu = [
-    { label: "Dashboard", href: "/admin", icon: LayoutDashboard, badge: 0 },
-    { label: "Projects", href: "/admin/manageProjects", icon: Image, badge: 0 },
-    { label: "Messages", href: "/admin/messages", icon: Mail, badge: unreadCount },
-    // { label: "Settings", href: "/admin/settings", icon: Settings, badge: 0 },
+    { label: "Dashboard",  href: "/admin",                icon: LayoutDashboard,   badge: 0 },
+    { label: "Projects",   href: "/admin/manageProjects", icon: Image,             badge: 0 },
+    { label: "Messages",   href: "/admin/messages",       icon: Mail,              badge: unreadCount },
+    { label: "Gallery",    href: "/admin/manageGallery",  icon: GalleryHorizontal, badge: 0 },
   ];
 
   return (
