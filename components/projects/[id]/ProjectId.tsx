@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight, X, ArrowLeft, ZoomIn } from "lucide-react";
 import type { Project } from "@/lib/supabase";
 import Navbar from "../../NavBar";
 import Footer from "../../Footer";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function StatusBadge({ status }: { status: string }) {
   const cls =
@@ -64,13 +65,88 @@ function Lightbox({ images, startIndex, onClose }: {
   );
 }
 
+// ─── Skeleton that mirrors the real page layout exactly ──────────────────────
+function ProjectDetailSkeleton() {
+  return (
+    <>
+      <Navbar />
+      <main className="bg-gray-50 min-h-screen py-8 px-4 md:px-8">
+        <div className="max-w-6xl mx-auto">
+
+          {/* Back button */}
+          <Skeleton className="h-4 w-32 mb-6" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
+
+            {/* ── Gallery skeleton ── */}
+            <div>
+              {/* Main image */}
+              <Skeleton className="w-full aspect-[16/10] rounded-xl" />
+
+              {/* Thumbnails */}
+              <div className="grid grid-cols-5 gap-2 mt-2.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Skeleton key={i} className="aspect-square rounded-lg" />
+                ))}
+              </div>
+
+              {/* "X photos" label */}
+              <Skeleton className="h-3 w-16 ml-auto mt-1.5" />
+            </div>
+
+            {/* ── Info panel skeleton ── */}
+            <div className="flex flex-col gap-5">
+
+              {/* Title + badges + meta card */}
+              <div className="bg-white rounded-xl border border-gray-100 p-6 space-y-4">
+                {/* Title */}
+                <Skeleton className="h-7 w-3/4" />
+                <Skeleton className="h-5 w-1/2" />
+
+                {/* Badges row */}
+                <div className="flex gap-2">
+                  <Skeleton className="h-6 w-20 rounded-full" />
+                  <Skeleton className="h-6 w-24 rounded-full" />
+                </div>
+
+                {/* Meta rows */}
+                <div className="divide-y divide-gray-100 pt-1">
+                  <div className="flex justify-between py-2.5">
+                    <Skeleton className="h-4 w-12" />
+                    <Skeleton className="h-4 w-28" />
+                  </div>
+                  <div className="flex justify-between py-2.5">
+                    <Skeleton className="h-4 w-10" />
+                    <Skeleton className="h-4 w-24" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Description card */}
+              <div className="bg-white rounded-xl border border-gray-100 p-6 space-y-3">
+                <Skeleton className="h-3 w-36" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-2/3" />
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+// ─── Main page ───────────────────────────────────────────────────────────────
 export default function ProjectDetailPage() {
   const { id } = useParams();
   const router = useRouter();
 
-  const [project, setProject]         = useState<Project | null>(null);
-  const [loading, setLoading]         = useState(true);
-  const [activeImage, setActiveImage] = useState(0);
+  const [project, setProject]             = useState<Project | null>(null);
+  const [loading, setLoading]             = useState(true);
+  const [activeImage, setActiveImage]     = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
@@ -84,18 +160,8 @@ export default function ProjectDetailPage() {
       .catch(() => setLoading(false));
   }, [id]);
 
-  const images = project?.images ?? [];
-  const hasImages = images.length > 0;
-
-  if (loading) return (
-    <>
-      <Navbar />
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="w-8 h-8 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
-      </div>
-      <Footer />
-    </>
-  );
+  // Show skeleton while fetching
+  if (loading) return <ProjectDetailSkeleton />;
 
   if (!project) return (
     <>
@@ -108,6 +174,9 @@ export default function ProjectDetailPage() {
       <Footer />
     </>
   );
+
+  const images    = project?.images ?? [];
+  const hasImages = images.length > 0;
 
   return (
     <>
@@ -141,7 +210,6 @@ export default function ProjectDetailPage() {
                     No images available
                   </div>
                 )}
-                {/* Zoom hint */}
                 {hasImages && (
                   <div className="absolute bottom-3 right-3 bg-black/45 text-white text-xs px-2.5 py-1.5 rounded-md flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
                     <ZoomIn size={12} /> View full
@@ -172,7 +240,6 @@ export default function ProjectDetailPage() {
             {/* ── Info panel ── */}
             <div className="flex flex-col gap-5">
 
-              {/* Title + badges + meta */}
               <div className="bg-white rounded-xl border border-gray-100 p-6">
                 <h1 className="font-serif text-2xl font-medium text-gray-900 leading-snug mb-3">
                   {project.title}
@@ -212,7 +279,6 @@ export default function ProjectDetailPage() {
                 </div>
               </div>
 
-              {/* Description */}
               {project.description && (
                 <div className="bg-white rounded-xl border border-gray-100 p-6">
                   <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">

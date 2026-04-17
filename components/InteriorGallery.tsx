@@ -1,36 +1,74 @@
 // 📁 src/components/InteriorGallery.tsx
-// Design is UNCHANGED — only the type now uses `description` to match DB,
-// while still accepting `desc` as a fallback so old data keeps working.
-
 "use client";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type GalleryItem = {
   id: string;
   src: string;
   title: string;
-  description: string; // DB column name
-  desc?: string;       // legacy alias returned by the API normaliser
+  description: string;
+  desc?: string;
 };
 
+// ─── Skeleton placeholder (mirrors the real grid exactly) ───────────────────
+function GallerySkeleton() {
+  return (
+    <section className="bg-[#f5f5f5] py-16 px-6">
+      {/* Header skeleton */}
+      <div className="max-w-6xl mx-auto mb-10">
+        <div className="flex flex-col md:flex-row justify-between gap-6">
+          <div className="space-y-2">
+            <Skeleton className="h-3 w-24" />
+            <Skeleton className="h-6 w-64" />
+          </div>
+          <Skeleton className="h-12 w-80" />
+        </div>
+      </div>
+
+      {/* Grid skeleton — same 3-column layout as the real grid */}
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {/* Left large */}
+        <Skeleton className="md:row-span-2 rounded-xl h-[250px] md:h-[520px]" />
+        {/* Top middle */}
+        <Skeleton className="rounded-xl h-[250px]" />
+        {/* Right tall */}
+        <Skeleton className="md:row-span-2 rounded-xl h-[250px] md:h-[520px]" />
+        {/* Bottom middle */}
+        <Skeleton className="rounded-xl h-[250px]" />
+      </div>
+    </section>
+  );
+}
+
+// ─── Main component ──────────────────────────────────────────────────────────
 export default function InteriorGallery() {
   const [gallery, setGallery] = useState<GalleryItem[]>([]);
+  const [loading, setLoading] = useState(true); // 👈 track loading state
 
   useEffect(() => {
     fetch("/api/gallery")
       .then((r) => r.json())
-      .then((data) => setGallery(data))
-      .catch(console.error);
+      .then((data) => {
+        setGallery(data);
+        setLoading(false); // 👈 done loading
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false); // 👈 stop skeleton even on error
+      });
   }, []);
 
-  // Keep at most 4 items to match the original layout
+  // Show skeleton while fetching
+  if (loading) return <GallerySkeleton />;
+
   const items = gallery.slice(0, 4);
 
-  if (items.length < 4) return null; // or a loading skeleton
+  // Not enough data after loading — render nothing (or a fallback)
+  if (items.length < 4) return null;
 
-  // Helper so templates never need to worry about which field is populated
   const getDesc = (item: GalleryItem) => item.description || item.desc || "";
 
   return (
@@ -53,9 +91,8 @@ export default function InteriorGallery() {
         </div>
       </div>
 
-      {/* Grid — identical layout as original */}
+      {/* Grid */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-
         {/* Left Large */}
         <div className="md:row-span-2 relative overflow-hidden rounded-xl group">
           <Image src={items[0].src} alt={items[0].title} width={300} height={200}
@@ -107,7 +144,6 @@ export default function InteriorGallery() {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
