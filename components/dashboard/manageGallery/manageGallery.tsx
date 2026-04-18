@@ -16,7 +16,6 @@ export default function ManageGalleryPage() {
   const [items, setItems] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // ── Add-new form state ──────────────────────────────────────────────────────
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [newTitle, setNewTitle] = useState("");
@@ -25,16 +24,13 @@ export default function ManageGalleryPage() {
   const [addError, setAddError] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // ── Inline-edit state ───────────────────────────────────────────────────────
   const [editId, setEditId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState("");
   const [editDesc, setEditDesc] = useState("");
   const [saving, setSaving] = useState(false);
 
-  // ── Delete state ────────────────────────────────────────────────────────────
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  // ── Toast ───────────────────────────────────────────────────────────────────
   const [toast, setToast] = useState<{ msg: string; ok: boolean } | null>(null);
 
   function showToast(msg: string, ok = true) {
@@ -42,12 +38,12 @@ export default function ManageGalleryPage() {
     setTimeout(() => setToast(null), 3000);
   }
 
-  // ── Fetch items ─────────────────────────────────────────────────────────────
   async function fetchItems() {
     setLoading(true);
     try {
       const res = await fetch("/api/gallery");
       const data = await res.json();
+      console.log("Gallery data:", data); // 👈 ADDED
       setItems(
         (data as GalleryItem[]).map((d: GalleryItem & { desc?: string }) => ({
           ...d,
@@ -65,7 +61,6 @@ export default function ManageGalleryPage() {
     fetchItems();
   }, []);
 
-  // ── File picker ─────────────────────────────────────────────────────────────
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0] ?? null;
     setFile(f);
@@ -84,7 +79,6 @@ export default function ManageGalleryPage() {
     if (fileInputRef.current) fileInputRef.current.value = "";
   }
 
-  // ── Add item ────────────────────────────────────────────────────────────────
   async function handleAdd(e: React.FormEvent) {
     e.preventDefault();
     setAddError("");
@@ -95,7 +89,6 @@ export default function ManageGalleryPage() {
 
     setAdding(true);
     try {
-      // 1. Upload image
       const fd = new FormData();
       fd.append("file", file);
       const upRes = await fetch("/api/uploadGallery", {
@@ -108,7 +101,6 @@ export default function ManageGalleryPage() {
       }
       const { url } = await upRes.json();
 
-      // 2. Save to DB
       const saveRes = await fetch("/api/gallery", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -131,9 +123,7 @@ export default function ManageGalleryPage() {
     }
   }
 
-  // ── Delete item ─────────────────────────────────────────────────────────────
   async function handleDelete(id: string) {
-    if (!confirm("Delete this gallery item?")) return;
     setDeletingId(id);
     try {
       const res = await fetch(`/api/gallery/${id}`, { method: "DELETE" });
@@ -147,7 +137,6 @@ export default function ManageGalleryPage() {
     }
   }
 
-  // ── Start edit ──────────────────────────────────────────────────────────────
   function startEdit(item: GalleryItem) {
     setEditId(item.id);
     setEditTitle(item.title);
@@ -160,7 +149,6 @@ export default function ManageGalleryPage() {
     setEditDesc("");
   }
 
-  // ── Save edit ───────────────────────────────────────────────────────────────
   async function saveEdit(id: string) {
     if (!editTitle.trim() || !editDesc.trim()) return;
     setSaving(true);
@@ -188,11 +176,9 @@ export default function ManageGalleryPage() {
     }
   }
 
-  // ─────────────────────────────────────────────────────────────────────────────
   return (
     <div className="p-6 max-w-5xl mx-auto">
 
-      {/* Toast */}
       {toast && (
         <div
           className={`fixed top-5 right-5 z-50 px-4 py-3 rounded-lg shadow-lg text-sm font-medium text-white transition-all ${
@@ -208,12 +194,10 @@ export default function ManageGalleryPage() {
         Upload and manage the 4 images shown in the public Interior Design Highlights section.
       </p>
 
-      {/* ── Add New Item Form ─────────────────────────────────────────── */}
       <div className="bg-subtle rounded-xl p-6 mb-10 border border-line/20">
         <h2 className="text-base font-semibold text-foreground mb-4">Add New Gallery Item</h2>
 
         <form onSubmit={handleAdd} className="space-y-4">
-          {/* Image picker */}
           <div>
             <label className="block text-sm font-medium text-foreground mb-1">Image</label>
             {preview ? (
@@ -246,7 +230,6 @@ export default function ManageGalleryPage() {
             />
           </div>
 
-          {/* Title */}
           <div>
             <label className="block text-sm font-medium text-foreground mb-1">Title</label>
             <input
@@ -258,7 +241,6 @@ export default function ManageGalleryPage() {
             />
           </div>
 
-          {/* Description */}
           <div>
             <label className="block text-sm font-medium text-foreground mb-1">Description</label>
             <textarea
@@ -290,7 +272,6 @@ export default function ManageGalleryPage() {
         </form>
       </div>
 
-      {/* ── Existing Items ───────────────────────────────────────────── */}
       <h2 className="text-base font-semibold text-foreground mb-4">
         Current Items{" "}
         <span className="text-gray-mid font-normal text-sm">
@@ -313,7 +294,6 @@ export default function ManageGalleryPage() {
                 idx < 4 ? "border-primary/30" : "border-line/20 opacity-60"
               }`}
             >
-              {/* Image */}
               <div className="relative w-full h-44">
                 <Image src={item.src} alt={item.title} fill className="object-cover" />
                 {idx < 4 && (
@@ -328,10 +308,8 @@ export default function ManageGalleryPage() {
                 )}
               </div>
 
-              {/* Content */}
               <div className="p-4">
                 {editId === item.id ? (
-                  /* ── Edit mode ── */
                   <div className="space-y-2">
                     <input
                       type="text"
@@ -363,7 +341,6 @@ export default function ManageGalleryPage() {
                     </div>
                   </div>
                 ) : (
-                  /* ── View mode ── */
                   <>
                     <h3 className="font-semibold text-sm text-foreground">{item.title}</h3>
                     <p className="text-xs text-gray-mid mt-1 line-clamp-2">{item.description}</p>
