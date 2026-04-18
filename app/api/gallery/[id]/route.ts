@@ -5,7 +5,7 @@ import { supabaseAdmin } from "@/lib/supabase";
 
 // DELETE - remove a gallery item + its storage object
 export async function DELETE(req: NextRequest, context: any) {
-  const { id } = context.params;
+  const { id } = await context.params; // 👈 FIXED: await params
 
   // 1. Get image URL first
   const { data: row, error: fetchErr } = await supabaseAdmin
@@ -55,7 +55,7 @@ export async function DELETE(req: NextRequest, context: any) {
 
 // PATCH - update title and description
 export async function PATCH(req: NextRequest, context: any) {
-  const { id } = context.params;
+  const { id } = await context.params; // 👈 FIXED: await params
 
   const body = await req.json();
   const { title, description } = body;
