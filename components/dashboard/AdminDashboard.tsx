@@ -49,7 +49,7 @@ export default function AdminSidebar({
     { label: "Dashboard",  href: "/admin",                icon: LayoutDashboard,   badge: 0 },
     { label: "Projects",   href: "/admin/manageProjects", icon: Image,             badge: 0 },
     { label: "Messages",   href: "/admin/messages",       icon: Mail,              badge: unreadCount },
-    { label: "Gallery",    href: "/admin/manageGallery",  icon: GalleryHorizontal, badge: 0 },
+    // { label: "Gallery",    href: "/admin/manageGallery",  icon: GalleryHorizontal, badge: 0 },
   ];
 
   return (

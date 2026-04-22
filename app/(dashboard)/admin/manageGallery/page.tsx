@@ -3,7 +3,7 @@ import ManageGalleryPage from "@/components/dashboard/manageGallery/manageGaller
 export default function (){
     return (
         <div>
-            <ManageGalleryPage/>
+            {/* <ManageGalleryPage/> */}
         </div>
     )
 }

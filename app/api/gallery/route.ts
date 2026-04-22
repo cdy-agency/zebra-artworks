@@ -1,41 +1,39 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 
-// GET ALL IMAGES
 export async function GET() {
   const { data, error } = await supabaseAdmin
-    .from("gallery")
-    .select("*")
+    .from("projects")
+    .select("id, title, description, images")
     .order("created_at", { ascending: false });
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return NextResponse.json(data ?? []);
+  const items = (data ?? [])
+    .flatMap((project) => {
+      const images = Array.isArray(project.images) ? project.images : [];
+
+      return images
+        .filter((src): src is string => typeof src === "string" && src.trim().length > 0)
+        .map((src, index) => ({
+          id: `${project.id}-${index}`,
+          projectId: project.id,
+          src,
+          title: project.title,
+          description: project.description ?? "",
+        }));
+    })
+    .slice(0, 4);
+
+  return NextResponse.json(items);
 }
 
-// SAVE IMAGE TO DATABASE
 export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const { src, title, description } = body;
-
-  if (!src || !title || !description) {
-    return NextResponse.json(
-      { error: "src, title, description required" },
-      { status: 400 }
-    );
-  }
-
-  const { data, error } = await supabaseAdmin
-    .from("gallery")
-    .insert([{ src, title, description }])
-    .select()
-    .single();
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
-
-  return NextResponse.json(data);
+  void req;
+  return NextResponse.json(
+    { error: "Gallery images are managed from project uploads only." },
+    { status: 405 }
+  );
 }
