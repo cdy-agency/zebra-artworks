@@ -73,7 +73,7 @@ export default function HeroSection() {
 
         <p
           key={current + "-desc"}
-          className="text-background/75 text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed font-light transition-all duration-500"
+          className="text-background/75 text-md md:text-xl font-medium max-w-xl mx-auto mb-10 leading-relaxed transition-all duration-500"
         >
           {slides[current].desc}
         </p>
