@@ -58,18 +58,18 @@ export default function LoginPage() {
 
           <div className="absolute top-6 left-6 flex items-center gap-2">
             <div className="w-9 h-9 rounded-full bg-background/90 flex items-center justify-center">
-              <span className="text-primary font-extrabold text-sm">Z</span>
+              <span className="text-primary font-extrabold text-type-ui">Z</span>
             </div>
-            <span className="text-white font-extrabold tracking-tight text-base">
+            <span className="text-white font-heading font-semibold tracking-tight text-type-prose">
               ZAG Rwanda
             </span>
           </div>
 
           <div className="absolute bottom-8 left-6 right-6">
-            <h2 className="text-white text-2xl font-extrabold leading-snug">
+            <h2 className="text-white font-extrabold leading-snug">
               Transforming spaces,<br />shaping futures.
             </h2>
-            <p className="text-white/70 text-sm mt-2">
+            <p className="text-white/70 text-type-prose mt-2">
               Design and construction excellence across Rwanda.
             </p>
             <div className="flex items-center gap-2 mt-5">
@@ -85,10 +85,10 @@ export default function LoginPage() {
 
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
 
-            <h1 className="text-2xl font-extrabold text-foreground mb-1">
+            <h1 className="font-extrabold text-foreground mb-1">
               Welcome Back to ZAG!
             </h1>
-            <p className="text-gray-mid text-sm mb-8">
+            <p className="text-gray-mid text-type-prose mb-8">
               Sign in to your account
             </p>
 
@@ -96,7 +96,7 @@ export default function LoginPage() {
 
               {/* Email */}
               <div className="space-y-1.5">
-                <label className="text-sm font-medium text-foreground">
+                <label className="text-type-prose font-medium text-foreground">
                   Your Email
                 </label>
                 <input
@@ -105,13 +105,13 @@ export default function LoginPage() {
                   required
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full px-4 py-3 text-sm border border-line rounded-xl bg-subtle text-foreground placeholder:text-gray-mid/60 focus:outline-none focus:border-primary transition"
+                  className="w-full px-4 py-3 text-type-prose border border-line rounded-xl bg-subtle text-foreground placeholder:text-gray-mid/60 focus:outline-none focus:border-primary transition"
                 />
               </div>
 
               {/* Password */}
               <div className="space-y-1.5">
-                <label className="text-sm font-medium text-foreground">
+                <label className="text-type-prose font-medium text-foreground">
                   Password
                 </label>
                 <div className="relative">
@@ -121,7 +121,7 @@ export default function LoginPage() {
                     required
                     value={form.password}
                     onChange={(e) => setForm({ ...form, password: e.target.value })}
-                    className="w-full px-4 pr-10 py-3 text-sm border border-line rounded-xl bg-subtle text-foreground placeholder:text-gray-mid/60 focus:outline-none focus:border-primary transition"
+                    className="w-full px-4 pr-10 py-3 text-type-prose border border-line rounded-xl bg-subtle text-foreground placeholder:text-gray-mid/60 focus:outline-none focus:border-primary transition"
                   />
                   <button
                     type="button"
@@ -135,14 +135,14 @@ export default function LoginPage() {
 
               {/* Error */}
               {error && (
-                <p className="text-red-500 text-sm">{error}</p>
+                <p className="text-red-500 text-type-prose">{error}</p>
               )}
 
               {/* Submit */}
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[var(--color-primary-dark)] hover:bg-[var(--color-primary-dark)]/80 text-white font-bold text-sm py-3.5 rounded-xl transition-all duration-300 disabled:opacity-60"
+                className="w-full bg-[var(--color-primary-dark)] hover:bg-[var(--color-primary-dark)]/80 text-white font-bold text-type-prose py-3.5 rounded-xl transition-all duration-300 disabled:opacity-60"
               >
                 {loading ? "Signing in..." : "Login"}
               </button>
@@ -150,7 +150,7 @@ export default function LoginPage() {
             </form>
           </div>
 
-          <p className="text-center text-xs text-gray-mid mt-6">
+          <p className="text-center text-type-meta text-gray-mid mt-6">
             Copyright © ZAG Rwanda. All Rights Reserved.
           </p>
         </div>

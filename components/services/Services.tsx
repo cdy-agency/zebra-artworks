@@ -1,8 +1,5 @@
 "use client";
 
-import Navbar from "../NavBar";
-import Footer from "../Footer";
-
 const interiorServices = [
   {
     icon: (
@@ -107,9 +104,9 @@ function ServiceCard({ icon, title, desc }: { icon: React.ReactNode; title: stri
         {icon}
       </div>
 
-      <h3 className="font-bold text-[#1a1a1a] text-base">{title}</h3>
+      <h3 className="font-bold text-[#1a1a1a] text-type-h3">{title}</h3>
 
-      <p className="text-[#6b6b6b] text-sm leading-relaxed flex-1">{desc}</p>
+      <p className="text-[#6b6b6b] text-type-prose leading-relaxed flex-1">{desc}</p>
 
       {/* Arrow */}
       <div className="mt-2">
@@ -125,7 +122,6 @@ function ServiceCard({ icon, title, desc }: { icon: React.ReactNode; title: stri
 export default function ServicesPage() {
   return (
     <>
-      <Navbar />
       <main className="min-h-screen bg-[#f6f7f9] text-[#1a1a1a]">
 
         {/* HERO WITH BACKGROUND IMAGE */}
@@ -138,7 +134,7 @@ export default function ServicesPage() {
           <div className="absolute inset-0 bg-black/60" />
 
           <div className="relative z-10 pt-28">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-white">
+            <h1 className="text-type-hero font-heading font-bold text-white">
               Our Services
             </h1>
           </div>
@@ -148,10 +144,10 @@ export default function ServicesPage() {
         {/* SECTION LABEL + HEADING */}
         <section className="px-6 pt-20 pb-4 text-center">
           <div className="max-w-2xl mx-auto">
-            <p className="text-[var(--color-primary-dark)] text-sm font-semibold uppercase tracking-wide mb-3">
+            <p className="text-[var(--color-primary-dark)] text-type-meta font-semibold uppercase tracking-wide mb-3">
               Features Services
             </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#1a1a1a] leading-tight">
+            <h2 className="font-extrabold text-[#1a1a1a] leading-tight">
               A wide range of design &amp; construction services
             </h2>
           </div>
@@ -160,7 +156,7 @@ export default function ServicesPage() {
         {/* INTERIOR DESIGN CARDS */}
         <section className="px-6 pt-12 pb-6">
           <div className="max-w-6xl mx-auto">
-            <h3 className="text-lg font-bold mb-6 text-[#1a1a1a]">
+            <h3 className="font-bold mb-6 text-[#1a1a1a]">
               Interior Design Department
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -174,7 +170,7 @@ export default function ServicesPage() {
         {/* ARCHITECTURE CARDS */}
         <section className="px-6 pt-6 pb-20">
           <div className="max-w-6xl mx-auto">
-            <h3 className="text-lg font-bold mb-6 text-[#1a1a1a]">
+            <h3 className="font-bold mb-6 text-[#1a1a1a]">
               Architecture &amp; Construction
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -188,17 +184,16 @@ export default function ServicesPage() {
         {/* CTA */}
         <section className="px-6 pb-24">
           <div className="max-w-4xl mx-auto text-center bg-white border border-[#e6e6e6] rounded-3xl p-10 shadow-sm">
-            <h2 className="text-2xl md:text-3xl font-bold">
+            <h2 className="font-bold">
               Ready to start your project?
             </h2>
-            <p className="text-[#6b6b6b] mt-3 text-sm">
+            <p className="text-[#6b6b6b] mt-3 text-type-prose">
               Let&apos;s turn your vision into reality with professional design and construction.
             </p>
           </div>
         </section>
 
       </main>
-      <Footer />
     </>
   );
 }

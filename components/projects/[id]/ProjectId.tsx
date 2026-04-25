@@ -5,8 +5,6 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, X, ArrowLeft, ZoomIn } from "lucide-react";
 import type { Project } from "@/lib/supabase";
-import Navbar from "../../NavBar";
-import Footer from "../../Footer";
 import { Skeleton } from "@/components/ui/skeleton";
 
 function StatusBadge({ status }: { status: string }) {
@@ -15,7 +13,7 @@ function StatusBadge({ status }: { status: string }) {
     status === "Ongoing"   ? "bg-blue-100 text-blue-700" :
                              "bg-amber-100 text-amber-700";
   return (
-    <span className={`px-3 py-1 text-xs font-semibold rounded-full ${cls}`}>
+    <span className={`px-3 py-1 text-type-meta font-semibold rounded-full ${cls}`}>
       {status}
     </span>
   );
@@ -53,7 +51,7 @@ function Lightbox({ images, startIndex, onClose }: {
           className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-colors">
           <ChevronLeft size={20} />
         </button>
-        <span className="text-white/60 text-sm min-w-[50px] text-center">
+        <span className="text-white/60 text-type-prose min-w-[50px] text-center">
           {idx + 1} / {images.length}
         </span>
         <button onClick={() => nav(1)}
@@ -68,10 +66,8 @@ function Lightbox({ images, startIndex, onClose }: {
 // ─── Skeleton that mirrors the real page layout exactly ──────────────────────
 function ProjectDetailSkeleton() {
   return (
-    <>
-      <Navbar />
-      <main className="bg-gray-50 min-h-screen py-8 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto">
+    <main className="bg-gray-50 min-h-screen py-8 px-4 md:px-8">
+      <div className="max-w-6xl mx-auto">
 
           {/* Back button */}
           <Skeleton className="h-4 w-32 mb-6" />
@@ -132,10 +128,8 @@ function ProjectDetailSkeleton() {
             </div>
 
           </div>
-        </div>
-      </main>
-      <Footer />
-    </>
+      </div>
+    </main>
   );
 }
 
@@ -164,15 +158,11 @@ export default function ProjectDetailPage() {
   if (loading) return <ProjectDetailSkeleton />;
 
   if (!project) return (
-    <>
-      <Navbar />
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4">
-        <p className="text-gray-500">Project not found</p>
-        <button onClick={() => router.push("/projects")}
-          className="text-sm text-blue-600 underline">Back to projects</button>
-      </div>
-      <Footer />
-    </>
+    <div className="min-h-screen flex flex-col items-center justify-center gap-4">
+      <p className="text-gray-500">Project not found</p>
+      <button onClick={() => router.push("/projects")}
+        className="text-type-prose text-blue-600 underline">Back to projects</button>
+    </div>
   );
 
   const images    = project?.images ?? [];
@@ -180,14 +170,12 @@ export default function ProjectDetailPage() {
 
   return (
     <>
-      <Navbar />
-
       <main className="bg-gray-50 min-h-screen py-8 px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
 
           {/* Back button */}
           <button onClick={() => router.push("/projects")}
-            className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 mb-6 transition-colors">
+            className="flex items-center gap-1.5 text-type-prose text-gray-500 hover:text-gray-900 mb-6 transition-colors">
             <ArrowLeft size={15} />
             Back to projects
           </button>
@@ -206,12 +194,12 @@ export default function ProjectDetailPage() {
                   <img src={images[activeImage]} alt=""
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
+                  <div className="w-full h-full flex items-center justify-center text-gray-400 text-type-prose">
                     No images available
                   </div>
                 )}
                 {hasImages && (
-                  <div className="absolute bottom-3 right-3 bg-black/45 text-white text-xs px-2.5 py-1.5 rounded-md flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute bottom-3 right-3 bg-black/45 text-white text-type-meta px-2.5 py-1.5 rounded-md flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
                     <ZoomIn size={12} /> View full
                   </div>
                 )}
@@ -230,7 +218,7 @@ export default function ProjectDetailPage() {
                       </button>
                     ))}
                   </div>
-                  <p className="text-xs text-gray-400 text-right mt-1.5">
+                  <p className="text-type-meta text-gray-400 text-right mt-1.5">
                     {images.length} photos
                   </p>
                 </>
@@ -241,19 +229,19 @@ export default function ProjectDetailPage() {
             <div className="flex flex-col gap-5">
 
               <div className="bg-white rounded-xl border border-gray-100 p-6">
-                <h1 className="font-serif text-2xl font-medium text-gray-900 leading-snug mb-3">
+                <h1 className="font-heading font-medium text-gray-900 leading-snug mb-3">
                   {project.title}
                 </h1>
 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.status && <StatusBadge status={project.status} />}
                   {project.category && (
-                    <span className="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-600">
+                    <span className="px-3 py-1 text-type-meta font-medium rounded-full bg-gray-100 text-gray-600">
                       {project.category}
                     </span>
                   )}
                   {project.subcategory && (
-                    <span className="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-600">
+                    <span className="px-3 py-1 text-type-meta font-medium rounded-full bg-gray-100 text-gray-600">
                       {project.subcategory}
                     </span>
                   )}
@@ -261,13 +249,13 @@ export default function ProjectDetailPage() {
 
                 <div className="divide-y divide-gray-100">
                   {project.client && (
-                    <div className="flex items-center justify-between py-2.5 text-sm">
+                    <div className="flex items-center justify-between py-2.5 text-type-prose">
                       <span className="text-gray-500">Client</span>
                       <span className="font-medium text-gray-900">{project.client}</span>
                     </div>
                   )}
                   {project.date && (
-                    <div className="flex items-center justify-between py-2.5 text-sm">
+                    <div className="flex items-center justify-between py-2.5 text-type-prose">
                       <span className="text-gray-500">Date</span>
                       <span className="font-medium text-gray-900">
                         {new Date(project.date).toLocaleDateString("en-GB", {
@@ -281,10 +269,10 @@ export default function ProjectDetailPage() {
 
               {project.description && (
                 <div className="bg-white rounded-xl border border-gray-100 p-6">
-                  <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">
+                  <p className="text-type-eyebrow font-semibold uppercase tracking-widest text-gray-400 mb-3">
                     About this project
                   </p>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-type-prose text-gray-600 leading-relaxed">
                     {project.description}
                   </p>
                 </div>
@@ -293,8 +281,6 @@ export default function ProjectDetailPage() {
           </div>
         </div>
       </main>
-
-      <Footer />
 
       {lightboxIndex !== null && (
         <Lightbox images={images} startIndex={lightboxIndex}

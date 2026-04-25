@@ -29,10 +29,10 @@ export default function AdminDashboardPage() {
 
       {/* Welcome */}
       <div>
-        <h1 className="text-2xl font-bold text-foreground">
+        <h1 className="font-bold text-foreground">
           Welcome back
         </h1>
-        <p className="text-gray-mid text-sm">
+        <p className="text-gray-mid text-type-prose">
           Manage your projects, services, and clients here.
         </p>
       </div>
@@ -49,8 +49,8 @@ export default function AdminDashboardPage() {
             key={i}
             className="p-5 border border-line/20 bg-background rounded-lg"
           >
-            <p className="text-sm text-gray-mid">{item.title}</p>
-            <h2 className="text-2xl font-bold text-foreground">
+            <p className="text-type-prose text-gray-mid">{item.title}</p>
+            <h2 className="font-bold text-foreground">
               {item.value}
             </h2>
           </div>
@@ -66,14 +66,14 @@ export default function AdminDashboardPage() {
         <div className="flex justify-between gap-3 flex-wrap">
           <Link
             href="/admin/manageProjects"
-            className="px-4 py-2 bg-primary text-background rounded-md text-sm"
+            className="px-4 py-2 bg-primary text-background rounded-md text-type-prose"
           >
             Manage Projects
           </Link>
 
           <Link
             href="/admin/messages"
-            className="px-4 py-2 border border-line text-foreground rounded-md text-sm"
+            className="px-4 py-2 border border-line text-foreground rounded-md text-type-prose"
           >
             View Messages
           </Link>

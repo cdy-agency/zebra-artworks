@@ -65,7 +65,7 @@ export default function HeroSection() {
 
         <h1
           key={current}
-          className="text-4xl md:text-6xl font-extrabold text-background leading-tight mb-6 tracking-tight transition-all duration-500"
+          className="text-type-hero-mega font-heading font-bold text-background leading-tight mb-6 tracking-tight transition-all duration-500 max-w-[22ch] mx-auto"
         >
           {slides[current].title}
           <span className="block">{slides[current].subtitle}</span>
@@ -73,14 +73,14 @@ export default function HeroSection() {
 
         <p
           key={current + "-desc"}
-          className="text-background/75 text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed font-light transition-all duration-500"
+          className="text-background/75 text-type-lead md:text-type-prose-lg font-medium max-w-xl mx-auto mb-10 leading-relaxed transition-all duration-500"
         >
           {slides[current].desc}
         </p>
 
         <Link
           href="/projects"
-          className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-background font-semibold text-sm md:text-base px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 group"
+          className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-background font-semibold text-type-ui md:text-type-prose-sm px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 group"
         >
           Explore Our Projects
           <ArrowUpRight

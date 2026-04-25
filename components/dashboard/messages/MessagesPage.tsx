@@ -58,8 +58,8 @@ export default function MessagesPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Messages</h1>
-          <p className="text-gray-mid text-sm">
+          <h1 className="font-bold text-foreground">Messages</h1>
+          <p className="text-gray-mid text-type-prose">
             {unreadCount > 0
               ? `${unreadCount} unread message${unreadCount > 1 ? "s" : ""}`
               : "All messages read"}
@@ -68,9 +68,9 @@ export default function MessagesPage() {
       </div>
 
       {loading ? (
-        <p className="text-gray-mid text-sm">Loading messages...</p>
+        <p className="text-gray-mid text-type-prose">Loading messages...</p>
       ) : messages.length === 0 ? (
-        <p className="text-gray-mid text-sm">No messages yet.</p>
+        <p className="text-gray-mid text-type-prose">No messages yet.</p>
       ) : (
         <div className="grid md:grid-cols-2 gap-4">
 
@@ -102,7 +102,7 @@ export default function MessagesPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2">
                       <p
-                        className={`text-sm truncate ${
+                        className={`text-type-prose truncate ${
                           msg.is_read
                             ? "text-gray-mid"
                             : "font-semibold text-foreground"
@@ -110,13 +110,13 @@ export default function MessagesPage() {
                       >
                         {msg.name}
                       </p>
-                      <span className="text-xs text-gray-mid flex-shrink-0">
+                      <span className="text-type-meta text-gray-mid flex-shrink-0">
                         {new Date(msg.created_at).toLocaleDateString()}
                       </span>
                     </div>
 
                     <p
-                      className={`text-xs truncate ${
+                      className={`text-type-meta truncate ${
                         msg.is_read ? "text-gray-mid" : "text-foreground"
                       }`}
                     >
@@ -133,11 +133,11 @@ export default function MessagesPage() {
             {selected ? (
               <div className="space-y-4">
                 <div>
-                  <h2 className="text-lg font-bold text-foreground">
+                  <h2 className="font-bold text-foreground">
                     {selected.subject}
                   </h2>
 
-                  <p className="text-sm text-gray-mid">
+                  <p className="text-type-prose text-gray-mid">
                     From:{" "}
                     <span className="text-foreground font-medium">
                       {selected.name}
@@ -145,27 +145,27 @@ export default function MessagesPage() {
                     &lt;{selected.email}&gt;
                   </p>
 
-                  <p className="text-xs text-gray-mid">
+                  <p className="text-type-meta text-gray-mid">
                     {new Date(selected.created_at).toLocaleString()}
                   </p>
                 </div>
 
                 <hr className="border-line/20" />
 
-                <p className="text-sm text-foreground whitespace-pre-wrap leading-relaxed">
+                <p className="text-type-prose text-foreground whitespace-pre-wrap leading-relaxed">
                   {selected.message}
                 </p>
 
                 {/* ✅ FIXED BUTTON */}
                 <a
                   href={`mailto:${selected.email}?subject=Re: ${selected.subject}`}
-                  className="inline-block mt-4 px-4 py-2 bg-primary text-background text-sm rounded-lg hover:bg-primary-dark transition"
+                  className="inline-block mt-4 px-4 py-2 bg-primary text-background text-type-prose rounded-lg hover:bg-primary-dark transition"
                 >
                   Reply via Email
                 </a>
               </div>
             ) : (
-              <div className="h-full flex items-center justify-center text-gray-mid text-sm">
+              <div className="h-full flex items-center justify-center text-gray-mid text-type-prose">
                 Select a message to read it
               </div>
             )}

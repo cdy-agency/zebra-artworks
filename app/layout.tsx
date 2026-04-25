@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
-import { Nunito, Geist } from "next/font/google";
+import { Playfair_Display, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import Navbar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 
-
-const geist = Geist({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-heading",
+  weight: ["500", "600", "700"],
 });
 
-const nunito = Nunito({
-  variable: "--font-nunito",
+const sourceSans = Source_Sans_3({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -26,25 +28,22 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html
       lang="en"
       className={cn(
         "h-full",
         "antialiased",
-        nunito.variable,
+        playfair.variable,
+        sourceSans.variable,
         "font-sans",
-        geist.variable
       )}
     >
       <body className="min-h-full flex flex-col">
-
+        <Navbar />
         {children}
-
-        {/* 🌐 WhatsApp Floating Button (GLOBAL) */}
+        <Footer />
         <WhatsAppButton />
-
       </body>
     </html>
   );

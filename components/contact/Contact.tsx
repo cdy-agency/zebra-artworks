@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "../NavBar";
-import Footer from "../Footer";
 import { Phone, Mail, MapPin } from "lucide-react";
 
 export default function ContactPage() {
@@ -52,8 +50,6 @@ export default function ContactPage() {
 
   return (
     <>
-      <Navbar />
-
       <main className="bg-subtle min-h-screen">
 
         {/* HERO */}
@@ -64,7 +60,7 @@ export default function ContactPage() {
           />
           <div className="absolute inset-0 bg-gray-dark/60" />
           <div className="relative z-10 pt-28">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-background">
+            <h1 className="text-type-hero font-heading font-bold text-background">
               Contact Us
             </h1>
           </div>
@@ -76,8 +72,8 @@ export default function ContactPage() {
 
             {/* FORM */}
             <div className="space-y-6">
-              <h2 className="text-3xl font-bold text-foreground">Get In Touch</h2>
-              <p className="text-gray-mid text-sm">
+              <h2 className="font-bold text-foreground">Get In Touch</h2>
+              <p className="text-gray-mid text-type-prose">
                 Have a project in mind? Reach out to us and let&apos;s build something amazing together.
               </p>
 
@@ -89,7 +85,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   placeholder="Your Name"
                   required
-                  className="w-full p-3 rounded-xl border border-line bg-subtle focus:outline-none focus:border-primary"
+                  className="w-full p-3 text-type-prose rounded-xl border border-line bg-subtle focus:outline-none focus:border-primary"
                 />
                 <input
                   type="email"
@@ -98,7 +94,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   placeholder="Your Email"
                   required
-                  className="w-full p-3 rounded-xl border border-line bg-subtle focus:outline-none focus:border-primary"
+                  className="w-full p-3 text-type-prose rounded-xl border border-line bg-subtle focus:outline-none focus:border-primary"
                 />
                 <input
                   type="text"
@@ -107,7 +103,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   placeholder="Subject"
                   required
-                  className="w-full p-3 rounded-xl border border-line bg-subtle focus:outline-none focus:border-primary"
+                  className="w-full p-3 text-type-prose rounded-xl border border-line bg-subtle focus:outline-none focus:border-primary"
                 />
                 <textarea
                   name="message"
@@ -116,15 +112,15 @@ export default function ContactPage() {
                   placeholder="Your Message"
                   rows={5}
                   required
-                  className="w-full p-3 rounded-xl border border-line bg-subtle focus:outline-none focus:border-primary"
+                  className="w-full p-3 text-type-prose rounded-xl border border-line bg-subtle focus:outline-none focus:border-primary"
                 />
 
                 {/* Feedback */}
                 {error && (
-                  <p className="text-red-500 text-sm">{error}</p>
+                  <p className="text-red-500 text-type-prose">{error}</p>
                 )}
                 {success && (
-                  <p className="text-green-500 text-sm">
+                  <p className="text-green-500 text-type-prose">
                     Message sent successfully. We&apos;ll get back to you soon.
                   </p>
                 )}
@@ -132,7 +128,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-primary-dark transition disabled:opacity-60"
+                  className="w-full bg-primary text-white text-type-prose py-3 rounded-xl font-semibold hover:bg-primary-dark transition disabled:opacity-60"
                 >
                   {loading ? "Sending..." : "Send Message"}
                 </button>
@@ -147,7 +143,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">Phone / WhatsApp</p>
-                  <p className="text-gray-mid text-sm">(250) 784 843 042</p>
+                  <p className="text-gray-mid text-type-prose">(250) 784 843 042</p>
                 </div>
               </div>
 
@@ -157,7 +153,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">Email Address</p>
-                  <p className="text-gray-mid text-sm">zagrwanda@yahoo.com</p>
+                  <p className="text-gray-mid text-type-prose">zagrwanda@yahoo.com</p>
                 </div>
               </div>
 
@@ -167,13 +163,13 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">Our Location</p>
-                  <p className="text-gray-mid text-sm">1 KN 78 St, Kigali – Norssken House</p>
+                  <p className="text-gray-mid text-type-prose">1 KN 78 St, Kigali – Norssken House</p>
                 </div>
               </div>
 
               <div className="bg-subtle border border-line p-6 rounded-2xl space-y-3">
                 <p className="font-semibold text-foreground">Follow Us</p>
-                <div className="flex gap-4 text-sm text-gray-mid">
+                <div className="flex gap-4 text-type-prose text-gray-mid">
                   <span className="hover:text-primary cursor-pointer">Twitter @zagrwanda</span>
                   <span className="hover:text-primary cursor-pointer">LinkedIn</span>
                   <span className="hover:text-primary cursor-pointer">Instagram</span>
@@ -194,8 +190,6 @@ export default function ContactPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </>
   );
 }
