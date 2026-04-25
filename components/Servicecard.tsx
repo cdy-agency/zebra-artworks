@@ -50,20 +50,20 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
 
           {/* Title bar — always visible on desktop, hidden on mobile */}
           <div className="absolute bottom-0 left-0 right-0 hidden sm:block bg-black/55 px-6 py-4 transition-opacity duration-500 group-hover:opacity-0">
-            <h3 className="text-white text-xl sm:text-2xl tracking-wide">
+            <h3 className="text-white text-type-h3 tracking-wide">
               {service.title}
             </h3>
           </div>
 
           {/* Hover overlay — desktop only */}
           <div className="absolute inset-0 hidden sm:flex flex-col justify-end bg-primary/90 px-6 py-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <h3 className="text-white text-2xl mb-3 tracking-wide">
+            <h3 className="text-white text-type-h2 mb-3 tracking-wide">
               {service.title}
             </h3>
-            <p className="text-white/85 text-sm sm:text-base font-light leading-relaxed mb-5">
+            <p className="text-white/85 text-type-prose-sm sm:text-type-prose font-light leading-relaxed mb-5">
               {service.description}
             </p>
-            <span className="inline-flex items-center gap-2 text-white text-sm font-medium uppercase tracking-widest border-b border-white/50 pb-0.5 w-fit">
+            <span className="inline-flex items-center gap-2 text-white text-type-ui font-medium uppercase tracking-widest border-b border-white/50 pb-0.5 w-fit">
               Explore
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path
@@ -82,13 +82,13 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
 
         {/* Mobile description — always visible below image */}
         <div className="sm:hidden bg-subtle px-5 py-4 border-t-[3px] border-primary">
-          <h3 className="text-foreground text-lg mb-2">
+          <h3 className="text-foreground text-type-h3 mb-2">
             {service.title}
           </h3>
-          <p className="text-gray-mid text-sm font-light leading-relaxed mb-3">
+          <p className="text-gray-mid text-type-prose font-light leading-relaxed mb-3">
             {service.description}
           </p>
-          <span className="inline-flex items-center gap-2 text-primary text-xs font-medium uppercase tracking-widest">
+          <span className="inline-flex items-center gap-2 text-primary text-type-eyebrow font-medium uppercase tracking-widest">
             Explore service
             <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
               <path

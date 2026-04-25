@@ -1,19 +1,17 @@
-import Navbar from "@/components/NavBar";
 import HeroSection from "@/components/Herosection";
-import Footer from "@/components/Footer";
 import ServicesSection from "@/components/Servicessection";
 import LatestDesigns from "@/components/InteriorDesign";
 import LatestConstruction from "@/components/Construction";
+import ReadySection from "@/components/ReadToConnect";
 
 export default function Home() {
   return (
     <main>
-      <Navbar />
       <HeroSection />
       <ServicesSection />
       <LatestDesigns />
       <LatestConstruction />
-      <Footer />
+      <ReadySection />
     </main>
   );
 }

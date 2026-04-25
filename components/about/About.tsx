@@ -1,12 +1,8 @@
 import Image from "next/image";
-import Navbar from "../NavBar";
-import Footer from "../Footer";
 
 export default function AboutPage() {
   return (
     <>
-      <Navbar />
-
       <main className="bg-subtle">
 
         {/* 🔵 HEADER with background image - covers behind navbar */}
@@ -25,10 +21,10 @@ export default function AboutPage() {
 
           {/* Content */}
           <div className="relative z-10 pt-28">
-            <h1 className="text-5xl font-bold text-white mb-4">
+            <h1 className="text-type-hero font-heading font-bold text-white mb-4">
               About Us
             </h1>
-            <p className="text-white/80 max-w-2xl mx-auto">
+            <p className="text-white/80 text-type-prose sm:text-type-lead max-w-2xl mx-auto">
               ZEBRA ARTWORKS GROUP embarked on its journey in May 2019, and by July 2020, it was formally registered, marking a significant milestone in its pursuit of excellence within the construction industry.
 Our primary goal is to set new standards of craftsmanship,particularly focusing on 
 the intricate details of Construction finishing and interior design. Founded by Eng.
@@ -45,8 +41,8 @@ the intricate details of Construction finishing and interior design. Founded by 
         {/* 🔵 MISSION */}
         <section className="bg-primary text-white py-16 px-6">
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-            <h2 className="text-2xl font-bold">OUR MISSION</h2>
-            <p className="text-white/90 leading-relaxed">
+            <h2 className="font-bold">OUR MISSION</h2>
+            <p className="text-white/90 text-type-prose leading-relaxed">
              At Zebra Artworks Group, we are dedicated to reshaping the architectural 
              concepts, Construction and interior design landscape through our unwavering 
              commitment to sustainability, precision timing, and global standard finishing.
@@ -73,8 +69,8 @@ the intricate details of Construction finishing and interior design. Founded by 
             <div className="absolute inset-0 bg-black/60"></div>
           </div>
           <div className="relative max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 text-white">
-            <h2 className="text-2xl font-bold">OUR VISION</h2>
-            <p className="leading-relaxed text-white/90">
+            <h2 className="font-bold">OUR VISION</h2>
+            <p className="text-type-prose leading-relaxed text-white/90">
               Our vision at Zebra Artworks Group is to be recognized globally 
               specifically in Africa as a trailblazer in sustainable architectural 
               and interior design, synonymous with uncompromising quality, impeccable
@@ -180,8 +176,6 @@ the intricate details of Construction finishing and interior design. Founded by 
         {/* <div className="pb-20"></div> */}
 
       </main>
-
-      <Footer />
     </>
   );
 }

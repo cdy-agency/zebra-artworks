@@ -17,8 +17,8 @@ export default function Footer() {
         
         {/* Company Info */}
         <div>
-          <h2 className="text-xl font-bold mb-4">ZAG Rwanda</h2>
-          <p className="text-gray-400 text-sm leading-relaxed">
+          <h2 className="font-heading mb-4">ZAG Rwanda</h2>
+          <p className="text-gray-400 text-type-prose-sm leading-relaxed">
             Transforming spaces into beautiful, functional homes. We bring
             creativity and precision to every interior design project.
           </p>
@@ -26,10 +26,10 @@ export default function Footer() {
 
         {/* Navigation */}
         <div>
-          <h3 className="text-sm font-semibold mb-4 uppercase tracking-wide">
+          <h3 className="text-type-meta font-semibold mb-4 uppercase tracking-wide">
             Company
           </h3>
-          <ul className="space-y-2 text-gray-400 text-sm">
+          <ul className="space-y-2 text-gray-400 text-type-prose-sm">
             <li>
               <Link href="/" className="hover:text-white transition">
                 About
@@ -55,7 +55,7 @@ export default function Footer() {
 
         {/* Services (DROPDOWN ONLY CHANGED PART) */}
         <div>
-          <h3 className="text-sm font-semibold mb-4 uppercase tracking-wide">
+          <h3 className="text-type-meta font-semibold mb-4 uppercase tracking-wide">
             Services
           </h3>
 
@@ -63,14 +63,14 @@ export default function Footer() {
           <div className="mb-3 border-b border-gray-700 pb-2">
             <button
               onClick={() => toggle("interior")}
-              className="w-full flex justify-between items-center text-gray-400 hover:text-white transition text-sm"
+              className="w-full flex justify-between items-center text-gray-400 hover:text-white transition text-type-prose-sm"
             >
-              Interior Design Department
+              <span className="text-left font-medium">Interior Design Department</span>
               <span>{open === "interior" ? "−" : "+"}</span>
             </button>
 
             {open === "interior" && (
-              <ul className="mt-2 space-y-1 text-gray-400 text-sm pl-2">
+              <ul className="mt-2 space-y-1 text-gray-400 text-type-prose-sm pl-2">
                 <li>Commercial Spaces</li>
                 <li>Residential Spaces</li>
                 <li>Hotels and Apartments</li>
@@ -83,14 +83,14 @@ export default function Footer() {
           <div className="border-b border-gray-700 pb-2">
             <button
               onClick={() => toggle("architecture")}
-              className="w-full flex justify-between items-center text-gray-400 hover:text-white transition text-sm"
+              className="w-full flex justify-between items-center text-gray-400 hover:text-white transition text-type-prose-sm"
             >
               Architecture & Construction
               <span>{open === "architecture" ? "−" : "+"}</span>
             </button>
 
             {open === "architecture" && (
-              <ul className="mt-2 space-y-1 text-gray-400 text-sm pl-2">
+              <ul className="mt-2 space-y-1 text-gray-400 text-type-prose-sm pl-2">
                 <li>Architectural Plan</li>
                 <li>MEP Supplies</li>
                 <li>Construction</li>
@@ -102,10 +102,10 @@ export default function Footer() {
 
         {/* Contact */}
         <div>
-          <h3 className="text-sm font-semibold mb-4 uppercase tracking-wide">
+          <h3 className="text-type-meta font-semibold mb-4 uppercase tracking-wide">
             Contact
           </h3>
-          <ul className="space-y-2 text-gray-400 text-sm">
+          <ul className="space-y-2 text-gray-400 text-type-prose-sm">
             <li>Office Location Norrsken House KN 78 Streets, Kigali - Nyarugenge</li>
             <li>+250784843042</li>
             <li>office@zagrwanda.rw</li>
@@ -128,7 +128,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom */}
-      <div className="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500 text-sm">
+      <div className="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500 text-type-meta">
         © {new Date().getFullYear()} ZAG Rwanda. All rights reserved.
       </div>
     </footer>

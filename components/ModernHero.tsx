@@ -21,14 +21,14 @@ export default function ModernHero() {
         
         {/* LEFT TEXT */}
         <div className="max-w-xl">
-          <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">
+          <h1 className="text-type-hero-mega font-heading font-bold text-white leading-tight">
             Turning Houses into Homes, One Design at a Time
           </h1>
         </div>
 
         {/* RIGHT CONTENT */}
         <div className="max-w-sm">
-          <p className="text-white/80 text-sm leading-relaxed mb-6">
+          <p className="text-white/80 text-type-prose leading-relaxed mb-6">
             With every project we undertake, we are committed to turning
             houses into homes, one design at a time.
           </p>
@@ -39,14 +39,14 @@ export default function ModernHero() {
             {/* Primary Button */}
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 bg-primary text-white text-sm px-5 py-2.5 rounded-full hover:bg-primary-dark transition"
+              className="inline-flex items-center gap-2 bg-primary text-white text-type-ui px-5 py-2.5 rounded-full hover:bg-primary-dark transition"
             >
               Get in touch
               <ArrowUpRight size={16} />
             </Link>
 
             {/* Secondary Button */}
-            <button className="text-white text-sm px-5 py-2.5 rounded-full border border-white/40 hover:bg-white/10 transition">
+            <button className="text-white text-type-ui px-5 py-2.5 rounded-full border border-white/40 hover:bg-white/10 transition">
               Call us: +250784843042
             </button>
 

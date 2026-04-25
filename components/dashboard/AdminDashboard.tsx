@@ -57,10 +57,10 @@ export default function AdminSidebar({
 
       {/* Logo */}
       <div className="p-5 border-b border-line/20">
-        <h1 className="text-lg font-bold text-foreground">
+        <h1 className="text-type-ui-lg font-bold text-foreground">
           ZEBRA <span className="text-primary">ARTWORKS</span>
         </h1>
-        <p className="text-xs text-gray-mid">Admin Panel</p>
+        <p className="text-type-meta text-gray-mid">Admin Panel</p>
       </div>
 
       {/* Menu */}
@@ -73,7 +73,7 @@ export default function AdminSidebar({
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition ${
+              className={`flex items-center gap-3 px-3 py-2 rounded-lg text-type-prose transition ${
                 active
                   ? "bg-primary text-background"
                   : "text-gray-mid hover:bg-subtle hover:text-primary"
@@ -83,7 +83,7 @@ export default function AdminSidebar({
               <span className="flex-1">{item.label}</span>
 
               {item.badge > 0 && (
-                <span className="bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center leading-none">
+                <span className="bg-red-500 text-white text-type-meta font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center leading-none">
                   {item.badge > 99 ? "99+" : item.badge}
                 </span>
               )}
@@ -94,11 +94,11 @@ export default function AdminSidebar({
 
       {/* User */}
       <div className="p-4 border-t border-line/20">
-        <p className="text-sm font-semibold text-foreground">{fullName}</p>
-        <p className="text-xs text-gray-mid truncate">{email}</p>
+        <p className="text-type-prose font-semibold text-foreground">{fullName}</p>
+        <p className="text-type-meta text-gray-mid truncate">{email}</p>
         <button
           onClick={handleLogout}
-          className="mt-2 text-xs cursor-pointer text-gray-mid hover:text-primary flex items-center gap-2"
+          className="mt-2 text-type-meta cursor-pointer text-gray-mid hover:text-primary flex items-center gap-2"
         >
           <LogOut size={14} /> Logout
         </button>

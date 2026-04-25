@@ -109,17 +109,17 @@ export default function LatestDesigns() {
         className="mb-10 sm:mb-14 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 max-w-6xl mx-auto"
       >
         <div>
-          <p className="text-primary text-xs font-medium uppercase tracking-[0.2em] mb-3">
+          <p className="text-primary text-type-eyebrow font-medium uppercase tracking-[0.2em] mb-3">
             Portfolio
           </p>
-          <h1 className="text-4xl sm:text-5xl text-foreground leading-[1.1]">
+          <h1 className="font-bold text-foreground leading-[1.1]">
             Latest Interior Design
           </h1>
           <div className="h-0.5 w-56 bg-accent mt-1 rounded-full" />
         </div>
         <Link
-          href="/projects"
-          className="inline-flex items-center gap-2 text-primary text-xs font-medium uppercase tracking-widest border-b border-primary pb-0.5 w-fit transition-colors hover:text-primary-dark shrink-0"
+          href="/interior-design"
+          className="inline-flex items-center gap-2 text-primary text-type-eyebrow font-medium uppercase tracking-widest border-b border-primary pb-0.5 w-fit transition-colors hover:text-primary-dark shrink-0"
         >
           View all projects
           <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
@@ -185,7 +185,7 @@ export default function LatestDesigns() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-4 left-4 text-white/40 text-xs tracking-widest"
+                    className="absolute top-4 left-4 text-white/40 text-type-meta tracking-widest"
                   >
                     {project.num}
                   </motion.span>
@@ -206,14 +206,14 @@ export default function LatestDesigns() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 6 }}
                       transition={{ duration: 0.3, delay: 0.05 }}
-                      className="text-white/60 text-base font-medium uppercase tracking-[0.16em] mb-1"
+                      className="text-white/60 text-type-prose font-medium uppercase tracking-[0.16em] mb-1"
                     >
                       {project.tag}
                     </motion.p>
                   )}
                 </AnimatePresence>
 
-                <h3 className="text-white text-xl sm:text-2xl tracking-wide">
+                <h3 className="text-white text-type-h3 tracking-wide">
                   {project.title}
                 </h3>
 
@@ -227,8 +227,8 @@ export default function LatestDesigns() {
                       className="overflow-hidden"
                     >
                       <Link
-                        href={`/projects/${project.id}`}
-                        className="inline-flex items-center gap-2 text-white cursor-pointer hover:text-primary text-[10px] font-medium uppercase tracking-widest border-b border-white/40 pb-0.5"
+                        href={`/interior-design/${project.id}`}
+                        className="inline-flex items-center gap-2 text-white cursor-pointer hover:text-primary text-type-eyebrow font-medium uppercase tracking-widest border-b border-white/40 pb-0.5"
                       >
                         View project
                         <svg
@@ -274,15 +274,15 @@ export default function LatestDesigns() {
               />
             </div>
             <div className="bg-subtle px-5 py-4 border-t-[3px] border-primary">
-              <p className="text-primary text-[10px] font-medium uppercase tracking-widest mb-1">
+              <p className="text-primary text-type-eyebrow font-medium uppercase tracking-widest mb-1">
                 {project.tag}
               </p>
-              <h3 className="text-foreground text-xl sm:text-2xl tracking-wide mb-2">
+              <h3 className="text-foreground text-type-h3 tracking-wide mb-2">
                 {project.title}
               </h3>
               <Link
-                href={`/projects/${project.id}`}
-                className="inline-flex items-center gap-2 text-primary text-[10px] font-medium uppercase tracking-widest"
+                href={`/interior-design/${project.id}`}
+                className="inline-flex items-center gap-2 text-primary text-type-eyebrow font-medium uppercase tracking-widest"
               >
                 View project
                 <svg width="12" height="12" viewBox="0 0 14 14" fill="none">

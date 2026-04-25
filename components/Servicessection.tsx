@@ -36,10 +36,10 @@ export default function ServicesSection() {
         className="mb-12 sm:mb-16 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 max-w-6xl mx-auto"
       >
         <div>
-          <p className="text-primary text-xs font-medium uppercase tracking-[0.2em] mb-3">
+          <p className="text-primary text-type-eyebrow font-medium uppercase tracking-[0.2em] mb-3">
             What we do
           </p>
-          <h1 className="text-4xl sm:text-5xl text-foreground leading-[1.1]">
+          <h1 className="font-bold text-foreground leading-[1.1]">
             Our Services
           </h1>
 
