@@ -180,10 +180,10 @@ export default function ManageServicesPage() {
         {/* Header */}
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-foreground">
+            <h1 className="font-bold text-foreground">
               Manage Services
             </h1>
-            <p className="text-sm text-gray-mid">
+            <p className="text-type-prose text-gray-mid">
               Control your services
             </p>
           </div>
@@ -212,7 +212,7 @@ export default function ManageServicesPage() {
         {/* Table */}
         <div className="bg-background border border-line/20 rounded-lg">
           <table className="w-full">
-            <thead className="border-b border-line/20 text-gray-mid text-sm">
+            <thead className="border-b border-line/20 text-gray-mid text-type-prose">
               <tr>
                 <th className="p-3 text-left">Service</th>
                 <th className="p-3 text-right">Actions</th>

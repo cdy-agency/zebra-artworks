@@ -16,15 +16,15 @@ export default function ArchitectureSection() {
         <div className="flex flex-col md:flex-row justify-between gap-6 mb-10">
           
           <div>
-            <p className="text-sm text-primary font-semibold tracking-wide uppercase">
+            <p className="text-type-meta text-primary font-semibold tracking-wide uppercase">
               Categories
             </p>
-            <h2 className="text-1xl md:text-2xl font-bold text-gray-900">
+            <h2 className="font-bold text-gray-900">
               Architecture Interior.
             </h2>
           </div>
 
-          <p className="text-gray-600 max-w-md text-sm leading-relaxed">
+          <p className="text-gray-600 max-w-md text-type-prose leading-relaxed">
             Designing an architectural interior involves integrating
             functionality, aesthetics, and user experience to create spaces that
             are both visually appealing and practical.
@@ -46,7 +46,7 @@ export default function ArchitectureSection() {
               />
 
               {/* Label */}
-              <div className="absolute bottom-0 left-0 right-0 bg-white/90 text-center py-2 text-xs font-semibold tracking-wide">
+              <div className="absolute bottom-0 left-0 right-0 bg-white/90 text-center py-2 text-type-meta font-semibold tracking-wide">
                 {item.title.toUpperCase()}
               </div>
 

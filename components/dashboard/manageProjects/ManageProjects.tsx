@@ -57,7 +57,7 @@ function StatusBadge({ status }: { status: Status }) {
     status === "Completed" ? "bg-green-100 text-green-700" :
     status === "Ongoing" ? "bg-blue-100 text-blue-700" :
     "bg-yellow-100 text-yellow-700";
-  return <span className={`px-2 py-1 text-xs font-medium rounded ${cls}`}>{status}</span>;
+  return <span className={`px-2 py-1 text-type-meta font-medium rounded ${cls}`}>{status}</span>;
 }
 
 // ─── Field ────────────────────────────────────────────────────────────────────
@@ -65,13 +65,13 @@ function StatusBadge({ status }: { status: Status }) {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
-      <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide">{label}</label>
+      <label className="block text-type-meta font-semibold text-gray-500 uppercase tracking-wide">{label}</label>
       {children}
     </div>
   );
 }
 
-const inputCls = "w-full border border-gray-200 bg-white text-gray-900 rounded-md px-3 py-2 text-sm outline-none focus:border-blue-500 transition-colors placeholder:text-gray-400";
+const inputCls = "w-full border border-gray-200 bg-white text-gray-900 rounded-md px-3 py-2 text-type-prose outline-none focus:border-blue-500 transition-colors placeholder:text-gray-400";
 
 function getErrorMessage(error: unknown, fallback: string) {
   return error instanceof Error ? error.message : fallback;
@@ -113,7 +113,7 @@ function ImageViewer({ images, startIndex, onClose }: { images: string[]; startI
       <img src={images[idx]} alt="" className="max-w-[90vw] max-h-[70vh] object-contain rounded-lg" onClick={(e) => e.stopPropagation()} />
       <div className="flex items-center gap-4" onClick={(e) => e.stopPropagation()}>
         <button onClick={() => nav(-1)} className="border border-white/20 bg-white/10 text-white rounded-full w-9 h-9 flex items-center justify-center hover:bg-white/20"><ChevronLeft size={16} /></button>
-        <span className="text-sm text-white/60">{idx + 1} / {images.length}</span>
+        <span className="text-type-prose text-white/60">{idx + 1} / {images.length}</span>
         <button onClick={() => nav(1)} className="border border-white/20 bg-white/10 text-white rounded-full w-9 h-9 flex items-center justify-center hover:bg-white/20"><ChevronRight size={16} /></button>
       </div>
     </div>
@@ -203,11 +203,11 @@ function ProjectModal({ project, onSave, onClose }: { project?: Project | null; 
       <div className="bg-white rounded-t-2xl sm:rounded-lg w-full sm:max-w-xl max-h-[92vh] overflow-y-auto p-5 sm:p-6 space-y-4">
 
         <div className="flex items-center justify-between">
-          <h2 className="text-base sm:text-lg font-bold text-gray-700">{isEdit ? "Edit Project" : "Add New Project"}</h2>
+          <h2 className="font-bold text-gray-700">{isEdit ? "Edit Project" : "Add New Project"}</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-700"><X size={20} /></button>
         </div>
 
-        {error && <div className="bg-red-50 border border-red-200 text-red-700 text-sm px-3 py-2 rounded-md">{error}</div>}
+        {error && <div className="bg-red-50 border border-red-200 text-red-700 text-type-prose px-3 py-2 rounded-md">{error}</div>}
 
         <div className="space-y-3">
           <Field label="Project Title">
@@ -266,8 +266,8 @@ function ProjectModal({ project, onSave, onClose }: { project?: Project | null; 
               <div className="flex flex-col items-center gap-2 pointer-events-none">
                 <Upload size={20} className="text-gray-400" />
                 {isUploading
-                  ? <p className="text-sm text-blue-500">Uploading…</p>
-                  : <><p className="text-sm text-gray-400">Drop images or <span className="text-blue-500 font-medium">click to browse</span></p><p className="text-xs text-gray-400">JPG, PNG, WEBP</p></>
+                  ? <p className="text-type-prose text-blue-500">Uploading…</p>
+                  : <><p className="text-type-prose text-gray-400">Drop images or <span className="text-blue-500 font-medium">click to browse</span></p><p className="text-type-meta text-gray-400">JPG, PNG, WEBP</p></>
                 }
               </div>
             </div>
@@ -282,9 +282,9 @@ function ProjectModal({ project, onSave, onClose }: { project?: Project | null; 
         </div>
 
         <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-2 pt-2 border-t border-gray-100">
-          <button onClick={onClose} className="w-full sm:w-auto px-4 py-2 border border-gray-200 text-gray-700 cursor-pointer rounded-md text-sm hover:opacity-80">Cancel</button>
+          <button onClick={onClose} className="w-full sm:w-auto px-4 py-2 border border-gray-200 text-gray-700 cursor-pointer rounded-md text-type-prose hover:opacity-80">Cancel</button>
           <button onClick={handleSave} disabled={!title.trim() || !category || !subcategory || isUploading || isSaving}
-            className="w-full sm:w-auto px-4 py-2 bg-primary text-white rounded-md text-sm hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed">
+            className="w-full sm:w-auto px-4 py-2 bg-primary text-white rounded-md text-type-prose hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed">
             {isSaving ? "Saving…" : isEdit ? "Update Project" : "Save Project"}
           </button>
         </div>
@@ -333,29 +333,29 @@ export default function ManageProjectsPage() {
       <div className="space-y-5 p-6">
         <div className="flex items-start sm:items-center justify-between gap-3">
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Manage Projects</h1>
-            <p className="text-xs sm:text-sm text-gray-500">Add, update, and manage all your projects.</p>
+            <h1 className="font-bold text-gray-900">Manage Projects</h1>
+            <p className="text-type-meta sm:text-type-prose text-gray-500">Add, update, and manage all your projects.</p>
           </div>
-          <button onClick={() => { setEditTarget(null); setModalOpen(true); }} className="flex items-center gap-1.5 px-4 py-2 bg-primary cursor-pointer text-white rounded-md text-sm  shrink-0">
+          <button onClick={() => { setEditTarget(null); setModalOpen(true); }} className="flex items-center gap-1.5 px-4 py-2 bg-primary cursor-pointer text-white rounded-md text-type-prose  shrink-0">
             <Plus size={15} /> Add Project
           </button>
         </div>
 
         <div className="flex items-center gap-2 border border-gray-200 bg-white rounded-lg px-3 py-2 w-full sm:w-[320px]">
           <Search size={15} className="text-gray-400 shrink-0" />
-          <input type="text" placeholder="Search projects..." className="w-full outline-none bg-transparent text-sm placeholder:text-gray-400" value={search} onChange={(e) => setSearch(e.target.value)} />
+          <input type="text" placeholder="Search projects..." className="w-full outline-none bg-transparent text-type-prose placeholder:text-gray-400" value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
 
         {/* Desktop table */}
         <div className="hidden md:block border border-gray-200 bg-white rounded-lg overflow-hidden">
-          <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-700 gap-4">
+          <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] bg-gray-50 px-4 py-3 text-type-prose font-semibold text-gray-700 gap-4">
             <span>Project</span><span>Category</span><span>Subcategory</span><span>Status</span><span>Client</span><span className="text-right">Actions</span>
           </div>
           <div className="divide-y divide-gray-100">
-            {loading ? <p className="text-center py-10 text-sm text-gray-400">Loading…</p> :
-             filtered.length === 0 ? <p className="text-center py-10 text-sm text-gray-400">No projects found.</p> :
+            {loading ? <p className="text-center py-10 text-type-prose text-gray-400">Loading…</p> :
+             filtered.length === 0 ? <p className="text-center py-10 text-type-prose text-gray-400">No projects found.</p> :
              filtered.map((project) => (
-              <div key={project.id} className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] px-4 py-3 text-sm items-center gap-4">
+              <div key={project.id} className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] px-4 py-3 text-type-prose items-center gap-4">
                 <div>
                   <span className="font-medium text-gray-900">{project.title}</span>
                   {project.images.length > 0 && (
@@ -364,7 +364,7 @@ export default function ManageProjectsPage() {
                         <img key={i} src={src} alt="" onClick={() => { setViewerImages(project.images); setViewerStart(i); }}
                           className="w-7 h-7 object-cover rounded border border-gray-200 cursor-pointer hover:border-blue-500" />
                       ))}
-                      {project.images.length > 4 && <span className="text-xs text-gray-400">+{project.images.length - 4}</span>}
+                      {project.images.length > 4 && <span className="text-type-meta text-gray-400">+{project.images.length - 4}</span>}
                     </div>
                   )}
                 </div>
@@ -383,14 +383,14 @@ export default function ManageProjectsPage() {
 
         {/* Mobile cards */}
         <div className="md:hidden space-y-3">
-          {loading ? <p className="text-center py-10 text-sm text-gray-400">Loading…</p> :
-           filtered.length === 0 ? <p className="text-center py-10 text-sm text-gray-400">No projects found.</p> :
+          {loading ? <p className="text-center py-10 text-type-prose text-gray-400">Loading…</p> :
+           filtered.length === 0 ? <p className="text-center py-10 text-type-prose text-gray-400">No projects found.</p> :
            filtered.map((project) => (
             <div key={project.id} className="border border-gray-200 bg-white rounded-lg p-4 space-y-3">
               <div className="flex items-start justify-between gap-2">
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">{project.title}</p>
-                  <p className="text-xs text-gray-400">{project.category} → {project.subcategory}</p>
+                  <p className="text-type-prose font-semibold text-gray-900">{project.title}</p>
+                  <p className="text-type-meta text-gray-400">{project.category} → {project.subcategory}</p>
                 </div>
                 <div className="flex gap-2 shrink-0">
                   <button onClick={() => { setEditTarget(project); setModalOpen(true); }} className="text-gray-400 hover:text-blue-500 p-1"><Edit size={15} /></button>
@@ -399,8 +399,8 @@ export default function ManageProjectsPage() {
               </div>
               <div className="flex items-center gap-3 flex-wrap">
                 <StatusBadge status={project.status as Status} />
-                {project.client && <span className="text-xs text-gray-400">{project.client}</span>}
-                {project.date && <span className="text-xs text-gray-400">{project.date}</span>}
+                {project.client && <span className="text-type-meta text-gray-400">{project.client}</span>}
+                {project.date && <span className="text-type-meta text-gray-400">{project.date}</span>}
               </div>
               {project.images.length > 0 && (
                 <div className="flex gap-1.5">

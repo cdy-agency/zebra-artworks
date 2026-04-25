@@ -7,7 +7,8 @@ import { Menu, X, Home, UserCircle } from "lucide-react";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "Projects", href: "/projects" },
+  { label: "Interior Design", href: "/interior-design" },
+  { label: "Construction", href: "/construction" },
   { label: "About Us", href: "/about" },
 ];
 
@@ -26,7 +27,7 @@ export default function Navbar() {
           <span className="bg-primary text-background rounded-lg p-1.5">
             <Home size={18} />
           </span>
-          <span className="text-foreground font-extrabold tracking-tight text-lg">
+          <span className="text-foreground font-heading font-semibold tracking-tight text-type-ui-lg">
             ZAG Rwanda
           </span>
         </Link>
@@ -37,7 +38,7 @@ export default function Navbar() {
             <li key={link.label}>
               <Link
                 href={link.href}
-                className="text-gray-mid font-medium hover:text-primary hover:font-bold transition-all duration-200 text-sm hover:-translate-y-0.5 inline-block"
+                className="text-gray-mid font-medium hover:text-primary hover:font-bold transition-all duration-200 text-type-ui hover:-translate-y-0.5 inline-block"
               >
                 {link.label}
               </Link>
@@ -60,7 +61,7 @@ export default function Navbar() {
           {/* Contact CTA */}
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-background font-semibold text-sm px-6 py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-background font-semibold text-type-ui px-6 py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5"
           >
             Contact Us
           </Link>
@@ -84,7 +85,7 @@ export default function Navbar() {
             <Link
               key={link.label}
               href={link.href}
-              className="text-gray-mid font-medium hover:text-primary hover:font-bold transition-all"
+              className="text-gray-mid font-medium hover:text-primary hover:font-bold transition-all text-type-ui"
               onClick={() => setMenuOpen(false)}
             >
               {link.label}
@@ -94,7 +95,7 @@ export default function Navbar() {
           {/* Login link in mobile */}
           <Link
             href="/login"
-            className="text-gray-mid font-medium hover:text-primary transition-all flex items-center gap-2"
+            className="text-gray-mid font-medium hover:text-primary transition-all flex items-center gap-2 text-type-ui"
             onClick={() => setMenuOpen(false)}
           >
             <UserCircle size={18} />
@@ -103,7 +104,7 @@ export default function Navbar() {
 
           <Link
             href="/contact"
-            className="bg-primary text-background font-semibold text-sm px-6 py-2.5 rounded-full text-center"
+            className="bg-primary text-background font-semibold text-type-ui px-6 py-2.5 rounded-full text-center"
             onClick={() => setMenuOpen(false)}
           >
             Contact Us

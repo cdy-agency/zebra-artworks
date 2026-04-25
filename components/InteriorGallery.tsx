@@ -15,7 +15,7 @@ type GalleryItem = {
   desc?: string;
 };
 
-// ─── Skeleton placeholder (mirrors the real grid exactly) ───────────────────
+// Skeleton placeholder (mirrors the real grid exactly)
 function GallerySkeleton() {
   return (
     <section className="bg-[#f5f5f5] py-16 px-6">
@@ -33,13 +33,13 @@ function GallerySkeleton() {
       {/* Grid skeleton — same 3-column layout as the real grid */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {/* Left large */}
-        <Skeleton className="md:row-span-2 rounded-xl h-[250px] md:h-[520px]" />
+        <Skeleton className="md:row-span-2 rounded-xl h-62.5 md:h-130" />
         {/* Top middle */}
-        <Skeleton className="rounded-xl h-[250px]" />
+        <Skeleton className="rounded-xl h-62.5 md:h-130" />
         {/* Right tall */}
-        <Skeleton className="md:row-span-2 rounded-xl h-[250px] md:h-[520px]" />
+        <Skeleton className="md:row-span-2 rounded-xl h-62.5 md:h-130" />
         {/* Bottom middle */}
-        <Skeleton className="rounded-xl h-[250px]" />
+        <Skeleton className="rounded-xl h-62.5" />
       </div>
     </section>
   );
@@ -83,14 +83,14 @@ export default function InteriorGallery() {
       <div className="max-w-6xl mx-auto mb-10">
         <div className="flex flex-col md:flex-row justify-between gap-6">
           <div>
-            <p className="text-sm text-primary font-semibold tracking-wide uppercase">
+            <p className="text-type-meta text-primary font-semibold tracking-wide uppercase">
               Highlights
             </p>
-            <h2 className="text-2xl md:text-2xl font-bold text-gray-900">
+            <h2 className="font-bold text-gray-900">
               Our Interior Design Highlights
             </h2>
           </div>
-          <p className="text-gray-600 max-w-md text-sm leading-relaxed">
+          <p className="text-gray-600 max-w-md text-type-prose leading-relaxed">
             Explore some of our finest interior design works, showcasing creativity,
             elegance, and attention to detail in every space we transform.
           </p>
@@ -106,12 +106,12 @@ export default function InteriorGallery() {
           aria-label={`View details for ${items[0].title}`}
         >
           <Image src={items[0].src} alt={items[0].title} width={300} height={200}
-            className={`${imageClassName} h-[250px] md:h-[520px]`}
+            className={`${imageClassName} h-62.5 md:h-130`}
           />
           <div className={overlayClassName}>
             <div>
-              <h3 className="text-white font-semibold text-sm">{items[0].title}</h3>
-              <p className="text-white/70 text-xs mt-1">{getDesc(items[0])}</p>
+              <h3 className="text-white font-heading font-semibold text-type-prose-lg">{items[0].title}</h3>
+              <p className="text-white/70 text-type-meta mt-1 line-clamp-2">{getDesc(items[0])}</p>
             </div>
           </div>
         </Link>
@@ -123,12 +123,12 @@ export default function InteriorGallery() {
           aria-label={`View details for ${items[1].title}`}
         >
           <Image src={items[1].src} alt={items[1].title} width={300} height={200}
-            className={`${imageClassName} h-[250px]`}
+            className={`${imageClassName} h-62.5`}
           />
           <div className={overlayClassName}>
             <div>
-              <h3 className="text-white font-semibold text-sm">{items[1].title}</h3>
-              <p className="text-white/70 text-xs mt-1">{getDesc(items[1])}</p>
+              <h3 className="text-white font-heading font-semibold text-type-prose-lg">{items[1].title}</h3>
+              <p className="text-white/70 text-type-meta mt-1 line-clamp-2">{getDesc(items[1])}</p>
             </div>
           </div>
         </Link>
@@ -140,12 +140,12 @@ export default function InteriorGallery() {
           aria-label={`View details for ${items[2].title}`}
         >
           <Image src={items[2].src} alt={items[2].title} width={300} height={200}
-            className={`${imageClassName} h-[250px] md:h-[520px]`}
+            className={`${imageClassName} h-62.5 md:h-130`}
           />
           <div className={overlayClassName}>
             <div>
-              <h3 className="text-white font-semibold text-sm">{items[2].title}</h3>
-              <p className="text-white/70 text-xs mt-1">{getDesc(items[2])}</p>
+              <h3 className="text-white font-heading font-semibold text-type-prose-lg">{items[2].title}</h3>
+              <p className="text-white/70 text-type-meta mt-1 line-clamp-2">{getDesc(items[2])}</p>
             </div>
           </div>
         </Link>
@@ -157,12 +157,12 @@ export default function InteriorGallery() {
           aria-label={`View details for ${items[3].title}`}
         >
           <Image src={items[3].src} alt={items[3].title} width={300} height={200}
-            className={`${imageClassName} h-[250px]`}
+            className={`${imageClassName} h-62.5`}
           />
           <div className={overlayClassName}>
             <div>
-              <h3 className="text-white font-semibold text-sm">{items[3].title}</h3>
-              <p className="text-white/70 text-xs mt-1">{getDesc(items[3])}</p>
+              <h3 className="text-white font-heading font-semibold text-type-prose-lg">{items[3].title}</h3>
+              <p className="text-white/70 text-type-meta mt-1 line-clamp-2">{getDesc(items[3])}</p>
             </div>
           </div>
         </Link>

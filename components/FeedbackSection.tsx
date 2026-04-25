@@ -40,7 +40,7 @@ export default function FeedbackSection() {
         
         {/* Header */}
         <div className="mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 max-w-lg leading-snug">
+          <h2 className="font-bold text-gray-900 max-w-lg leading-snug">
             Explore client feedback on our latest project
           </h2>
         </div>
@@ -62,12 +62,12 @@ export default function FeedbackSection() {
               </div>
 
               {/* Message */}
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-gray-600 text-type-prose leading-relaxed">
                 “{item.message}”
               </p>
 
               {/* Name */}
-              <p className="text-gray-900 text-sm font-semibold">
+              <p className="text-gray-900 text-type-prose font-semibold">
                 {item.name}
               </p>
 
