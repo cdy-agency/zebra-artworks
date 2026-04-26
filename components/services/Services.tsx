@@ -1,6 +1,6 @@
 "use client";
 
-const interiorServices = [
+export const interiorServices = [
   {
     icon: (
       <svg viewBox="0 0 48 48" fill="none" className="w-10 h-10" stroke="currentColor" strokeWidth="1.5">
@@ -49,7 +49,7 @@ const interiorServices = [
   },
 ];
 
-const constructionServices = [
+export const constructionServices = [
   {
     icon: (
       <svg viewBox="0 0 48 48" fill="none" className="w-10 h-10" stroke="currentColor" strokeWidth="1.5">
@@ -95,12 +95,12 @@ const constructionServices = [
   },
 ];
 
-function ServiceCard({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
+export function ServiceCard({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm border border-[#e6e6e6] flex flex-col gap-4 hover:-translate-y-2 transition-all duration-300 cursor-pointer group">
       
       {/* Icon container */}
-      <div className="w-16 h-16 rounded-xl bg-[#f6f7f9] flex items-center justify-center text-[var(--color-primary-dark)] group-hover:bg-[var(--color-primary-dark)] group-hover:text-white transition-all duration-300">
+      <div className="w-10 h-10 rounded-xl bg-[#f6f7f9] flex items-center justify-center text-primary-dark group-hover:bg-primary-dark group-hover:text-white transition-all duration-300">
         {icon}
       </div>
 
@@ -110,7 +110,7 @@ function ServiceCard({ icon, title, desc }: { icon: React.ReactNode; title: stri
 
       {/* Arrow */}
       <div className="mt-2">
-        <span className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-[#e6e6e6] text-[#1a1a1a] group-hover:bg-[var(--color-primary-dark)] group-hover:text-white group-hover:border-transparent transition-all duration-300">
+        <span className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-[#e6e6e6] text-[#1a1a1a] group-hover:bg-primary-dark group-hover:text-white group-hover:border-transparent transition-all duration-300">
           →
         </span>
       </div>
@@ -144,7 +144,7 @@ export default function ServicesPage() {
         {/* SECTION LABEL + HEADING */}
         <section className="px-6 pt-20 pb-4 text-center">
           <div className="max-w-2xl mx-auto">
-            <p className="text-[var(--color-primary-dark)] text-type-meta font-semibold uppercase tracking-wide mb-3">
+            <p className="text-primary-dark text-type-meta font-semibold uppercase tracking-wide mb-3">
               Features Services
             </p>
             <h2 className="font-extrabold text-[#1a1a1a] leading-tight">

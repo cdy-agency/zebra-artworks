@@ -5,6 +5,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import type { Project } from "@/lib/supabase";
+import { interiorServices } from "@/components/services/Services";
+import { ServiceCard } from "@/components/services/ServiceCard";
+import ProcessSection from "@/components/services/Processsection";
+import TestimonialsSection from "@/components/services/Testimonialssection";
+import ReadySection from "@/components/ReadToConnect";
+import DepartmentContactStrip from "@/components/DepartmentContactStrip";
 
 type InteriorProject = Project & {
   num: string;
@@ -83,7 +89,9 @@ function ProjectCard({
           <p className="text-white/50 text-type-eyebrow font-medium uppercase tracking-[0.16em] mb-1">
             {project.displayCategory}
           </p>
-          <h3 className="text-white font-heading text-type-prose leading-snug">{project.title}</h3>
+          <h3 className="text-white font-heading text-type-prose leading-snug">
+            {project.title}
+          </h3>
         </div>
       </motion.div>
     </Link>
@@ -112,7 +120,7 @@ export default function InteriorDesignPage() {
             alt: project.title,
             tall: index % 4 === 0 || index % 4 === 3,
             displayCategory: project.subcategory || project.category,
-          }))
+          })),
         );
         setLoading(false);
       })
@@ -158,13 +166,42 @@ export default function InteriorDesignPage() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 pt-20 pb-32">
-        <div className="columns-2 md:columns-3 gap-2" style={{ columnGap: "8px" }}>
+      <section className="px-6 pt-12">
+        <div className="max-w-6xl mx-auto">
+          <div>
+            <h3 className="font-bold text-[#1a1a1a]">
+              Interior Design Department
+            </h3>
+            <div className="h-0.5 w-56 bg-accent mt-1 mb-6 rounded-full" />
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {interiorServices.map((s) => (
+              <ServiceCard key={s.title} {...s} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-6 pt-10 pb-32">
+        <div>
+          <h3 className="font-bold text-[#1a1a1a]">
+            Interior Design Portfolio
+          </h3>
+          <div className="h-0.5 w-56 bg-accent mt-1 mb-6 rounded-full" />
+        </div>
+        <div
+          className="columns-2 md:columns-3 gap-2"
+          style={{ columnGap: "8px" }}
+        >
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
       </section>
+      <DepartmentContactStrip department="interior" />
+      <ProcessSection />
+      <TestimonialsSection category="Interior Design" />
+      <ReadySection />
     </main>
   );
 }

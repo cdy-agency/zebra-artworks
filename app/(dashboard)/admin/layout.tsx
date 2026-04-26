@@ -1,5 +1,3 @@
-// FILE: src/app/admin/layout.tsx
-
 import AdminSidebar from "@/components/dashboard/AdminDashboard";
 import AdminTopbar from "@/components/dashboard/AdminTopbar";
 import { requireAdminUser } from "@/lib/auth/session";

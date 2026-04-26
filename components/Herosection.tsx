@@ -45,7 +45,6 @@ export default function HeroSection() {
 
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
-
       {/* Slides */}
       {slides.map((slide, index) => (
         <div
@@ -62,7 +61,6 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-
         <h1
           key={current}
           className="text-type-hero-mega font-heading font-bold text-background leading-tight mb-6 tracking-tight transition-all duration-500 max-w-[22ch] mx-auto"
@@ -78,16 +76,28 @@ export default function HeroSection() {
           {slides[current].desc}
         </p>
 
-        <Link
-          href="/projects"
-          className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-background font-semibold text-type-ui md:text-type-prose-sm px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 group"
-        >
-          Explore Our Projects
-          <ArrowUpRight
-            size={18}
-            className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
-          />
-        </Link>
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5">
+          <Link
+            href="/projects"
+            className="group inline-flex min-w-56 items-center justify-center gap-2 bg-primary px-8 py-4 text-type-ui font-semibold text-background shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-xl md:text-type-prose-sm"
+          >
+            Start Your Project
+            <ArrowUpRight
+              size={18}
+              className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </Link>
+          <Link
+            href="/about"
+            className="group inline-flex min-w-56 items-center justify-center gap-2 border border-white/30 bg-white/8 px-8 py-4 text-type-ui font-semibold text-background backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/14 md:text-type-prose-sm"
+          >
+            Explore Us
+            <ArrowUpRight
+              size={18}
+              className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </Link>
+        </div>
       </div>
 
       {/* Dots */}
