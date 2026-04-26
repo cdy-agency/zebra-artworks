@@ -103,8 +103,6 @@ export default function InteriorDesignDetailPage() {
     <main className="min-h-screen bg-background">
       {/* ── Hero image ── */}
       <section className="relative w-full h-[55vh] sm:h-[70vh] overflow-hidden bg-[#111]">
-        <div className="absolute top-0 left-0 right-0 h-0.75 bg-primary z-10" />
-
         {images.length > 0 ? (
           <Image
             src={images[activeImage]}
@@ -122,46 +120,12 @@ export default function InteriorDesignDetailPage() {
         {/* Dark gradient bottom */}
         <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent" />
 
-        {/* Back link */}
-        <div className="absolute top-6 left-6 z-10">
-          <Link
-            href="/interior-design"
-            className="inline-flex items-center gap-2 text-white/70 text-type-eyebrow uppercase tracking-widest hover:text-white transition-colors"
-          >
-            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-              <path
-                d="M13 7H1M6 3L1 7l5 4"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="square"
-              />
-            </svg>
-            Interior Design
-          </Link>
-        </div>
-
-        {/* Status badge */}
-        <div className="absolute top-6 right-6 z-10">
-          <span
-            className="text-type-eyebrow font-medium uppercase tracking-widest px-3 py-1.5"
-            style={{
-              background:
-                project.status === "Ongoing"
-                  ? "#005f75"
-                  : "rgba(255,255,255,0.15)",
-              color: "#fff",
-            }}
-          >
-            {project.status}
-          </span>
-        </div>
-
         {/* Title overlay */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-          className="absolute bottom-8 left-6 sm:left-10 lg:left-20 right-6 z-10"
+          className="absolute bottom-8 left-6 sm:left-10 lg:left-44 right-6 z-10"
         >
           <p className="text-primary text-type-eyebrow uppercase tracking-[0.2em] mb-2">
             {project.subcategory}

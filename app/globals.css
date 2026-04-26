@@ -18,18 +18,9 @@
   --color-line: #737373;
   --color-subtle: #f5f5f5;
 
-  /*
-   * Typography scale — single source of truth
-   * Headings: Playfair (var --font-heading from layout) via .font-heading / base
-   * Body: Source Sans 3 (var --font-sans)
-   * Sizes: slightly above typical defaults for readability; fluid clamps on hero level
-   */
-
-  /* Overlines, badges, CTA label caps (never below ~13px) */
   --text-type-eyebrow: 0.8125rem;
   --text-type-eyebrow--line-height: 1.2;
 
-  /* Secondary / meta (captions, table cells, form hints) */
   --text-type-meta: 0.875rem;
   --text-type-meta--line-height: 1.45;
 
@@ -112,4 +103,14 @@
   .font-heading {
     font-family: var(--font-heading), Georgia, ui-serif, serif;
   }
+}
+
+.bg-diamond {
+  background-color: #e8f0f2;
+  background-image:
+    linear-gradient(135deg, #c8d8dc 25%, transparent 25%),
+    linear-gradient(225deg, #c8d8dc 25%, transparent 25%),
+    linear-gradient(315deg, #c8d8dc 25%, transparent 25%),
+    linear-gradient(45deg,  #c8d8dc 25%, transparent 25%);
+  background-size: 40px 40px;
 }

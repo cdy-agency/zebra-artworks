@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import { Playfair_Display, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import Navbar from "@/components/NavBar";
-import Footer from "@/components/Footer";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -39,12 +36,7 @@ export default function RootLayout({
         "font-sans",
       )}
     >
-      <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}
-        <Footer />
-        <WhatsAppButton />
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

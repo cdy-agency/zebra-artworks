@@ -5,6 +5,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import type { Project } from "@/lib/supabase";
+import { ServiceCard } from "@/components/services/ServiceCard";
+import { constructionServices } from "@/components/services/Services";
+import WhyChooseUs from "@/components/services/Whychooseus";
+import ReadySection from "@/components/ReadToConnect";
+import TestimonialsSection from "@/components/services/Testimonialssection";
+import DepartmentContactStrip from "@/components/DepartmentContactStrip";
 
 type ConstructionProject = Project & {
   num: string;
@@ -123,7 +129,7 @@ export default function ConstructionPage() {
             tall: index % 4 === 0 || index % 4 === 3,
             displayCategory: project.subcategory || project.category,
             meta: project.client || project.status || project.category,
-          }))
+          })),
         );
         setLoading(false);
       })
@@ -169,9 +175,7 @@ export default function ConstructionPage() {
               Our work
             </p>
             <h1 className="text-white text-type-hero font-heading font-bold leading-[1.05]">
-              Architecture
-              <br />
-              &amp; Construction
+              Architecture Construction
             </h1>
           </div>
         </motion.div>
@@ -208,13 +212,40 @@ export default function ConstructionPage() {
         ))}
       </motion.div>
 
-      <section className="max-w-6xl mx-auto px-6 pt-20 pb-32">
+      <section className="px-6 pt-12">
+        <div className="max-w-6xl mx-auto">
+          <div>
+            <h3 className="font-bold text-[#1a1a1a]">
+              Architecture & Construction
+            </h3>
+            <div className="h-0.5 w-56 bg-accent mt-1 mb-6 rounded-full" />
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {constructionServices.map((s) => (
+              <ServiceCard key={s.title} {...s} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-6 pt-10 pb-32">
+        <div>
+          <h3 className="font-bold text-[#1a1a1a]">
+            Construction Portfolio
+          </h3>
+          <div className="h-0.5 w-56 bg-accent mt-1 mb-6 rounded-full" />
+        </div>
         <div className="columns-2 md:columns-3" style={{ columnGap: "8px" }}>
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
       </section>
+
+      <DepartmentContactStrip department="construction" />
+      <WhyChooseUs />
+      <TestimonialsSection category="Architecture & Construction" />
+      <ReadySection />
     </main>
   );
 }
