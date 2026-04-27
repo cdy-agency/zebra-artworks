@@ -20,10 +20,6 @@ import {
 const services = [
   "Interior Design",
   "Architecture & Construction",
-  "Materials Supply",
-  "MEP Supplies",
-  "Architectural Planning",
-  "Other",
 ];
 
 const contactInfo = [

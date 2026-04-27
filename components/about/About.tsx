@@ -63,12 +63,10 @@ const resources = [
   },
 ];
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function AboutPage() {
   return (
     <main className="bg-subtle">
-      {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="relative text-center py-44 -mt-28 overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -127,23 +125,22 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Story / Who we are ────────────────────────────────────────────── */}
       <section className="py-20 sm:py-24">
         <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Image */}
             <div className="relative">
-              <div className="relative h-[420px] sm:h-[500px] rounded-2xl overflow-hidden">
+              <div className="relative h-105 sm:h-125 overflow-hidden">
                 <Image
                   src="/interior1.jpg"
                   alt="Our story"
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
               </div>
               {/* Floating accent card */}
-              <div className="absolute -bottom-5 -right-5 bg-primary text-white rounded-2xl px-6 py-4 shadow-xl">
+              <div className="absolute -bottom-5 -right-5 bg-primary text-white px-6 py-4 shadow-xl">
                 <p className="text-2xl font-black leading-none">5+</p>
                 <p className="text-[11px] font-medium text-white/70 mt-1 uppercase tracking-wide">
                   Years registered
@@ -198,12 +195,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Mission ───────────────────────────────────────────────────────── */}
       <section className="bg-primary py-16 sm:py-20">
         <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="grid lg:grid-cols-[1fr_2fr] gap-10 lg:gap-20 items-start">
             <div>
-              <p className="text-primary-light text-[11px] font-bold uppercase tracking-[0.2em] mb-3 text-white/50">
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] mb-3 text-white/50">
                 Our purpose
               </p>
               <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">
@@ -231,7 +227,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Vision ────────────────────────────────────────────────────────── */}
       <section className="relative py-20 sm:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -240,7 +235,7 @@ export default function AboutPage() {
             fill
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40" />
+          <div className="absolute inset-0 bg-linear-to-r from-black/85 via-black/70 to-black/40" />
         </div>
         <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="max-w-2xl">
@@ -292,7 +287,7 @@ export default function AboutPage() {
               return (
                 <div
                   key={value.title}
-                  className="group relative bg-subtle border border-line/20 rounded-2xl p-8 hover:border-primary/30 hover:shadow-lg transition-all duration-300 overflow-hidden"
+                  className="group relative bg-subtle border border-line/20 p-8 hover:border-primary/30 hover:shadow-lg transition-all duration-300 overflow-hidden"
                 >
                   {/* Subtle bg glow */}
                   <div
@@ -310,7 +305,7 @@ export default function AboutPage() {
 
                   {/* Icon */}
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 border"
+                    className="w-12 h-12 flex items-center justify-center mb-5 border"
                     style={{
                       background: `${value.accent}12`,
                       borderColor: `${value.accent}30`,
@@ -376,10 +371,10 @@ export default function AboutPage() {
                     key={res.title}
                     href={res.file}
                     download
-                    className="group flex items-start gap-5 bg-background border border-line/20 rounded-2xl p-6 hover:border-primary/40 hover:shadow-md transition-all duration-300"
+                    className="group flex items-start gap-5 bg-background border border-line/20  p-6 hover:border-primary/40 hover:shadow-md transition-all duration-300"
                   >
                     {/* Icon tile */}
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary/15 transition-colors">
+                    <div className="w-12 h-12 bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary/15 transition-colors">
                       <Icon
                         size={20}
                         className="text-primary"
@@ -398,7 +393,7 @@ export default function AboutPage() {
                             {res.desc}
                           </p>
                         </div>
-                        <div className="w-9 h-9 rounded-xl bg-subtle border border-line/20 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:border-primary transition-all duration-300">
+                        <div className="w-9 h-9 bg-subtle border border-line/20 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:border-primary transition-all duration-300">
                           <Download
                             size={14}
                             className="text-gray-mid group-hover:text-white transition-colors duration-300"
