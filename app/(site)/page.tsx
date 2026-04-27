@@ -11,8 +11,8 @@ export default function Home() {
     <main>
       <HeroSection />
       <ServicesSection />
-      <LatestDesigns />
       <PartnersSection />
+      <LatestDesigns />
       <LatestConstruction />
       <NewsSection />
       <ReadySection />
