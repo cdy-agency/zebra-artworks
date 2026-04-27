@@ -113,7 +113,6 @@ function DesktopNavItem({
   );
 }
 
-// ─── Mobile nav item ──────────────────────────────────────────────────────────
 
 function MobileNavItem({
   link,
