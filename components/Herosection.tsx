@@ -78,10 +78,10 @@ export default function HeroSection() {
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5">
           <Link
-            href="/projects"
+            href="/contact"
             className="group inline-flex min-w-56 items-center justify-center gap-2 bg-primary px-8 py-4 text-type-ui font-semibold text-background shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-xl md:text-type-prose-sm"
           >
-            Start Your Project
+             Send Message
             <ArrowUpRight
               size={18}
               className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

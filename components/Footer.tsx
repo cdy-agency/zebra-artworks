@@ -29,7 +29,7 @@ export default function Footer() {
         
         {/* Company Info */}
         <div>
-          <h2 className="font-heading mb-4">ZAG Rwanda</h2>
+          <img src="/ZEBRA.png" alt="" className="w-20 h-15 mb-5" />
           <p className="text-gray-400 text-type-prose-sm leading-relaxed">
             Transforming spaces into beautiful, functional homes. We bring
             creativity and precision to every interior design project.

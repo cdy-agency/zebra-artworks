@@ -4,10 +4,16 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const BASE_PARTNERS = [
-  { name: "Britam", src: "/Britam.png" },
-  { name: "Mayfair", src: "/MAYFAIR.svg" },
-  { name: "MUA", src: "/MUA.svg" },
-  { name: "Prime", src: "/Prime.svg" },
+  { name: "Urban-Park", src: "/Urban-Park.png" },
+  { name: "DigitalAxis.png", src: "/DigitalAxis.png" },
+  { name: "logo-sharp", src: "/logo-sharp.png" },
+  { name: "NLA_Logo", src: "/NLA_Logo.png" },
+  { name: "pwc-logo.png", src: "/pwc-logo.png" },
+  { name: "RCS-LOGO", src: "/RCS-LOGO.webp" },
+  { name: "Rema_logo", src: "/Rema_logo.png" },
+  { name: "roof", src: "/roof.jpg" },
+  { name: "RP_Logo", src: "/RP_Logo.jpeg" },
+  { name: "Rema_logo", src: "/Rema_logo.png" },
 ];
 
 const PARTNERS = [
@@ -20,13 +26,13 @@ const PARTNERS = [
 function PartnerLogo({ name, src }: { name: string; src: string }) {
   return (
     <div className="flex items-center justify-center px-8 shrink-0 group cursor-default">
-      <div className="relative h-8 w-28 transition-all duration-300 opacity-90 group-hover:opacity-100">
+      <div className="relative h-12 w-40 transition-all duration-300 opacity-90 group-hover:opacity-100">
         <Image
           src={src}
           alt={name}
           fill
           className="object-contain"
-          sizes="112px"
+          sizes="160px"
           unoptimized
         />
       </div>
