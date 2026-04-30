@@ -228,6 +228,12 @@ export default function AdminTopbar({
   return (
     <header className="h-15 shrink-0 border-b border-line/20 bg-background flex items-center justify-between px-6 gap-4">
       {/* Page title */}
+
+<div className="flex items-center gap-3">
+{/* LOGO */}
+
+</div>
+      
       <h2 className="text-sm font-bold text-foreground truncate">
         {pageTitle}
       </h2>

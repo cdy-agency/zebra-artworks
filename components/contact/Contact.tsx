@@ -64,7 +64,7 @@ const interiorSocials = [
   },
   {
     icon: FaXTwitter,
-    label: "X",
+    label: "Twitter",
     handle: "@zagrwanda",
     href: INTERIOR_SOCIAL.x,
   },

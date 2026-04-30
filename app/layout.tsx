@@ -18,6 +18,9 @@ const sourceSans = Source_Sans_3({
 export const metadata: Metadata = {
   title: "ZAG Rwanda",
   description: "Construction, Interior Design & Architecture Company",
+  icons:{
+    icon:'/sebra.png'
+  }
 };
 
 export default function RootLayout({

@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X, UserCircle, ChevronDown } from "lucide-react";
 
-
 interface NavLink {
   label: string;
   href: string;
@@ -20,7 +19,6 @@ const navLinks = [
   { label: "About Us", href: "/about" },
 ];
 
-
 function isActive(
   href: string,
   pathname: string,
@@ -31,7 +29,6 @@ function isActive(
   if (children?.some((c) => pathname.startsWith(c.href))) return true;
   return false;
 }
-
 
 function DropdownMenu({ items }: { items: { label: string; href: string }[] }) {
   return (
@@ -51,7 +48,6 @@ function DropdownMenu({ items }: { items: { label: string; href: string }[] }) {
     </div>
   );
 }
-
 
 function DesktopNavItem({
   link,
@@ -84,7 +80,6 @@ function DesktopNavItem({
           />
         </button>
 
-        {/* Active underline */}
         {active && (
           <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full" />
         )}
@@ -112,7 +107,6 @@ function DesktopNavItem({
     </li>
   );
 }
-
 
 function MobileNavItem({
   link,
@@ -185,112 +179,108 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Shadow on scroll
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 12);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // Close mobile menu on route change (deferred to avoid sync setState in effect)
   useEffect(() => {
     const t = setTimeout(() => setMenuOpen(false), 0);
     return () => clearTimeout(t);
   }, [pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 pt-4">
-      {/* Main bar */}
-      <nav
-        className={`max-w-6xl mx-auto bg-background/90 backdrop-blur-md rounded-full px-5 sm:px-7 py-3 flex items-center justify-between transition-shadow duration-300 ${
-          scrolled ? "shadow-xl" : "shadow-md"
-        }`}
-      >
-        {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2.5 shrink-0 hover:-translate-y-0.5 transition-transform duration-200"
+    <header className="fixed top-0 left-0 right-0 z-50">
+      
+      {/* ORANGE TOP BAR */}
+      <div className="bg-orange-500/55 text-white text-xs sm:text-sm text-center py-1.5 font-semibold">
+        We Are Open: Deliveries Start Soon
+      </div>
+
+      {/* ORIGINAL NAVBAR (UNCHANGED) */}
+      <div className="px-4 sm:px-6 pt-2">
+        <nav
+          className={`max-w-6xl mx-auto bg-background/90 backdrop-blur-md rounded-full px-5 sm:px-7 py-3 flex items-center justify-between transition-shadow duration-300 ${
+            scrolled ? "shadow-xl" : "shadow-md"
+          }`}
         >
-          <div className="relative w-7 h-7 rounded-lg overflow-hidden bg-primary flex items-center justify-center">
-            {/* Swap for <Image src="/logo.png" ... /> if you have one */}
-            <span className="text-white font-black text-xs tracking-tight">
-              ZA
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 shrink-0 hover:-translate-y-0.5 transition-transform duration-200"
+          >
+            <div className="relative w-15 h-9 rounded-lg overflow-hidden flex items-center justify-center">
+              <img src="/sebra.png" alt="" />
+            </div>
+            <span className="text-foreground font-semibold tracking-tight text-sm hidden xs:block">
+              ZAG Rwanda
             </span>
-          </div>
-          <span className="text-foreground font-semibold tracking-tight text-sm hidden xs:block">
-            ZAG Rwanda
-          </span>
-        </Link>
-
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-7">
-          {navLinks.map((link) => (
-            <DesktopNavItem key={link.href} link={link} pathname={pathname} />
-          ))}
-        </ul>
-
-        {/* Right actions */}
-        <div className="hidden md:flex items-center gap-3">
-          <Link
-            href="/login"
-            aria-label="Login"
-            className="text-gray-mid hover:text-primary transition-colors hover:-translate-y-0.5 inline-flex"
-          >
-            <UserCircle size={22} />
           </Link>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-background text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-          >
-            Contact Us
-          </Link>
-        </div>
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden w-9 h-9 rounded-xl bg-subtle border border-line/20 flex items-center justify-center text-gray-mid hover:text-primary transition-colors"
-          onClick={() => setMenuOpen((v) => !v)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X size={18} /> : <Menu size={18} />}
-        </button>
-      </nav>
-
-      {/* Mobile panel */}
-      {menuOpen && (
-        <div className="md:hidden max-w-6xl mx-auto mt-2 bg-background border border-line/20 rounded-2xl shadow-xl px-5 py-4 flex flex-col">
-          {/* Links */}
-          <div className="flex flex-col mb-4">
+          <ul className="hidden md:flex items-center gap-7">
             {navLinks.map((link) => (
-              <MobileNavItem
-                key={link.href}
-                link={link}
-                pathname={pathname}
-                onClose={() => setMenuOpen(false)}
-              />
+              <DesktopNavItem key={link.href} link={link} pathname={pathname} />
             ))}
-          </div>
+          </ul>
 
-          {/* Bottom actions */}
-          <div className="flex flex-col gap-2.5 pt-2">
+          <div className="hidden md:flex items-center gap-3">
             <Link
               href="/login"
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-2 text-sm text-gray-mid hover:text-primary transition-colors font-medium"
+              aria-label="Login"
+              className="text-gray-mid hover:text-primary transition-colors hover:-translate-y-0.5 inline-flex"
             >
-              <UserCircle size={16} />
-              Login to dashboard
+              <UserCircle size={22} />
             </Link>
             <Link
               href="/contact"
-              onClick={() => setMenuOpen(false)}
-              className="bg-primary text-background text-sm font-semibold px-6 py-2.5 rounded-full text-center hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-background text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
             >
               Contact Us
             </Link>
           </div>
-        </div>
-      )}
+
+          <button
+            className="md:hidden w-9 h-9 rounded-xl bg-subtle border border-line/20 flex items-center justify-center text-gray-mid hover:text-primary transition-colors"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </nav>
+
+        {menuOpen && (
+          <div className="md:hidden max-w-6xl mx-auto mt-2 bg-background border border-line/20 rounded-2xl shadow-xl px-5 py-4 flex flex-col">
+            <div className="flex flex-col mb-4">
+              {navLinks.map((link) => (
+                <MobileNavItem
+                  key={link.href}
+                  link={link}
+                  pathname={pathname}
+                  onClose={() => setMenuOpen(false)}
+                />
+              ))}
+            </div>
+
+            <div className="flex flex-col gap-2.5 pt-2">
+              <Link
+                href="/login"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center gap-2 text-sm text-gray-mid hover:text-primary transition-colors font-medium"
+              >
+                <UserCircle size={16} />
+                Login to dashboard
+              </Link>
+              <Link
+                href="/contact"
+                onClick={() => setMenuOpen(false)}
+                className="bg-primary text-background text-sm font-semibold px-6 py-2.5 rounded-full text-center hover:opacity-90 transition-opacity"
+              >
+                Contact Us
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
     </header>
   );
 }
