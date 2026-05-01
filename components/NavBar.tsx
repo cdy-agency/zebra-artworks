@@ -195,7 +195,7 @@ export default function Navbar() {
       
       {/* ORANGE TOP BAR */}
       <div className="bg-orange-500/55 text-white text-xs sm:text-sm text-center py-1.5 font-semibold">
-        We Are Open: Deliveries Start Soon
+       Website Under Maintenance | We’re Still Open for Business, and Our Services Remain Available
       </div>
 
       {/* ORIGINAL NAVBAR (UNCHANGED) */}
