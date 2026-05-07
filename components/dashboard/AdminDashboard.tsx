@@ -11,7 +11,8 @@ import {
   LogOut,
   ChevronRight,
   NewspaperIcon,
-  QuoteIcon
+  QuoteIcon,
+  Handshake
 } from "lucide-react";
 
 export default function AdminSidebar({
@@ -63,6 +64,7 @@ export default function AdminSidebar({
     },
     { label: "News", href: "/admin/news", icon: NewspaperIcon, badge: 0 },
     { label: "Testimonials", href: "/admin/testimonials", icon: QuoteIcon, badge: 0 },
+    { label: "Partners", href: "/admin/ManagePartners", icon: Handshake, badge: 0 },
     {
       label: "Messages",
       href: "/admin/messages",

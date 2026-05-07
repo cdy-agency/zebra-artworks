@@ -29,3 +29,11 @@ export type Profile = {
   role: "admin" | "user";
   created_at: string;
 };
+
+export type Partner = {
+  id: string;
+  logo: string;
+  name?: string;
+  link?: string;
+  created_at: string;
+};

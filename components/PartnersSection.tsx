@@ -2,34 +2,16 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import type { Partner } from "@/lib/supabase";
 
-const BASE_PARTNERS = [
-  { name: "Urban-Park", src: "/Urban-Park.png" },
-  { name: "DigitalAxis.png", src: "/DigitalAxis.png" },
-  { name: "logo-sharp", src: "/logo-sharp.png" },
-  { name: "NLA_Logo", src: "/NLA_Logo.png" },
-  { name: "pwc-logo.png", src: "/pwc-logo.png" },
-  { name: "RCS-LOGO", src: "/RCS-LOGO.webp" },
-  { name: "Rema_logo", src: "/Rema_logo.png" },
-  { name: "roof", src: "/roof.jpg" },
-  { name: "RP_Logo", src: "/RP_Logo.jpeg" },
-  { name: "Rema_logo", src: "/Rema_logo.png" },
-];
-
-const PARTNERS = [
-  ...BASE_PARTNERS,
-  ...BASE_PARTNERS,
-  ...BASE_PARTNERS,
-  ...BASE_PARTNERS,
-];
-
-function PartnerLogo({ name, src }: { name: string; src: string }) {
-  return (
+function PartnerLogo({ name, src, link }: { name?: string; src: string; link?: string }) {
+  const content = (
     <div className="flex items-center justify-center px-8 shrink-0 group cursor-default">
       <div className="relative h-12 w-40 transition-all duration-300 opacity-90 group-hover:opacity-100">
         <Image
           src={src}
-          alt={name}
+          alt={name ?? "Partner logo"}
           fill
           className="object-contain"
           sizes="160px"
@@ -38,9 +20,38 @@ function PartnerLogo({ name, src }: { name: string; src: string }) {
       </div>
     </div>
   );
+
+  if (link) {
+    return (
+      <a href={link} target="_blank" rel="noopener noreferrer" title={name}>
+        {content}
+      </a>
+    );
+  }
+
+  return content;
 }
 
 export default function PartnersSection() {
+  const [partners, setPartners] = useState<Partner[]>([]);
+
+  useEffect(() => {
+    fetch("/api/partners")
+      .then((res) => res.json())
+      .then((data) => setPartners(data.partners ?? []))
+      .catch(() => {});
+  }, []);
+
+  // Duplicate for seamless marquee (need at least 4x for smooth loop)
+  const PARTNERS = [
+    ...partners,
+    ...partners,
+    ...partners,
+    ...partners,
+  ];
+
+  if (partners.length === 0) return null;
+
   return (
     <section className="relative overflow-hidden py-10 bg-diamond">
       <div className="absolute inset-0 bg-white/50" />
@@ -84,7 +95,7 @@ export default function PartnersSection() {
             style={{ animation: "zag-marquee 28s linear infinite" }}
           >
             {PARTNERS.map((p, i) => (
-              <PartnerLogo key={i} name={p.name} src={p.src} />
+              <PartnerLogo key={i} src={p.logo} name={p.name} link={p.link} />
             ))}
           </div>
         </div>
