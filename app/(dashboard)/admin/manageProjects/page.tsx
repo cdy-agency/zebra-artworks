@@ -162,6 +162,7 @@ export default function ManageProjectsPage() {
           </div>
 
           <button
+            type="button"
             onClick={openAdd}
             className="flex items-center gap-2 px-4 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity cursor-pointer shrink-0 shadow-sm"
           >

@@ -34,12 +34,14 @@ export function ProjectCard({
         </div>
         <div className="flex gap-1.5 shrink-0">
           <button
+            type="button"
             onClick={() => onEdit(project)}
             className="w-8 h-8 rounded-lg bg-subtle border border-line/20 flex items-center justify-center text-gray-mid hover:text-primary hover:border-primary/40 transition-colors"
           >
             <Edit size={13} />
           </button>
           <button
+            type="button"
             onClick={() => onDelete(project.id)}
             className="w-8 h-8 rounded-lg bg-subtle border border-line/20 flex items-center justify-center text-gray-mid hover:text-red-500 hover:border-red-200 hover:bg-red-50 transition-colors"
           >
@@ -66,6 +68,7 @@ export function ProjectCard({
         <div className="flex gap-1.5">
           {project.images.slice(0, 5).map((src, i) => (
             <button
+              type="button"
               key={i}
               onClick={() => onViewImages(project.images, i)}
               className="relative w-11 h-11 rounded-lg overflow-hidden border border-line/20 hover:border-primary/50 transition-colors shrink-0"
@@ -81,6 +84,7 @@ export function ProjectCard({
           ))}
           {project.images.length > 5 && (
             <button
+              type="button"
               onClick={() => onViewImages(project.images, 5)}
               className="w-11 h-11 rounded-lg bg-subtle border border-line/20 text-xs font-bold text-gray-mid flex items-center justify-center shrink-0"
             >

@@ -47,6 +47,7 @@ export function ProjectFilters({
           />
           {filters.search && (
             <button
+              type="button"
               onClick={() => onChange({ ...filters, search: "" })}
               className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-mid hover:text-foreground"
             >
@@ -98,6 +99,7 @@ export function ProjectFilters({
         {/* Clear */}
         {hasActiveFilters && (
           <button
+            type="button"
             onClick={clear}
             className="flex items-center gap-1.5 h-9 px-3 text-sm text-gray-mid hover:text-foreground border border-line/30 rounded-lg hover:border-line/60 transition-colors"
           >

@@ -19,7 +19,7 @@ export type Project = {
   description: string;
   images: string[];
   status: "Pending" | "Ongoing" | "Completed";
-  date: string;
+  date?: string;
   created_at: string;
 };
 

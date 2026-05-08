@@ -275,7 +275,7 @@ export default function InteriorDesignDetailPage() {
                   { label: "Category", value: project.category },
                   { label: "Type", value: project.subcategory },
                   { label: "Status", value: project.status },
-                  { label: "Date", value: formatDate(project.date) },
+                 { label: "Date", value: formatDate(project.created_at) },
                 ].map(({ label, value }) => (
                   <div
                     key={label}
