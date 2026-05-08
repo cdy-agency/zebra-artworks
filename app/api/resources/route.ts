@@ -7,6 +7,7 @@ export async function GET() {
     .from("resources")
     .select("*")
     .order("created_at", { ascending: true });
+      console.log("resources data:", JSON.stringify(data, null, 2))
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
