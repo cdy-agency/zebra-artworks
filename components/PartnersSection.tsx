@@ -7,17 +7,22 @@ import type { Partner } from "@/lib/supabase";
 
 function PartnerLogo({ name, src, link }: { name?: string; src: string; link?: string }) {
   const content = (
-    <div className="flex items-center justify-center px-8 shrink-0 group cursor-default">
-      <div className="relative h-12 w-40 transition-all duration-300 opacity-90 group-hover:opacity-100">
+    <div className="flex flex-col items-center justify-center px-10 shrink-0 group gap-2">
+      <div className="relative h-16 w-48 sm:h-20 sm:w-56 transition-all duration-300 opacity-80 group-hover:opacity-100">
         <Image
           src={src}
           alt={name ?? "Partner logo"}
           fill
           className="object-contain"
-          sizes="160px"
+          sizes="(max-width: 640px) 192px, 224px"
           unoptimized
         />
       </div>
+      {name && (
+        <p className="text-xs font-bold text-gray-500  tracking-wide text-center truncate max-w-[160px]">
+          {name}
+        </p>
+      )}
     </div>
   );
 
@@ -42,20 +47,12 @@ export default function PartnersSection() {
       .catch(() => {});
   }, []);
 
-  // Duplicate for seamless marquee (need at least 4x for smooth loop)
-  const PARTNERS = [
-    ...partners,
-    ...partners,
-    ...partners,
-    ...partners,
-  ];
+  const PARTNERS = [...partners, ...partners, ...partners, ...partners];
 
   if (partners.length === 0) return null;
 
   return (
-    <section className="relative overflow-hidden py-10 bg-diamond">
-      <div className="absolute inset-0 bg-white/50" />
-
+    <section className="relative overflow-hidden py-12 bg-gray-100">
       <div className="relative z-10 max-w-6xl mx-auto px-4">
         {/* Label */}
         <motion.div
@@ -63,7 +60,7 @@ export default function PartnersSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-start mb-5"
+          className="text-start mb-8"
         >
           <div className="inline-flex flex-col items-start">
             <h3 className="text-lg uppercase tracking-[0.2em] text-primary font-bold">
@@ -75,24 +72,26 @@ export default function PartnersSection() {
 
         {/* Marquee track */}
         <div className="relative overflow-hidden">
+          {/* Left fade — matches gray-200 */}
           <div
-            className="absolute left-0 inset-y-0 w-20 z-10 pointer-events-none"
+            className="absolute left-0 inset-y-0 w-24 z-10 pointer-events-none"
             style={{
               background:
-                "linear-gradient(to right, rgba(255,255,255,0.55) 0%, transparent 100%)",
+                "linear-gradient(to right, rgb(229,231,235) 0%, transparent 100%)",
             }}
           />
+          {/* Right fade — matches gray-200 */}
           <div
-            className="absolute right-0 inset-y-0 w-20 z-10 pointer-events-none"
+            className="absolute right-0 inset-y-0 w-24 z-10 pointer-events-none"
             style={{
               background:
-                "linear-gradient(to left, rgba(255,255,255,0.55) 0%, transparent 100%)",
+                "linear-gradient(to left, rgb(229,231,235) 0%, transparent 100%)",
             }}
           />
 
           <div
-            className="flex w-max"
-            style={{ animation: "zag-marquee 28s linear infinite" }}
+            className="flex w-max items-center"
+            style={{ animation: "zag-marquee 32s linear infinite" }}
           >
             {PARTNERS.map((p, i) => (
               <PartnerLogo key={i} src={p.logo} name={p.name} link={p.link} />

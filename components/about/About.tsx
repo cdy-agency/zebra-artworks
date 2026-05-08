@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   Download,
@@ -10,6 +13,17 @@ import {
   Lightbulb,
   Phone,
 } from "lucide-react";
+
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+interface Resource {
+  id: string;
+  title?: string;
+  description?: string;
+  file_url: string;
+  file_name: string;
+  file_size?: string;
+}
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -44,27 +58,28 @@ const stats = [
   { value: "40+", label: "Expert Team Members" },
 ];
 
-const resources = [
-  {
-    icon: FileText,
-    title: "Company Profile",
-    desc: "A complete overview of who we are, our services, expertise, and track record.",
-    file: "/downloads/ZAG-Rwanda-Company-Profile.pdf",
-    label: "Download Profile",
-    size: "PDF · 4.2 MB",
-  },
-  {
-    icon: BookOpen,
-    title: "Project Portfolio",
-    desc: "Explore our completed projects across interior design, architecture, and construction.",
-    file: "/downloads/ZAG-Rwanda-Portfolio.pdf",
-    label: "Download Portfolio",
-    size: "PDF · 12.8 MB",
-  },
-];
+// ─── Helper ───────────────────────────────────────────────────────────────────
 
+function getFileIcon(fileName: string) {
+  const ext = fileName.split(".").pop()?.toLowerCase();
+  if (ext === "pdf") return FileText;
+  return BookOpen;
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function AboutPage() {
+  const [resources, setResources] = useState<Resource[]>([]);
+  const [loadingResources, setLoadingResources] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/resources")
+      .then((res) => res.json())
+      .then((data) => setResources(data.resources ?? []))
+      .catch(() => {})
+      .finally(() => setLoadingResources(false));
+  }, []);
+
   return (
     <main className="bg-subtle">
       <section className="relative text-center py-44 -mt-28 overflow-hidden">
@@ -267,7 +282,6 @@ export default function AboutPage() {
       {/* ── Core Values ───────────────────────────────────────────────────── */}
       <section className="py-20 sm:py-24 bg-background">
         <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
-          {/* Header */}
           <div className="text-center mb-14">
             <p className="text-primary text-[11px] font-bold uppercase tracking-[0.2em] mb-3">
               What guides us
@@ -280,7 +294,6 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Cards */}
           <div className="grid sm:grid-cols-3 gap-6">
             {values.map((value) => {
               const Icon = value.icon;
@@ -289,21 +302,16 @@ export default function AboutPage() {
                   key={value.title}
                   className="group relative bg-subtle border border-line/20 p-8 hover:border-primary/30 hover:shadow-lg transition-all duration-300 overflow-hidden"
                 >
-                  {/* Subtle bg glow */}
                   <div
                     className="absolute -top-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-500 pointer-events-none"
                     style={{ background: value.accent }}
                   />
-
-                  {/* Symbol */}
                   <span
                     className="block text-lg font-black mb-5 transition-colors duration-300"
                     style={{ color: value.accent }}
                   >
                     {value.symbol}
                   </span>
-
-                  {/* Icon */}
                   <div
                     className="w-12 h-12 flex items-center justify-center mb-5 border"
                     style={{
@@ -311,19 +319,10 @@ export default function AboutPage() {
                       borderColor: `${value.accent}30`,
                     }}
                   >
-                    <Icon
-                      size={20}
-                      style={{ color: value.accent }}
-                      strokeWidth={1.75}
-                    />
+                    <Icon size={20} style={{ color: value.accent }} strokeWidth={1.75} />
                   </div>
-
-                  <h3 className="text-lg font-black text-foreground mb-3">
-                    {value.title}
-                  </h3>
-                  <p className="text-sm text-gray-mid leading-relaxed">
-                    {value.desc}
-                  </p>
+                  <h3 className="text-lg font-black text-foreground mb-3">{value.title}</h3>
+                  <p className="text-sm text-gray-mid leading-relaxed">{value.desc}</p>
                 </div>
               );
             })}
@@ -331,92 +330,113 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Company Resources ─────────────────────────────────────────────── */}
-      <section className="py-20 sm:py-24 bg-subtle border-t border-line/20">
-        <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div className="grid lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-20 items-start">
-            {/* Left copy */}
-            <div>
-              <p className="text-primary text-[11px] font-bold uppercase tracking-[0.2em] mb-3">
-                Resources
-              </p>
-              <h2 className="text-3xl sm:text-4xl font-black text-foreground leading-tight mb-4">
-                Company Resources
-              </h2>
-              <p className="text-sm text-gray-mid leading-relaxed">
-                Download our company profile and project portfolio to learn more
-                about our work, our team, and the quality we bring to every
-                engagement.
-              </p>
-              <div className="mt-8 flex items-center gap-3">
-                <Phone size={14} className="text-primary shrink-0" />
-                <span className="text-sm text-gray-mid">
-                  Questions?{" "}
-                  <a
-                    href="/contact"
-                    className="text-primary font-semibold hover:underline"
-                  >
-                    Contact our team
-                  </a>
-                </span>
+      {/* ── Company Resources (fetched from API) ──────────────────────────── */}
+      {(loadingResources || resources.length > 0) && (
+        <section className="py-20 sm:py-24 bg-subtle border-t border-line/20">
+          <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
+            <div className="grid lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-20 items-start">
+              {/* Left copy */}
+              <div>
+                <p className="text-primary text-[11px] font-bold uppercase tracking-[0.2em] mb-3">
+                  Resources
+                </p>
+                <h2 className="text-3xl sm:text-4xl font-black text-foreground leading-tight mb-4">
+                  Company Resources
+                </h2>
+                <p className="text-sm text-gray-mid leading-relaxed">
+                  Download our company profile and project portfolio to learn more
+                  about our work, our team, and the quality we bring to every
+                  engagement.
+                </p>
+                <div className="mt-8 flex items-center gap-3">
+                  <Phone size={14} className="text-primary shrink-0" />
+                  <span className="text-sm text-gray-mid">
+                    Questions?{" "}
+                    <a href="/contact" className="text-primary font-semibold hover:underline">
+                      Contact our team
+                    </a>
+                  </span>
+                </div>
+              </div>
+
+              {/* Download cards */}
+              <div className="space-y-4">
+                {loadingResources ? (
+                  /* Skeletons */
+                  <>
+                    {[1, 2].map((i) => (
+                      <div
+                        key={i}
+                        className="flex items-start gap-5 bg-background border border-line/20 p-6 animate-pulse"
+                      >
+                        <div className="w-12 h-12 bg-subtle rounded shrink-0" />
+                        <div className="flex-1 space-y-2">
+                          <div className="h-4 w-40 bg-subtle rounded" />
+                          <div className="h-3 w-64 bg-subtle rounded" />
+                          <div className="h-6 w-32 bg-subtle rounded-full mt-3" />
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  resources.map((res) => {
+                    const Icon = getFileIcon(res.file_name);
+                    const label = res.title ? `Download ${res.title}` : "Download File";
+                    return (
+                      <a
+                        key={res.id}
+                        href={res.file_url}
+                        download={res.file_name}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-start gap-5 bg-background border border-line/20 p-6 hover:border-primary/40 hover:shadow-md transition-all duration-300"
+                      >
+                        {/* Icon tile */}
+                        <div className="w-12 h-12 bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary/15 transition-colors">
+                          <Icon size={20} className="text-primary" strokeWidth={1.75} />
+                        </div>
+
+                        {/* Text */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between gap-3">
+                            <div>
+                              <p className="text-sm font-bold text-foreground mb-1">
+                                {res.title || res.file_name}
+                              </p>
+                              {res.description && (
+                                <p className="text-xs text-gray-mid leading-relaxed">
+                                  {res.description}
+                                </p>
+                              )}
+                            </div>
+                            <div className="w-9 h-9 bg-subtle border border-line/20 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:border-primary transition-all duration-300">
+                              <Download
+                                size={14}
+                                className="text-gray-mid group-hover:text-white transition-colors duration-300"
+                              />
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2 mt-3">
+                            <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-primary bg-primary/8 border border-primary/20 px-2.5 py-1 rounded-full">
+                              <Download size={9} />
+                              {label}
+                            </span>
+                            {res.file_size && (
+                              <span className="text-[10px] text-gray-mid">
+                                {res.file_size}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </a>
+                    );
+                  })
+                )}
               </div>
             </div>
-
-            {/* Download cards */}
-            <div className="space-y-4">
-              {resources.map((res) => {
-                const Icon = res.icon;
-                return (
-                  <a
-                    key={res.title}
-                    href={res.file}
-                    download
-                    className="group flex items-start gap-5 bg-background border border-line/20  p-6 hover:border-primary/40 hover:shadow-md transition-all duration-300"
-                  >
-                    {/* Icon tile */}
-                    <div className="w-12 h-12 bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary/15 transition-colors">
-                      <Icon
-                        size={20}
-                        className="text-primary"
-                        strokeWidth={1.75}
-                      />
-                    </div>
-
-                    {/* Text */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <p className="text-sm font-bold text-foreground mb-1">
-                            {res.title}
-                          </p>
-                          <p className="text-xs text-gray-mid leading-relaxed">
-                            {res.desc}
-                          </p>
-                        </div>
-                        <div className="w-9 h-9 bg-subtle border border-line/20 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:border-primary transition-all duration-300">
-                          <Download
-                            size={14}
-                            className="text-gray-mid group-hover:text-white transition-colors duration-300"
-                          />
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2 mt-3">
-                        <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-primary bg-primary/8 border border-primary/20 px-2.5 py-1 rounded-full">
-                          <Download size={9} />
-                          {res.label}
-                        </span>
-                        <span className="text-[10px] text-gray-mid">
-                          {res.size}
-                        </span>
-                      </div>
-                    </div>
-                  </a>
-                );
-              })}
-            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </main>
   );
 }
