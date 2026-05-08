@@ -12,7 +12,8 @@ import {
   ChevronRight,
   NewspaperIcon,
   QuoteIcon,
-  Handshake
+  Handshake,
+  BookOpen,
 } from "lucide-react";
 
 export default function AdminSidebar({
@@ -65,6 +66,12 @@ export default function AdminSidebar({
     { label: "News", href: "/admin/news", icon: NewspaperIcon, badge: 0 },
     { label: "Testimonials", href: "/admin/testimonials", icon: QuoteIcon, badge: 0 },
     { label: "Partners", href: "/admin/ManagePartners", icon: Handshake, badge: 0 },
+    {
+      label: "Resources",
+      href: "/admin/ResourcesManagement",
+      icon: BookOpen,
+      badge: 0,
+    },
     {
       label: "Messages",
       href: "/admin/messages",
