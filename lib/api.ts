@@ -2,6 +2,14 @@ import type { Project } from "@/lib/supabase";
 import type { NewsItem, NewsPayload } from "@/types/news";
 import type { Testimonial, TestimonialPayload } from "@/types/testimonial";
 
+export async function getResponseErrorMessage(
+  res: Response,
+  fallback: string,
+): Promise<string> {
+  const err = await res.json().catch(() => null);
+  return err?.error ?? fallback;
+}
+
 export async function apiGetProjects(): Promise<Project[]> {
   const res = await fetch("/api/projects");
   if (!res.ok) throw new Error("Failed to fetch projects");
@@ -18,14 +26,15 @@ export async function apiSaveProject(
     body: JSON.stringify(data),
   });
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.error ?? "Save failed");
+    throw new Error(await getResponseErrorMessage(res, "Save failed"));
   }
 }
 
 export async function apiDeleteProject(id: string): Promise<void> {
   const res = await fetch(`/api/projects/${id}`, { method: "DELETE" });
-  if (!res.ok) throw new Error("Delete failed");
+  if (!res.ok) {
+    throw new Error(await getResponseErrorMessage(res, "Delete failed"));
+  }
 }
 
 export async function apiGetNews(): Promise<NewsItem[]> {
@@ -45,8 +54,7 @@ export async function apiSaveNews(
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.error ?? "Save failed");
+    throw new Error(await getResponseErrorMessage(res, "Save failed"));
   }
 
   return res.json();
@@ -55,8 +63,7 @@ export async function apiSaveNews(
 export async function apiDeleteNews(id: string): Promise<void> {
   const res = await fetch(`/api/news/${id}`, { method: "DELETE" });
   if (!res.ok) {
-    const err = await res.json().catch(() => null);
-    throw new Error(err?.error ?? "Delete failed");
+    throw new Error(await getResponseErrorMessage(res, "Delete failed"));
   }
 }
 
@@ -84,8 +91,7 @@ export async function apiSaveTestimonial(
     },
   );
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.error ?? "Save failed");
+    throw new Error(await getResponseErrorMessage(res, "Save failed"));
   }
   return res.json();
 }
@@ -93,7 +99,6 @@ export async function apiSaveTestimonial(
 export async function apiDeleteTestimonial(id: string): Promise<void> {
   const res = await fetch(`/api/testimonials/${id}`, { method: "DELETE" });
   if (!res.ok) {
-    const err = await res.json().catch(() => null);
-    throw new Error(err?.error ?? "Delete failed");
+    throw new Error(await getResponseErrorMessage(res, "Delete failed"));
   }
 }

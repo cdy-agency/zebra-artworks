@@ -6,8 +6,7 @@ import { motion } from "framer-motion";
 
 export default function ReadySection() {
   return (
-    <section className="relative overflow-hidden flex items-center justify-center min-h-80">
-      {/* Background image */}
+    <section className="relative flex min-h-80 items-center justify-center overflow-hidden">
       <Image
         src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&q=80&auto=format&fit=crop"
         alt="Architecture and construction background"
@@ -18,23 +17,19 @@ export default function ReadySection() {
         priority={false}
       />
 
-      {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/55" />
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-6 py-5 sm:py-10 max-w-2xl mx-auto">
-        {/* Overline */}
+      <div className="relative z-10 mx-auto max-w-2xl px-6 py-16 text-center sm:py-20">
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-          className="text-primary text-type-eyebrow font-medium uppercase tracking-[0.2em] mb-5"
+          className="mb-5 text-primary text-type-eyebrow font-medium uppercase tracking-[0.2em]"
         >
           Get started
         </motion.p>
 
-        {/* Heading */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -44,14 +39,11 @@ export default function ReadySection() {
             delay: 0.08,
             ease: [0.25, 0.1, 0.25, 1],
           }}
-          className="font-heading text-white text-type-hero font-bold leading-[1.1] mb-5"
+          className="mb-5 font-heading text-type-hero text-white"
         >
-          Ready to Start
-          <br />
-          Your Project?
+          Your Next Project Starts Here
         </motion.h2>
 
-        {/* Subtext */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -61,14 +53,14 @@ export default function ReadySection() {
             delay: 0.15,
             ease: [0.25, 0.1, 0.25, 1],
           }}
-          className="text-white/65 text-type-prose sm:text-type-prose-lg font-light leading-relaxed mb-10"
+          className="mb-10 text-type-prose text-white/65 sm:text-type-prose-lg"
         >
-          Let&apos;s create something extraordinary together.
-          <br className="hidden sm:block" />
-          Contact us today to discuss your vision.
+          Whether you are planning a commercial, hospitality, office, or
+          residential project, our team is ready to deliver innovative design
+          solutions, quality workmanship, and outstanding results that elevate
+          your space and your brand.
         </motion.p>
 
-        {/* Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -78,7 +70,7 @@ export default function ReadySection() {
             delay: 0.22,
             ease: [0.25, 0.1, 0.25, 1],
           }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <Link
             href="/contact"
@@ -90,7 +82,7 @@ export default function ReadySection() {
               transition-colors duration-300 hover:bg-primary-dark
             "
           >
-            Start a project
+            Let’s Discuss Your Project 
             <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
               <path
                 d="M1 7h12M8 3l5 4-5 4"

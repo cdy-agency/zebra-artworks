@@ -19,6 +19,8 @@ import {
   ProjectCardSkeleton,
 } from "@/components/dashboard/manageProjects/Projectcard";
 import { ImageViewer } from "@/components/dashboard/manageProjects/Imageviewer";
+import DeleteModal from "@/components/dashboard/shared/DeleteModal";
+import ToastMessage from "@/components/dashboard/shared/ToastMessage";
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -34,9 +36,20 @@ export default function ManageProjectsPage() {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [editTarget, setEditTarget] = useState<Project | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<Project | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [toast, setToast] = useState<{ message: string; variant: "success" | "error" } | null>(null);
 
   const [viewerImages, setViewerImages] = useState<string[]>([]);
   const [viewerStart, setViewerStart] = useState(0);
+
+  const showToast = (
+    message: string,
+    variant: "success" | "error" = "success",
+  ) => {
+    setToast({ message, variant });
+    window.setTimeout(() => setToast(null), 3000);
+  };
 
   // ── Data ──────────────────────────────────────────────────────────────────
 
@@ -87,10 +100,23 @@ export default function ManageProjectsPage() {
     setEditTarget(null);
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to remove this project?")) return;
-    await apiDeleteProject(id);
-    fetchProjects();
+  const handleDelete = async () => {
+    if (!deleteTarget) return;
+
+    setIsDeleting(true);
+    try {
+      await apiDeleteProject(deleteTarget.id);
+      setProjects((prev) => prev.filter((project) => project.id !== deleteTarget.id));
+      setDeleteTarget(null);
+      showToast("Project deleted.");
+    } catch (error: unknown) {
+      showToast(
+        error instanceof Error ? error.message : "Failed to delete project.",
+        "error",
+      );
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   const handleViewImages = (images: string[], startIndex: number) => {
@@ -170,7 +196,9 @@ export default function ManageProjectsPage() {
           projects={filtered}
           loading={loading}
           onEdit={openEdit}
-          onDelete={handleDelete}
+          onDelete={(id) =>
+            setDeleteTarget(projects.find((project) => project.id === id) ?? null)
+          }
           onViewImages={handleViewImages}
         />
 
@@ -195,7 +223,9 @@ export default function ManageProjectsPage() {
                 key={project.id}
                 project={project}
                 onEdit={openEdit}
-                onDelete={handleDelete}
+                onDelete={(id) =>
+                  setDeleteTarget(projects.find((projectItem) => projectItem.id === id) ?? null)
+                }
                 onViewImages={handleViewImages}
               />
             ))
@@ -220,6 +250,17 @@ export default function ManageProjectsPage() {
           onClose={() => setViewerImages([])}
         />
       )}
+
+      <DeleteModal
+        open={!!deleteTarget}
+        title={deleteTarget?.title ?? ""}
+        resourceLabel="project"
+        isDeleting={isDeleting}
+        onConfirm={handleDelete}
+        onClose={() => setDeleteTarget(null)}
+      />
+
+      {toast ? <ToastMessage message={toast.message} variant={toast.variant} /> : null}
     </>
   );
 }

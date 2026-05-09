@@ -13,6 +13,9 @@ import {
   ImagePlus,
 } from "lucide-react";
 import { uploadImage } from "@/lib/cloudinary";
+import { getResponseErrorMessage } from "@/lib/api";
+import DeleteModal from "@/components/dashboard/shared/DeleteModal";
+import ToastMessage from "@/components/dashboard/shared/ToastMessage";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -479,6 +482,8 @@ function DeleteConfirmModal({
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
+void DeleteConfirmModal;
+
 export default function PartnersPage() {
   const [partners, setPartners] = useState<Partner[]>([]);
   const [loading, setLoading] = useState(true);
@@ -486,11 +491,14 @@ export default function PartnersPage() {
   const [editingPartner, setEditingPartner] = useState<Partner | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Partner | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [toastMsg, setToastMsg] = useState("");
+  const [toast, setToast] = useState<{ message: string; variant: "success" | "error" } | null>(null);
 
-  const showToast = (msg: string) => {
-    setToastMsg(msg);
-    setTimeout(() => setToastMsg(""), 3000);
+  const showToast = (
+    message: string,
+    variant: "success" | "error" = "success",
+  ) => {
+    setToast({ message, variant });
+    window.setTimeout(() => setToast(null), 3000);
   };
 
   const fetchPartners = async () => {
@@ -521,7 +529,9 @@ export default function PartnersPage() {
       body: JSON.stringify(data),
     });
 
-    if (!res.ok) throw new Error("Failed to save partner.");
+    if (!res.ok) {
+      throw new Error(await getResponseErrorMessage(res, "Failed to save partner."));
+    }
 
     await fetchPartners();
     showToast(editingPartner ? "Partner updated." : "Partner added.");
@@ -531,12 +541,18 @@ export default function PartnersPage() {
     if (!deleteTarget) return;
     setIsDeleting(true);
     try {
-      await fetch(`/api/partners/${deleteTarget.id}`, { method: "DELETE" });
+      const res = await fetch(`/api/partners/${deleteTarget.id}`, { method: "DELETE" });
+      if (!res.ok) {
+        throw new Error(await getResponseErrorMessage(res, "Failed to delete partner."));
+      }
+
       await fetchPartners();
+      setDeleteTarget(null);
       showToast("Partner deleted.");
+    } catch (error: unknown) {
+      showToast(getErrorMessage(error, "Failed to delete partner."), "error");
     } finally {
       setIsDeleting(false);
-      setDeleteTarget(null);
     }
   };
 
@@ -640,21 +656,17 @@ export default function PartnersPage() {
 
       {/* Delete confirm */}
       {deleteTarget && (
-        <DeleteConfirmModal
-          partnerName={deleteTarget.name}
-          onConfirm={handleDelete}
-          onCancel={() => setDeleteTarget(null)}
+        <DeleteModal
+          open={!!deleteTarget}
+          title={deleteTarget.name ?? "this partner"}
+          resourceLabel="partner"
           isDeleting={isDeleting}
+          onConfirm={handleDelete}
+          onClose={() => setDeleteTarget(null)}
         />
       )}
 
-      {/* Toast */}
-      {toastMsg && (
-        <div className="fixed bottom-6 right-6 z-2000 bg-foreground text-background text-sm font-medium px-4 py-3 rounded-xl shadow-lg flex items-center gap-2 animate-in slide-in-from-bottom-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-          {toastMsg}
-        </div>
-      )}
+      {toast ? <ToastMessage message={toast.message} variant={toast.variant} /> : null}
     </div>
   );
 }

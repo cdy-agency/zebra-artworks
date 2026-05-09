@@ -137,15 +137,6 @@ export default function NewsModal({ open, item, onClose, onSave }: Props) {
             </Field>
           </div>
 
-          <Field label="Date">
-            <input
-              type="date"
-              value={form.date}
-              onChange={(e) => set("date", e.target.value)}
-              className={inputCls}
-            />
-          </Field>
-
           <Field label="Excerpt">
             <textarea
               value={form.excerpt}

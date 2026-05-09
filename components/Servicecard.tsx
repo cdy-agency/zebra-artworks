@@ -64,7 +64,7 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
               {service.description}
             </p>
             <span className="inline-flex items-center gap-2 text-white text-type-ui font-medium uppercase tracking-widest border-b border-white/50 pb-0.5 w-fit">
-              Explore
+              Explore More
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path
                   d="M1 7h12M8 3l5 4-5 4"

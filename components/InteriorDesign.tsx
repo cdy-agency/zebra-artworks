@@ -16,8 +16,8 @@ type InteriorProject = Project & {
 
 function LatestDesignsSkeleton() {
   return (
-    <section className="bg-background py-5 sm:py-10 px-6 sm:px-10 lg:px-20">
-      <div className="mb-10 sm:mb-14 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 max-w-6xl mx-auto">
+    <section className="landing-section bg-background">
+      <div className="landing-section-header">
         <div className="space-y-3">
           <Skeleton className="h-3 w-24 rounded-full" />
           <Skeleton className="h-10 sm:h-12 w-64 sm:w-96 rounded-xl" />
@@ -26,7 +26,7 @@ function LatestDesignsSkeleton() {
       </div>
 
       <div
-        className="hidden sm:flex gap-1.5 max-w-6xl mx-auto"
+        className="landing-container hidden gap-1.5 sm:flex"
         style={{ height: "520px" }}
       >
         {Array.from({ length: 4 }).map((_, index) => (
@@ -46,7 +46,7 @@ function LatestDesignsSkeleton() {
         ))}
       </div>
 
-      <div className="sm:hidden flex flex-col gap-4 max-w-7xl mx-auto">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:hidden">
         {Array.from({ length: 3 }).map((_, index) => (
           <div key={index} className="overflow-hidden rounded-xl">
             <Skeleton className="h-52 w-full rounded-none" />
@@ -100,27 +100,20 @@ export default function LatestDesigns() {
   if (projects.length === 0) return null;
 
   return (
-    <section className="bg-background py-5 sm:py-10 px-6 sm:px-10 lg:px-20">
+    <section className="landing-section bg-background">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
         transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
-        className="mb-10 sm:mb-14 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 max-w-6xl mx-auto"
+        className="landing-section-header"
       >
         <div>
-          <p className="text-primary text-type-eyebrow font-medium uppercase tracking-[0.2em] mb-3">
-            Portfolio
-          </p>
-          <h1 className="font-bold text-foreground leading-[1.1]">
-            Latest Interior Design
-          </h1>
-          <div className="h-0.5 w-56 bg-accent mt-1 rounded-full" />
+          <p className="landing-eyebrow">Portfolio</p>
+          <h2 className="landing-title">Latest Interior Design</h2>
+          <div className="landing-rule" />
         </div>
-        <Link
-          href="/interior-design"
-          className="inline-flex items-center gap-2 text-primary text-type-eyebrow font-medium uppercase tracking-widest border-b border-primary pb-0.5 w-fit transition-colors hover:text-primary-dark shrink-0"
-        >
+        <Link href="/interior-design" className="landing-link">
           View all projects
           <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
             <path
@@ -138,7 +131,7 @@ export default function LatestDesigns() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
         transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-        className="hidden sm:flex gap-1.5 max-w-6xl mx-auto"
+        className="landing-container hidden gap-1.5 sm:flex"
         style={{ height: "520px" }}
       >
         {projects.map((project) => {
@@ -254,7 +247,7 @@ export default function LatestDesigns() {
         })}
       </motion.div>
 
-      <div className="sm:hidden flex flex-col gap-px max-w-7xl mx-auto">
+      <div className="mx-auto flex max-w-7xl flex-col gap-px sm:hidden">
         {projects.map((project, index) => (
           <motion.div
             key={project.id}
@@ -274,10 +267,10 @@ export default function LatestDesigns() {
               />
             </div>
             <div className="bg-subtle px-5 py-4 border-t-[3px] border-primary">
-              <p className="text-primary text-type-eyebrow font-medium uppercase tracking-widest mb-1">
+              <p className="mb-1 text-primary text-type-eyebrow font-medium uppercase tracking-widest">
                 {project.tag}
               </p>
-              <h3 className="text-foreground text-type-h3 tracking-wide mb-2">
+              <h3 className="mb-2 text-foreground text-type-h3 tracking-wide">
                 {project.title}
               </h3>
               <Link

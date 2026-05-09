@@ -26,29 +26,22 @@ const services: Service[] = [
 
 export default function ServicesSection() {
   return (
-    <section className="bg-background py-20 sm:py-28 px-6 sm:px-10 lg:px-20">
-      {/* Section header */}
+    <section className="landing-section bg-background">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
         transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
-        className="mb-12 sm:mb-16 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 max-w-6xl mx-auto"
+        className="landing-section-header"
       >
         <div>
-          <p className="text-primary text-type-eyebrow font-medium uppercase tracking-[0.2em] mb-3">
-            What we do
-          </p>
-          <h1 className="font-bold text-foreground leading-[1.1]">
-            Our Services
-          </h1>
-
-          <div className="h-0.5 w-56 bg-accent mt-1 rounded-full" />
+          <p className="landing-eyebrow">What we do</p>
+          <h2 className="landing-title">Our Services</h2>
+          <div className="landing-rule" />
         </div>
       </motion.div>
 
-      {/* Cards grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto">
+      <div className="landing-container grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
         {services.map((service, index) => (
           <ServiceCard key={service.href} service={service} index={index} />
         ))}

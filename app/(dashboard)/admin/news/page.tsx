@@ -7,7 +7,8 @@ import { NewsItem } from "@/types/news";
 import NewsStatsBar from "@/components/dashboard/news/Newsstatsbar";
 import NewsTable from "@/components/dashboard/news/Newstable";
 import NewsModal from "@/components/dashboard/news/Newsmodal";
-import DeleteConfirmModal from "@/components/dashboard/news/Deleteconfirmmodal";
+import DeleteModal from "@/components/dashboard/shared/DeleteModal";
+import ToastMessage from "@/components/dashboard/shared/ToastMessage";
 
 export default function NewsDashboard() {
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -16,8 +17,15 @@ export default function NewsDashboard() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editItem, setEditItem] = useState<NewsItem | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [toast, setToast] = useState<{ message: string; variant: "success" | "error" } | null>(null);
 
   const deleteTarget = news.find((n) => n.id === deleteId);
+
+  function showToast(message: string, variant: "success" | "error" = "success") {
+    setToast({ message, variant });
+    window.setTimeout(() => setToast(null), 3000);
+  }
 
   async function fetchNews() {
     setLoading(true);
@@ -61,9 +69,23 @@ export default function NewsDashboard() {
     });
   }
 
-  async function handleDelete(id: string) {
-    await apiDeleteNews(id);
-    setNews((prev) => prev.filter((item) => item.id !== id));
+  async function handleDelete() {
+    if (!deleteId) return;
+
+    setIsDeleting(true);
+    try {
+      await apiDeleteNews(deleteId);
+      setNews((prev) => prev.filter((item) => item.id !== deleteId));
+      setDeleteId(null);
+      showToast("Article deleted.");
+    } catch (error: unknown) {
+      showToast(
+        error instanceof Error ? error.message : "Failed to delete article.",
+        "error",
+      );
+    } finally {
+      setIsDeleting(false);
+    }
   }
 
   return (
@@ -112,12 +134,16 @@ export default function NewsDashboard() {
         onSave={handleSave}
       />
 
-      <DeleteConfirmModal
+      <DeleteModal
         open={!!deleteId}
         title={deleteTarget?.title ?? ""}
-        onConfirm={() => (deleteId ? handleDelete(deleteId) : Promise.resolve())}
+        resourceLabel="article"
+        isDeleting={isDeleting}
+        onConfirm={handleDelete}
         onClose={() => setDeleteId(null)}
       />
+
+      {toast ? <ToastMessage message={toast.message} variant={toast.variant} /> : null}
     </div>
   );
 }

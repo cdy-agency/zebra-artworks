@@ -11,6 +11,9 @@ import {
   FileText,
   Download,
 } from "lucide-react";
+import { getResponseErrorMessage } from "@/lib/api";
+import DeleteModal from "@/components/dashboard/shared/DeleteModal";
+import ToastMessage from "@/components/dashboard/shared/ToastMessage";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -472,6 +475,8 @@ function DeleteConfirmModal({
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
+void DeleteConfirmModal;
+
 export default function ResourcesManagementPage() {
   const [resources, setResources] = useState<Resource[]>([]);
   const [loading, setLoading] = useState(true);
@@ -479,11 +484,14 @@ export default function ResourcesManagementPage() {
   const [editingResource, setEditingResource] = useState<Resource | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Resource | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [toastMsg, setToastMsg] = useState("");
+  const [toast, setToast] = useState<{ message: string; variant: "success" | "error" } | null>(null);
 
-  const showToast = (msg: string) => {
-    setToastMsg(msg);
-    setTimeout(() => setToastMsg(""), 3000);
+  const showToast = (
+    message: string,
+    variant: "success" | "error" = "success",
+  ) => {
+    setToast({ message, variant });
+    window.setTimeout(() => setToast(null), 3000);
   };
 
   const fetchResources = async () => {
@@ -514,7 +522,9 @@ export default function ResourcesManagementPage() {
       body: JSON.stringify(data),
     });
 
-    if (!res.ok) throw new Error("Failed to save resource.");
+    if (!res.ok) {
+      throw new Error(await getResponseErrorMessage(res, "Failed to save resource."));
+    }
     await fetchResources();
     showToast(editingResource ? "Resource updated." : "Resource added.");
   };
@@ -523,12 +533,18 @@ export default function ResourcesManagementPage() {
     if (!deleteTarget) return;
     setIsDeleting(true);
     try {
-      await fetch(`/api/resources/${deleteTarget.id}`, { method: "DELETE" });
+      const res = await fetch(`/api/resources/${deleteTarget.id}`, { method: "DELETE" });
+      if (!res.ok) {
+        throw new Error(await getResponseErrorMessage(res, "Failed to delete resource."));
+      }
+
       await fetchResources();
+      setDeleteTarget(null);
       showToast("Resource deleted.");
+    } catch (error: unknown) {
+      showToast(getErrorMessage(error, "Failed to delete resource."), "error");
     } finally {
       setIsDeleting(false);
-      setDeleteTarget(null);
     }
   };
 
@@ -625,21 +641,17 @@ export default function ResourcesManagementPage() {
 
       {/* Delete confirm */}
       {deleteTarget && (
-        <DeleteConfirmModal
-          resourceTitle={deleteTarget.title || deleteTarget.file_name}
-          onConfirm={handleDelete}
-          onCancel={() => setDeleteTarget(null)}
+        <DeleteModal
+          open={!!deleteTarget}
+          title={deleteTarget.title || deleteTarget.file_name}
+          resourceLabel="resource"
           isDeleting={isDeleting}
+          onConfirm={handleDelete}
+          onClose={() => setDeleteTarget(null)}
         />
       )}
 
-      {/* Toast */}
-      {toastMsg && (
-        <div className="fixed bottom-6 right-6 z-2000 bg-foreground text-background text-sm font-medium px-4 py-3 rounded-xl shadow-lg flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-          {toastMsg}
-        </div>
-      )}
+      {toast ? <ToastMessage message={toast.message} variant={toast.variant} /> : null}
     </div>
   );
 }
