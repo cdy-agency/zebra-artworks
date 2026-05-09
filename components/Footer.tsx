@@ -95,15 +95,18 @@ export default function Footer() {
 
           {/* ── Company links ── */}
           <div>
-            <p className="mb-5 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary">
-              Company
-            </p>
-            <ul className="space-y-0">
-              {companyLinks.map(({ label, href }) => (
-                <li
-                  key={label}
-                  className="border-b border-line/10 last:border-0"
-                >
+            <h3 className="text-xs font-bold mb-5 uppercase tracking-[0.18em] text-primary">
+              Quick Links
+            </h3>
+            <ul className="space-y-3">
+              {[
+                { label: "About Us", href: "/about" },
+                { label: "Services", href: "/interior-design" },
+                { label: "Gallery", href: "/projects" },
+                { label: "Pricing", href: "/contact" },
+                { label: "News & Updates", href: "/news" },
+              ].map(({ label, href }) => (
+                <li key={label}>
                   <Link
                     href={href}
                     className="group flex items-center justify-between py-2.5 text-type-prose-sm text-gray-mid transition-colors duration-200 hover:text-primary"

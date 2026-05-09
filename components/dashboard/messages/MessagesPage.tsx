@@ -20,6 +20,7 @@ type Message = {
   message: string;
   is_read: boolean;
   created_at: string;
+  phone?: string;
 };
 
 
@@ -167,6 +168,12 @@ function MessageDetail({ message }: { message: Message | null }) {
             <div className="flex items-center gap-1.5">
               <AtSign size={11} className="text-gray-mid shrink-0" />
               <span className="text-xs text-gray-mid">{message.email}</span>
+             {message.phone && (
+  <div className="flex items-center gap-1.5">
+    <User size={11} className="text-gray-mid shrink-0" />
+    <span className="text-xs text-gray-mid">{message.phone}</span>
+  </div>
+)}
             </div>
             <div className="flex items-center gap-1.5">
               <Clock size={11} className="text-gray-mid shrink-0" />
