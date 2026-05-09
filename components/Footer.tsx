@@ -11,8 +11,15 @@ import {
   ChevronDown,
   ArrowRight,
 } from "lucide-react";
-import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
+
+import {
+  FaInstagram,
+  FaLinkedinIn,
+  FaPinterestP,
+} from "react-icons/fa";
+
 import { FaXTwitter } from "react-icons/fa6";
+
 import {
   ZAG_ADDRESS,
   ZAG_EMAIL,
@@ -23,14 +30,6 @@ import {
   INTERIOR_SOCIAL,
   CONSTRUCTION_INSTAGRAM,
 } from "@/lib/zagContact";
-
-const companyLinks = [
-  { label: "About Us", href: "/about" },
-  { label: "Services", href: "/interior-design" },
-  { label: "Gallery", href: "/projects" },
-  { label: "Pricing", href: "/contact" },
-  { label: "Announcements", href: "/news" },
-];
 
 const services = [
   {
@@ -80,24 +79,26 @@ export default function Footer() {
                   className="object-contain"
                 />
               </div>
+
               <span className="text-foreground text-type-prose-sm font-semibold tracking-tight">
                 ZAG Rwanda
               </span>
             </Link>
 
             <p className="max-w-50 text-type-prose-sm leading-relaxed text-gray-mid">
-              Transforming spaces into beautiful, functional homes — creativity
-              and precision in every project.
+              Transforming spaces into beautiful, functional homes —
+              creativity and precision in every project.
             </p>
 
             <div className="mt-6 h-px bg-line/15" />
           </div>
 
-          {/* ── Company links ── */}
+          {/* ── Quick Links ── */}
           <div>
             <h3 className="text-xs font-bold mb-5 uppercase tracking-[0.18em] text-primary">
               Quick Links
             </h3>
+
             <ul className="space-y-3">
               {[
                 { label: "About Us", href: "/about" },
@@ -112,6 +113,7 @@ export default function Footer() {
                     className="group flex items-center justify-between py-2.5 text-type-prose-sm text-gray-mid transition-colors duration-200 hover:text-primary"
                   >
                     {label}
+
                     <ArrowRight className="size-3.5 shrink-0 -translate-x-1 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
                   </Link>
                 </li>
@@ -119,11 +121,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ── Services accordion ── */}
+          {/* ── Services ── */}
           <div>
             <p className="mb-5 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary">
               Services
             </p>
+
             <div className="space-y-0">
               {services.map((svc) => (
                 <div
@@ -131,17 +134,25 @@ export default function Footer() {
                   className="border-b border-line/10 last:border-0"
                 >
                   <button
-                    onClick={() => setOpen(open === svc.id ? null : svc.id)}
+                    onClick={() =>
+                      setOpen(open === svc.id ? null : svc.id)
+                    }
                     className="group flex w-full items-center justify-between py-2.5 text-type-prose-sm font-medium text-gray-mid transition-colors duration-200 hover:text-primary"
                   >
                     {svc.label}
+
                     <ChevronDown
-                      className={`size-3.5 shrink-0 text-gray-mid/50 transition-all duration-200 group-hover:text-primary ${open === svc.id ? "rotate-180" : ""}`}
+                      className={`size-3.5 shrink-0 text-gray-mid/50 transition-all duration-200 group-hover:text-primary ${
+                        open === svc.id ? "rotate-180" : ""
+                      }`}
                     />
                   </button>
+
                   <div
                     className="overflow-hidden transition-all duration-300"
-                    style={{ maxHeight: open === svc.id ? "200px" : "0px" }}
+                    style={{
+                      maxHeight: open === svc.id ? "200px" : "0px",
+                    }}
                   >
                     <ul className="pb-3 pl-2 space-y-2">
                       {svc.items.map((item) => (
@@ -160,7 +171,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ── Contact & social ── */}
+          {/* ── Contact & Social ── */}
           <div>
             <p className="mb-5 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary">
               Contact
@@ -172,9 +183,13 @@ export default function Footer() {
                 <p className="mb-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-gray-mid/75">
                   Location
                 </p>
+
                 <div className="flex items-start gap-2">
                   <MapPin className="mt-0.5 size-3.5 shrink-0 text-primary/50" />
-                  <span className="text-type-prose-sm text-gray-mid">{ZAG_ADDRESS}</span>
+
+                  <span className="text-type-prose-sm text-gray-mid">
+                    {ZAG_ADDRESS}
+                  </span>
                 </div>
               </div>
 
@@ -186,8 +201,10 @@ export default function Footer() {
                 <p className="mb-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-gray-mid/75 group-hover:text-primary/70 transition-colors duration-200">
                   Call us
                 </p>
+
                 <div className="flex items-center gap-2">
                   <Phone className="size-3.5 shrink-0 text-primary/50" />
+
                   <span className="text-type-prose-sm text-gray-mid transition-colors duration-200 group-hover:text-primary">
                     {ZAG_PHONE_DISPLAY}
                   </span>
@@ -202,8 +219,10 @@ export default function Footer() {
                 <p className="mb-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-gray-mid/75 group-hover:text-primary/70 transition-colors duration-200">
                   Email us
                 </p>
+
                 <div className="flex items-center gap-2">
                   <Mail className="size-3.5 shrink-0 text-primary/50" />
+
                   <span className="text-type-prose-sm text-gray-mid transition-colors duration-200 group-hover:text-primary">
                     {ZAG_EMAIL}
                   </span>
@@ -220,8 +239,10 @@ export default function Footer() {
                 <p className="mb-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-gray-mid/75 group-hover:text-primary/70 transition-colors duration-200">
                   Website
                 </p>
+
                 <div className="flex items-center gap-2">
                   <Globe className="size-3.5 shrink-0 text-primary/50" />
+
                   <span className="text-type-prose-sm text-gray-mid transition-colors duration-200 group-hover:text-primary">
                     {ZAG_WEBSITE_LABEL}
                   </span>
@@ -229,12 +250,14 @@ export default function Footer() {
               </a>
             </div>
 
-            {/* Socials */}
+            {/* ── Socials ── */}
             <div className="mt-5 space-y-3">
+              {/* Interior */}
               <div className="flex items-center justify-between gap-4 border-b border-line/10 pb-3">
                 <p className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-gray-mid/75">
                   Interior &amp; Brand
                 </p>
+
                 <div className="flex gap-1.5">
                   {[
                     {
@@ -247,7 +270,11 @@ export default function Footer() {
                       Icon: FaLinkedinIn,
                       label: "LinkedIn",
                     },
-                    { href: INTERIOR_SOCIAL.x, Icon: FaXTwitter, label: "X" },
+                    {
+                      href: INTERIOR_SOCIAL.x,
+                      Icon: FaXTwitter,
+                      label: "X",
+                    },
                   ].map(({ href, Icon, label }) => (
                     <a
                       key={label}
@@ -263,25 +290,41 @@ export default function Footer() {
                 </div>
               </div>
 
+              {/* Construction */}
               <div className="flex items-center justify-between gap-4">
                 <p className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-gray-mid/75">
                   Construction
                 </p>
-                <a
-                  href={CONSTRUCTION_INSTAGRAM}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-type-eyebrow text-gray-mid transition-colors duration-200 hover:text-primary"
-                >
-                  <FaInstagram className="size-3 text-primary/50" />
-                  @zagrwandac
-                </a>
+
+                <div className="flex gap-1.5">
+                  {/* Construction Instagram */}
+                  <a
+                    href={CONSTRUCTION_INSTAGRAM}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Construction Instagram"
+                    className="flex h-7 w-7 items-center justify-center border border-line/20 text-gray-mid/60 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
+                  >
+                    <FaInstagram className="size-3" />
+                  </a>
+
+                  {/* Pinterest */}
+                  <a
+                    href="https://pinterest.com/yourpage"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Pinterest"
+                    className="flex h-7 w-7 items-center justify-center border border-line/20 text-gray-mid/60 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
+                  >
+                    <FaPinterestP className="size-3" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* Bottom */}
         <div className="mt-12 border-t border-line/15 pt-6 flex flex-col items-center justify-between gap-2 sm:flex-row">
           <span className="text-type-eyebrow text-gray-mid/50">
             © {year} ZAG Rwanda. All rights reserved.
