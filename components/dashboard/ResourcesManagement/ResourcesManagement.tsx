@@ -510,11 +510,12 @@ export default function ResourcesManagementPage() {
     fetchResources();
   }, []);
 
-  const handleSave = async (data: Omit<Resource, "id" | "created_at">) => {
-    const url = editingResource
-      ? `/api/resources/${editingResource.id}`
+ const handleSave = async (data: Omit<Resource, "id" | "created_at">) => {
+    const id = editingResource?.id;
+    const url = id
+      ? `/api/resources/${id}`
       : "/api/resources";
-    const method = editingResource ? "PUT" : "POST";
+    const method = id ? "PUT" : "POST";
 
     const res = await fetch(url, {
       method,
@@ -554,6 +555,7 @@ export default function ResourcesManagementPage() {
   };
 
   const openEdit = (resource: Resource) => {
+     console.log("openEdit:", JSON.stringify(resource, null, 2));
     setEditingResource(resource);
     setModalOpen(true);
   };

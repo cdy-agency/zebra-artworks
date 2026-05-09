@@ -3,8 +3,8 @@ import { supabase } from "@/lib/supabase";
 
 // PUT /api/resources/[id]
 export async function PUT(
-  req: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
   const body = await req.json();
@@ -36,8 +36,8 @@ export async function PUT(
 
 // DELETE /api/resources/[id]
 export async function DELETE(
-  _req: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  _req: Request,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
   const { error } = await supabase

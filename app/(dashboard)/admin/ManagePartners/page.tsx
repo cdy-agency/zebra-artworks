@@ -1,10 +1,5 @@
-import PartnersPage from "@/components/dashboard/ManagePartners/ManagePart";
+import ManagePartnersDashboard from "@/components/dashboard/ManagePartners/ManagePartnersDashboard";
 
-
-export default  function ManagePartners(){
-    return(
-        <div>
-           <PartnersPage/>
-        </div>
-    )
+export default function ManagePartners() {
+  return <ManagePartnersDashboard />;
 }

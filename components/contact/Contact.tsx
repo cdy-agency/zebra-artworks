@@ -96,10 +96,12 @@ export default function ContactPage() {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    phone: "",
     service: "",
     subject: "",
     message: "",
   });
+
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -117,18 +119,29 @@ export default function ContactPage() {
     setLoading(true);
     setError("");
     setSuccess(false);
+
     try {
       const res = await fetch("/api/messages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
+
       const data = await res.json();
+
       if (!res.ok) {
         setError(data.error ?? "Something went wrong.");
       } else {
         setSuccess(true);
-        setForm({ name: "", email: "", service: "", subject: "", message: "" });
+
+        setForm({
+          name: "",
+          email: "",
+          phone: "",
+          service: "",
+          subject: "",
+          message: "",
+        });
       }
     } catch {
       setError("Failed to send message. Please try again.");
@@ -150,6 +163,7 @@ export default function ContactPage() {
           className="object-cover object-center"
           style={{ filter: "brightness(0.38)" }}
         />
+
         <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/30 to-transparent" />
         <div className="absolute top-0 left-0 right-0 h-0.75 bg-primary z-10" />
 
@@ -162,6 +176,7 @@ export default function ContactPage() {
           <p className="text-primary text-xs font-medium uppercase tracking-[0.2em] mb-3">
             Get in touch
           </p>
+
           <h1
             className="text-white font-bold leading-[1.05]"
             style={{ fontSize: "clamp(36px, 7vw, 72px)" }}
@@ -174,7 +189,7 @@ export default function ContactPage() {
       {/* ── Main content ── */}
       <section className="px-6 sm:px-10 lg:px-20 py-16 sm:py-24 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
-          {/* ── Form — takes 3 cols ── */}
+          {/* ── Form ── */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -188,16 +203,18 @@ export default function ContactPage() {
             <p className="text-primary text-xs font-medium uppercase tracking-[0.2em] mb-3">
               Send a message
             </p>
-            <h2 className="text-foreground text-3xl sm:text-4xl  font-bold leading-tight mb-3">
+
+            <h2 className="text-foreground text-3xl sm:text-4xl font-bold leading-tight mb-3">
               Get In Touch
             </h2>
-            <p className="text-gray-mid text-sm  font-light leading-relaxed mb-10 max-w-md">
+
+            <p className="text-gray-mid text-sm font-light leading-relaxed mb-10 max-w-md">
               Have a project in mind? Reach out and let&apos;s build something
               extraordinary together.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Name + Email */}
+              {/* Name + Email + Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <Field label="Full name" required>
                   <input
@@ -210,6 +227,7 @@ export default function ContactPage() {
                     className={inputClass}
                   />
                 </Field>
+
                 <Field label="Email address" required>
                   <input
                     type="email"
@@ -218,6 +236,18 @@ export default function ContactPage() {
                     onChange={handleChange}
                     placeholder="you@example.com"
                     required
+                    className={inputClass}
+                  />
+                </Field>
+
+                <Field label="Phone number">
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    placeholder="+250 781 234 567"
+                    pattern="^\+?[0-9\s-]{7,15}$"
                     className={inputClass}
                   />
                 </Field>
@@ -241,6 +271,7 @@ export default function ContactPage() {
                     <option value="" disabled className="text-foreground/40">
                       Select a service...
                     </option>
+
                     {services.map((s) => (
                       <option
                         key={s}
@@ -251,7 +282,7 @@ export default function ContactPage() {
                       </option>
                     ))}
                   </select>
-                  {/* Chevron */}
+
                   <svg
                     className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-foreground/30"
                     width="14"
@@ -298,11 +329,10 @@ export default function ContactPage() {
               {/* Feedback */}
               {error && (
                 <div className="border-l-[3px] border-red-500 pl-4 py-1">
-                  <p className="text-red-500 text-sm">
-                    {error}
-                  </p>
+                  <p className="text-red-500 text-sm">{error}</p>
                 </div>
               )}
+
               {success && (
                 <div className="border-l-[3px] border-primary pl-4 py-1">
                   <p className="text-primary text-sm">
@@ -317,6 +347,7 @@ export default function ContactPage() {
                 className="w-full sm:w-auto bg-primary text-white text-xs font-medium uppercase tracking-widest px-10 py-4 hover:bg-primary-dark transition-colors duration-300 disabled:opacity-50 flex items-center gap-3"
               >
                 {loading ? "Sending..." : "Send Message"}
+
                 {!loading && (
                   <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
                     <path
@@ -331,7 +362,7 @@ export default function ContactPage() {
             </form>
           </motion.div>
 
-          {/* ── Contact info — takes 2 cols ── */}
+          {/* ── Contact info ── */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -346,10 +377,10 @@ export default function ContactPage() {
               Contact details
             </p>
 
-            {/* Contact rows */}
             {contactInfo.map((item, i) => {
               const Icon = item.icon;
               const external = item.href.startsWith("http");
+
               return (
                 <motion.a
                   key={item.label}
@@ -368,10 +399,12 @@ export default function ContactPage() {
                       className="text-primary group-hover:text-white transition-colors duration-300"
                     />
                   </div>
+
                   <div>
                     <p className="text-foreground/40 text-[10px] font-medium uppercase tracking-widest mb-0.5">
                       {item.label}
                     </p>
+
                     <p className="text-foreground text-sm font-medium">
                       {item.value}
                     </p>
@@ -379,104 +412,7 @@ export default function ContactPage() {
                 </motion.a>
               );
             })}
-
-            {/* Socials */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="bg-subtle px-5 py-5 mt-0"
-            >
-              <p className="text-foreground/40 text-[10px] font-medium uppercase tracking-widest mb-4">
-                Interior &amp; brand
-              </p>
-              <div className="flex flex-col gap-3">
-                {interiorSocials.map((s) => {
-                  const Icon = s.icon;
-                  return (
-                    <a
-                      key={s.label}
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-gray-mid hover:text-primary transition-colors duration-200 group"
-                    >
-                      <Icon size={14} className="shrink-0" />
-                      <span className="text-xs font-medium uppercase tracking-widest">
-                        {s.label}
-                      </span>
-                      <span className="text-xs font-medium text-foreground/30 ml-auto">
-                        {s.handle}
-                      </span>
-                    </a>
-                  );
-                })}
-              </div>
-              <p className="text-foreground/40 text-[10px] font-medium uppercase tracking-widest mt-5 mb-2">
-                Construction
-              </p>
-              <a
-                href={CONSTRUCTION_INSTAGRAM}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-gray-mid hover:text-primary transition-colors duration-200"
-              >
-                <FaInstagram size={14} className="shrink-0" />
-                <span className="text-xs font-medium uppercase tracking-widest">
-                  Instagram
-                </span>
-                <span className="text-xs font-medium text-foreground/30 ml-auto">
-                  @zagrwandac
-                </span>
-              </a>
-            </motion.div>
-
-            {/* Hours */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.58 }}
-              className="bg-primary px-5 py-5"
-            >
-              <p className="text-white/60 text-[10px] font-medium uppercase tracking-widest mb-3">
-                Working hours
-              </p>
-              <div className="space-y-1.5">
-                {[
-                  { day: "Mon – Fri", hours: "8:00 AM – 6:00 PM" },
-                  { day: "Saturday", hours: "9:00 AM – 3:00 PM" },
-                  { day: "Sunday", hours: "Closed" },
-                ].map((h) => (
-                  <div
-                    key={h.day}
-                    className="flex justify-between items-center"
-                  >
-                    <span className="text-white/50 text-xs font-medium">
-                      {h.day}
-                    </span>
-                    <span className="text-white text-xs font-medium">
-                      {h.hours}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* ── Map ── */}
-      <section
-        id="map"
-        className="px-6 sm:px-10 lg:px-20 pb-20 max-w-7xl mx-auto"
-      >
-        <div className="relative overflow-hidden border-t-[3px] border-primary">
-          <iframe
-            src="https://maps.google.com/maps?q=Kigali%20Norrsken%20House&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            className="w-full border-0"
-            style={{ height: "420px" }}
-            loading="lazy"
-          />
         </div>
       </section>
     </main>

@@ -8,7 +8,6 @@ import { CATEGORIES, ALL_STATUSES, type Status } from "@/types/project";
 import { apiSaveProject } from "@/lib/api";
 import { PreviewThumb } from "./Previewthumb";
 
-
 function getErrorMessage(error: unknown, fallback: string) {
   return error instanceof Error ? error.message : fallback;
 }
@@ -47,8 +46,6 @@ function Field({
 const inputCls =
   "w-full border border-line/30 bg-subtle text-foreground rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/10 transition-all placeholder:text-gray-mid";
 
-// ─── Component ────────────────────────────────────────────────────────────────
-
 interface ProjectModalProps {
   project?: Project | null;
   onSave: () => void;
@@ -64,7 +61,6 @@ export function ProjectModal({ project, onSave, onClose }: ProjectModalProps) {
   const [status, setStatus] = useState<Status>(
     (project?.status as Status) ?? "Pending",
   );
-  const [date, setDate] = useState(project?.date ?? "");
   const [client, setClient] = useState(project?.client ?? "");
   const [description, setDescription] = useState(project?.description ?? "");
   const [images, setImages] = useState<string[]>(project?.images ?? []);
@@ -131,7 +127,6 @@ export function ProjectModal({ project, onSave, onClose }: ProjectModalProps) {
           description: description.trim(),
           images,
           status,
-          date: date || "",
         },
         isEdit ? project!.id : undefined,
       );
@@ -168,6 +163,7 @@ export function ProjectModal({ project, onSave, onClose }: ProjectModalProps) {
             </p>
           </div>
           <button
+            type="button"
             onClick={onClose}
             className="w-8 h-8 rounded-lg bg-subtle hover:bg-line/20 text-gray-mid hover:text-foreground flex items-center justify-center transition-colors"
           >
@@ -240,30 +236,20 @@ export function ProjectModal({ project, onSave, onClose }: ProjectModalProps) {
           <div>
             <SectionTitle>Project Details</SectionTitle>
             <div className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Field label="Status">
-                  <select
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value as Status)}
-                    className={inputCls + " cursor-pointer"}
-                  >
-                    {ALL_STATUSES.map((s) => (
-                      <option key={s} value={s}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
-                </Field>
-
-                <Field label="Date">
-                  <input
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className={inputCls}
-                  />
-                </Field>
-              </div>
+              {/* Status now stands alone — no date field beside it */}
+              <Field label="Status">
+                <select
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value as Status)}
+                  className={inputCls + " cursor-pointer"}
+                >
+                  {ALL_STATUSES.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </Field>
 
               <Field label="Client Name">
                 <input
@@ -293,7 +279,6 @@ export function ProjectModal({ project, onSave, onClose }: ProjectModalProps) {
               Photos{images.length > 0 ? ` (${images.length})` : ""}
             </SectionTitle>
 
-            {/* Drop zone */}
             <div
               onDragOver={(e) => {
                 e.preventDefault();
@@ -320,10 +305,7 @@ export function ProjectModal({ project, onSave, onClose }: ProjectModalProps) {
                 {isUploading ? (
                   <>
                     <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Upload
-                        size={18}
-                        className="text-primary animate-bounce"
-                      />
+                      <Upload size={18} className="text-primary animate-bounce" />
                     </div>
                     <p className="text-sm font-medium text-primary">
                       Uploading images…
@@ -337,9 +319,7 @@ export function ProjectModal({ project, onSave, onClose }: ProjectModalProps) {
                     <div>
                       <p className="text-sm text-foreground font-medium">
                         Drop images here or{" "}
-                        <span className="text-primary font-semibold">
-                          browse
-                        </span>
+                        <span className="text-primary font-semibold">browse</span>
                       </p>
                       <p className="text-xs text-gray-mid mt-0.5">
                         JPG, PNG, WEBP — multiple allowed
@@ -350,7 +330,6 @@ export function ProjectModal({ project, onSave, onClose }: ProjectModalProps) {
               </div>
             </div>
 
-            {/* Thumbnails grid */}
             {images.length > 0 && (
               <div className="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-2 mt-3">
                 {images.map((src, i) => (
@@ -370,12 +349,14 @@ export function ProjectModal({ project, onSave, onClose }: ProjectModalProps) {
         {/* Footer */}
         <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-2.5 px-6 py-4 border-t border-line/20 bg-subtle shrink-0">
           <button
+            type="button"
             onClick={onClose}
             className="w-full sm:w-auto px-5 py-2.5 border border-line/30 text-gray-mid hover:text-foreground hover:border-line/60 cursor-pointer rounded-lg text-sm font-medium transition-colors"
           >
             Cancel
           </button>
           <button
+            type="button"
             onClick={handleSave}
             disabled={!canSave}
             className="w-full sm:w-auto px-6 py-2.5 bg-primary text-white rounded-lg text-sm font-semibold hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-opacity cursor-pointer"

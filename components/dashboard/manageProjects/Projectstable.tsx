@@ -88,6 +88,7 @@ function ProjectRow({
           <div className="flex items-center gap-1.5 mt-2">
             {project.images.slice(0, 4).map((src, i) => (
               <button
+                type="button"
                 key={i}
                 onClick={() => onViewImages(project.images, i)}
                 className="relative w-8 h-8 rounded-md overflow-hidden border border-line/20 hover:border-primary/50 hover:scale-105 transition-all shrink-0"
@@ -103,6 +104,7 @@ function ProjectRow({
             ))}
             {project.images.length > 4 && (
               <button
+                type="button"
                 onClick={() => onViewImages(project.images, 4)}
                 className="w-8 h-8 rounded-md bg-subtle border border-line/20 text-[10px] font-bold text-gray-mid hover:border-primary/50 transition-colors flex items-center justify-center"
               >
@@ -136,6 +138,7 @@ function ProjectRow({
       {/* Actions */}
       <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
         <button
+          type="button"
           onClick={() => onEdit(project)}
           className="w-8 h-8 rounded-lg bg-subtle border border-line/20 flex items-center justify-center text-gray-mid hover:text-primary hover:border-primary/40 transition-colors"
           title="Edit"
@@ -143,6 +146,7 @@ function ProjectRow({
           <Edit size={13} />
         </button>
         <button
+          type="button"
           onClick={() => onDelete(project.id)}
           className="w-8 h-8 rounded-lg bg-subtle border border-line/20 flex items-center justify-center text-gray-mid hover:text-red-500 hover:border-red-200 hover:bg-red-50 transition-colors"
           title="Delete"
