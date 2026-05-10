@@ -43,7 +43,7 @@ export default function LoginPage() {
 
   return (
     <main className="min-h-screen bg-subtle flex items-center justify-center p-4">
-      <div className="w-full max-w-5xl bg-background rounded-3xl overflow-hidden shadow-xl flex flex-col md:flex-row min-h-[600px]">
+      <div className="w-full max-w-5xl bg-background  overflow-hidden shadow-xl flex flex-col md:flex-row min-h-[600px]">
 
         {/* LEFT — image panel */}
         <div className="relative w-full md:w-1/2 min-h-[300px] md:min-h-0 flex-shrink-0">
