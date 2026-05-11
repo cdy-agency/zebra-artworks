@@ -132,47 +132,39 @@ export default function InteriorDesignPage() {
 
   return (
     <main className="min-h-screen bg-background">
-      <section className="relative w-full py-40 -mt-28 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/interior2.jpg')" }}
+      <section className="relative flex min-h-95 flex-col justify-end overflow-hidden sm:min-h-110">
+        <Image
+          src="/interior2.jpg"
+          alt="Interior design hero background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+          style={{ filter: "brightness(0.35)" }}
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/10" />
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-          className="relative z-10 max-w-6xl mx-auto px-6 pt-28 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6"
+          className="relative z-10 mx-auto w-full max-w-6xl px-5 pt-28 pb-12 sm:px-8"
         >
-          <div>
-            <p className="text-primary text-type-eyebrow font-medium uppercase tracking-[0.2em] mb-4">
-              Portfolio
-            </p>
-            <h1 className="text-white text-type-hero font-heading font-bold leading-[1.05]">
-              Interior Design
-            </h1>
-          </div>
+          <p className="landing-eyebrow mb-4">Portfolio</p>
+          <h1 className="mb-4 text-type-hero-mega font-bold leading-[1.05] text-white">
+            Interior Design
+          </h1>
+          <p className="max-w-sm text-type-prose-sm leading-relaxed text-white/50">
+            Refined spaces shaped through detail, comfort, and contemporary design.
+          </p>
         </motion.div>
-
-        <div
-          className="absolute bottom-4 right-8 font-bold leading-none select-none pointer-events-none"
-          style={{
-            fontSize: "clamp(80px, 14vw, 160px)",
-            color: "rgba(255,255,255,0.04)",
-          }}
-        >
-          {loading ? "" : projects.length}
-        </div>
       </section>
 
-      <section className="px-6 pt-12">
-        <div className="max-w-6xl mx-auto">
+      <section className="landing-section bg-background">
+        <div className="landing-container">
           <div>
-            <h3 className="font-bold text-[#1a1a1a]">
-              Interior Design Department
-            </h3>
-            <div className="h-0.5 w-56 bg-accent mt-1 mb-6 rounded-full" />
+            <h2 className="landing-title">Interior Design Department</h2>
+            <div className="landing-rule mb-6" />
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {interiorServices.map((s) => (
@@ -182,12 +174,10 @@ export default function InteriorDesignPage() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 pt-10 pb-32">
+      <section className="landing-container px-6 pt-10 pb-32 sm:px-10 lg:px-0">
         <div>
-          <h3 className="font-bold text-[#1a1a1a]">
-            Interior Design Portfolio
-          </h3>
-          <div className="h-0.5 w-56 bg-accent mt-1 mb-6 rounded-full" />
+          <h2 className="landing-title">Interior Design Portfolio</h2>
+          <div className="landing-rule mb-6" />
         </div>
         <div
           className="columns-2 md:columns-3 gap-2"

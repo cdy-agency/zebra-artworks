@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ServiceCardProps {
-  icon: React.ReactNode;
   title: string;
   desc: string;
   href?: string;
 }
 
-export function ServiceCard({ icon, title, desc, href = "/" }: ServiceCardProps) {
+export function ServiceCard({ title, desc, href = "/" }: ServiceCardProps) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -39,14 +39,14 @@ export function ServiceCard({ icon, title, desc, href = "/" }: ServiceCardProps)
       />
 
       {/* Icon */}
-      <div
-        className="w-11 h-11 flex items-center justify-center mb-6 transition-colors duration-300"
-        style={{
-          background: hovered ? "#005f75" : "var(--color-subtle)",
-          color: hovered ? "#fff" : "#005f75",
-        }}
-      >
-        {icon}
+      <div className="w-10 h-10 rounded-xl bg-[#f6f7f9] flex items-center justify-center overflow-hidden transition-all duration-300">
+        <Image
+          src="/bg-logo-zaga.png"
+          alt="ZAG Rwanda"
+          width={28}
+          height={28}
+          className="object-contain  transition-all duration-300"
+        />
       </div>
 
       {/* Title */}

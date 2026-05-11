@@ -46,7 +46,7 @@ function FeatureRow({
         delay: index * 0.1,
         ease: [0.25, 0.1, 0.25, 1],
       }}
-      className="relative flex gap-4 py-5 border-b border-foreground/6 first:border-t first:border-foreground/6 cursor-default transition-all duration-300"
+      className="relative flex cursor-default gap-4 border-b border-foreground/6 py-5 transition-all duration-300 first:border-t first:border-foreground/6"
       style={{ paddingLeft: hovered ? "10px" : "0" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -59,7 +59,7 @@ function FeatureRow({
 
       {/* Number */}
       <span
-        className="text-xs font-bold shrink-0 pt-0.5 w-6 transition-colors duration-300"
+        className="w-6 shrink-0 pt-0.5 text-type-eyebrow font-bold transition-colors duration-300"
         style={{ color: hovered ? "#005f75" : "rgba(0,95,117,0.4)" }}
       >
         {feature.num}
@@ -68,12 +68,12 @@ function FeatureRow({
       {/* Content */}
       <div className="flex-1">
         <h4
-          className="text-sm font-bold mb-1.5 transition-colors duration-300"
+          className="mb-1.5 text-type-h5 font-bold transition-colors duration-300"
           style={{ color: hovered ? "#005f75" : "var(--color-foreground)" }}
         >
           {feature.title}
         </h4>
-        <p className="text-gray-mid text-sm font-light leading-relaxed">
+        <p className="text-type-prose-sm leading-relaxed text-gray-mid">
           {feature.desc}
         </p>
       </div>
@@ -83,9 +83,9 @@ function FeatureRow({
 
 export default function WhyChooseUs() {
   return (
-    <section className="bg-background relative py-5 sm:py-10 px-6 sm:px-10 lg:px-20 overflow-hidden">
+    <section className="landing-section relative overflow-hidden bg-background">
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+      <div className="landing-container grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
         {/* Left — text + features */}
         <div>
           <motion.div
@@ -94,18 +94,18 @@ export default function WhyChooseUs() {
             viewport={{ once: true }}
             transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <p className="text-primary text-xs font-medium uppercase tracking-[0.2em] mb-4">
+            <p className="landing-eyebrow mb-4">
               Why work with us
             </p>
             <h2
-              className="font-bold text-foreground leading-[1.1] mb-5"
+              className="mb-5 text-foreground"
               style={{ fontSize: "clamp(28px, 4vw, 44px)" }}
             >
               Why Choose
               <br />
               <span className="text-primary">ZAG</span> Construction?
             </h2>
-            <p className="text-gray-mid text-sm font-light leading-relaxed mb-10 max-w-sm">
+            <p className="mb-10 max-w-sm text-type-prose-sm leading-relaxed text-gray-mid">
               Built on precision, trust, and a passion for exceptional spaces —
               every project reflects our core values.
             </p>
@@ -156,7 +156,7 @@ export default function WhyChooseUs() {
             >
               40+
             </p>
-            <p className="text-white/60 text-[10px] font-medium uppercase tracking-widest">
+            <p className="text-type-eyebrow font-medium uppercase tracking-widest text-white/60">
               Projects completed
             </p>
           </div>
@@ -169,7 +169,7 @@ export default function WhyChooseUs() {
             >
               5+
             </p>
-            <p className="text-white/40 text-[10px] font-medium uppercase tracking-widest">
+            <p className="text-type-eyebrow font-medium uppercase tracking-widest text-white/40">
               Years experience
             </p>
           </div>

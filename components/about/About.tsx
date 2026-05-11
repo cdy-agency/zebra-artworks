@@ -13,6 +13,8 @@ import {
   Lightbulb,
   Phone,
 } from "lucide-react";
+import WhyChooseUs from "../services/Whychooseus";
+import { motion } from "framer-motion";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -20,8 +22,8 @@ interface Resource {
   id: string;
   title?: string;
   description?: string;
-  file_url: string;
   file_name: string;
+  file_url: string;
   file_size?: string;
 }
 
@@ -66,6 +68,14 @@ function getFileIcon(fileName: string) {
   return BookOpen;
 }
 
+// ─── Shared layout tokens ─────────────────────────────────────────────────────
+// Use these class strings everywhere so a single edit fixes the whole page.
+// container  → max-w + horizontal px
+// section-py → consistent vertical rhythm for all sections
+
+const container = "mx-auto w-full max-w-7xl px-6 sm:px-10";
+const sectionPy = "py-20 sm:py-24";
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function AboutPage() {
@@ -82,56 +92,49 @@ export default function AboutPage() {
 
   return (
     <main className="bg-subtle">
-      <section className="relative text-center py-44 -mt-28 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/construction1.jpg"
-            alt="Zebra Artworks Group"
-            fill
-            className="object-cover object-center"
-            priority
-          />
-          <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/55 to-black/80" />
-        </div>
-
-        {/* Grid texture */}
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage: `repeating-linear-gradient(0deg, #fff 0px, #fff 1px, transparent 1px, transparent 60px),
-                              repeating-linear-gradient(90deg, #fff 0px, #fff 1px, transparent 1px, transparent 60px)`,
-          }}
+      {/* ── Hero ──────────────────────────────────────────────────────────── */}
+      <section className="relative flex min-h-95 flex-col justify-end overflow-hidden sm:min-h-110">
+        <Image
+          src="/construction1.jpg"
+          alt="Construction hero background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+          style={{ filter: "brightness(0.35)" }}
         />
+        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/10" />
 
-        <div className="relative z-10 pt-24 px-6 max-w-4xl mx-auto">
-          <p className="text-primary text-[11px] font-bold uppercase tracking-[0.25em] mb-5">
-            Est. 2019 · Kigali, Rwanda
-          </p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
-            Building Rwanda&apos;s Future,{" "}
-            <span className="text-primary">One Space at a Time</span>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+          className={`relative z-10 ${container} pt-28 pb-12`}
+        >
+          <p className="landing-eyebrow mb-4">Our work</p>
+          <h1 className="mb-4 text-type-hero-mega font-bold leading-[1.05] text-white">
+            Architecture Construction
           </h1>
-          <p className="text-white/55 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-            Founded by Eng. Jean Victor ISHIMWE, Zebra Artworks Group set out in
-            2019 to redefine construction and interior design in Rwanda —
-            blending global standards with deeply local identity.
+          <p className="max-w-sm text-type-prose-sm leading-relaxed text-white/50">
+            Projects delivered with technical discipline, strong materials, and
+            clear execution.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* ── Stats strip ───────────────────────────────────────────────────── */}
       <section className="bg-background border-y border-line/20">
-        <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
+        <div className={container}>
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-line/20">
             {stats.map((stat) => (
               <div
                 key={stat.label}
                 className="flex flex-col items-center justify-center py-8 px-4 text-center"
               >
-                <span className="text-3xl sm:text-4xl font-black text-primary leading-none mb-1.5">
+                <span className="mb-1.5 text-type-h2 font-black leading-none text-primary">
                   {stat.value}
                 </span>
-                <span className="text-xs text-gray-mid font-medium uppercase tracking-wide">
+                <span className="text-type-eyebrow font-medium uppercase tracking-wide text-gray-mid">
                   {stat.label}
                 </span>
               </div>
@@ -140,8 +143,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 sm:py-24">
-        <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
+      {/* ── Our Story ─────────────────────────────────────────────────────── */}
+      <section className={sectionPy}>
+        <div className={container}>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Image */}
             <div className="relative">
@@ -157,7 +161,7 @@ export default function AboutPage() {
               {/* Floating accent card */}
               <div className="absolute -bottom-5 -right-5 bg-primary text-white px-6 py-4 shadow-xl">
                 <p className="text-2xl font-black leading-none">5+</p>
-                <p className="text-[11px] font-medium text-white/70 mt-1 uppercase tracking-wide">
+                <p className="mt-1 text-type-eyebrow font-medium uppercase tracking-wide text-white/70">
                   Years registered
                 </p>
               </div>
@@ -165,13 +169,9 @@ export default function AboutPage() {
 
             {/* Text */}
             <div>
-              <p className="text-primary text-[11px] font-bold uppercase tracking-[0.2em] mb-3">
-                Our story
-              </p>
-              <h2 className="text-3xl sm:text-4xl font-black text-foreground leading-tight mb-6">
-                Who We Are
-              </h2>
-              <div className="space-y-4 text-sm text-gray-mid leading-relaxed">
+              <p className="landing-eyebrow">Our story</p>
+              <h2 className="mb-6 text-foreground">Who We Are</h2>
+              <div className="space-y-4 text-type-prose-sm leading-relaxed text-gray-mid">
                 <p>
                   ZEBRA ARTWORKS GROUP embarked on its journey in{" "}
                   <strong className="text-foreground">May 2019</strong>, and by
@@ -201,7 +201,7 @@ export default function AboutPage() {
 
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 mt-8 bg-primary text-white text-sm font-bold px-7 py-3 rounded-full hover:opacity-90 transition-opacity"
+                className="mt-8 inline-flex items-center gap-2 bg-primary px-7 py-3 text-type-ui font-bold text-white transition-opacity hover:opacity-90"
               >
                 Work with us <ArrowRight size={14} />
               </Link>
@@ -210,19 +210,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-primary py-16 sm:py-20">
-        <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
+      {/* ── Why Choose Us ─────────────────────────────────────────────────── */}
+      <WhyChooseUs />
+
+      {/* ── Mission ───────────────────────────────────────────────────────── */}
+      <section className={`bg-primary ${sectionPy}`}>
+        <div className={container}>
           <div className="grid lg:grid-cols-[1fr_2fr] gap-10 lg:gap-20 items-start">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] mb-3 text-white/50">
+              <p className="mb-3 text-type-eyebrow font-bold uppercase tracking-[0.2em] text-white/50">
                 Our purpose
               </p>
-              <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">
-                Our Mission
-              </h2>
+              <h2 className="text-white">Our Mission</h2>
               <div className="mt-6 w-12 h-1 bg-white/30 rounded-full" />
             </div>
-            <p className="text-white/75 text-sm sm:text-base leading-relaxed">
+            <p className="text-type-prose-sm leading-relaxed text-white/75 sm:text-type-prose">
               At Zebra Artworks Group, we are dedicated to reshaping the
               architectural, construction, and interior design landscape through
               our unwavering commitment to sustainability, precision timing, and
@@ -242,7 +244,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative py-20 sm:py-24 overflow-hidden">
+      {/* ── Vision ────────────────────────────────────────────────────────── */}
+      <section className={`relative ${sectionPy} overflow-hidden`}>
         <div className="absolute inset-0">
           <Image
             src="/interior1.jpg"
@@ -252,15 +255,11 @@ export default function AboutPage() {
           />
           <div className="absolute inset-0 bg-linear-to-r from-black/85 via-black/70 to-black/40" />
         </div>
-        <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
+        <div className={`relative z-10 ${container}`}>
           <div className="max-w-2xl">
-            <p className="text-primary text-[11px] font-bold uppercase tracking-[0.2em] mb-3">
-              Looking ahead
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight mb-6">
-              Our Vision
-            </h2>
-            <p className="text-white/65 text-sm sm:text-base leading-relaxed">
+            <p className="landing-eyebrow">Looking ahead</p>
+            <h2 className="mb-6 text-white">Our Vision</h2>
+            <p className="text-type-prose-sm leading-relaxed text-white/80 sm:text-type-prose">
               Our vision is to be recognised globally — and specifically across
               Africa — as a trailblazer in sustainable architectural and
               interior design, synonymous with uncompromising quality,
@@ -280,16 +279,12 @@ export default function AboutPage() {
       </section>
 
       {/* ── Core Values ───────────────────────────────────────────────────── */}
-      <section className="py-20 sm:py-24 bg-background">
-        <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
+      <section className={`${sectionPy} bg-background`}>
+        <div className={container}>
           <div className="text-center mb-14">
-            <p className="text-primary text-[11px] font-bold uppercase tracking-[0.2em] mb-3">
-              What guides us
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-black text-foreground leading-tight">
-              Our Core Values
-            </h2>
-            <p className="text-gray-mid text-sm mt-3 max-w-md mx-auto">
+            <p className="landing-eyebrow">What guides us</p>
+            <h2 className="text-foreground">Our Core Values</h2>
+            <p className="mt-3 mx-auto max-w-md text-type-prose-sm text-gray-mid">
               The principles that guide everything we do
             </p>
           </div>
@@ -319,10 +314,16 @@ export default function AboutPage() {
                       borderColor: `${value.accent}30`,
                     }}
                   >
-                    <Icon size={20} style={{ color: value.accent }} strokeWidth={1.75} />
+                    <Icon
+                      size={20}
+                      style={{ color: value.accent }}
+                      strokeWidth={1.75}
+                    />
                   </div>
-                  <h3 className="text-lg font-black text-foreground mb-3">{value.title}</h3>
-                  <p className="text-sm text-gray-mid leading-relaxed">{value.desc}</p>
+                  <h3 className="mb-3 text-foreground">{value.title}</h3>
+                  <p className="text-type-prose-sm leading-relaxed text-gray-mid">
+                    {value.desc}
+                  </p>
                 </div>
               );
             })}
@@ -330,29 +331,28 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Company Resources (fetched from API) ──────────────────────────── */}
+      {/* ── Company Resources ─────────────────────────────────────────────── */}
       {(loadingResources || resources.length > 0) && (
-        <section className="py-20 sm:py-24 bg-subtle border-t border-line/20">
-          <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
+        <section className={`${sectionPy} bg-subtle border-t border-line/20`}>
+          <div className={container}>
             <div className="grid lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-20 items-start">
               {/* Left copy */}
               <div>
-                <p className="text-primary text-[11px] font-bold uppercase tracking-[0.2em] mb-3">
-                  Resources
-                </p>
-                <h2 className="text-3xl sm:text-4xl font-black text-foreground leading-tight mb-4">
-                  Company Resources
-                </h2>
-                <p className="text-sm text-gray-mid leading-relaxed">
-                  Download our company profile and project portfolio to learn more
-                  about our work, our team, and the quality we bring to every
-                  engagement.
+                <p className="landing-eyebrow">Resources</p>
+                <h2 className="mb-4 text-foreground">Company Resources</h2>
+                <p className="text-type-prose-sm leading-relaxed text-gray-mid">
+                  Download our company profile and project portfolio to learn
+                  more about our work, our team, and the quality we bring to
+                  every engagement.
                 </p>
                 <div className="mt-8 flex items-center gap-3">
                   <Phone size={14} className="text-primary shrink-0" />
-                  <span className="text-sm text-gray-mid">
+                  <span className="text-type-prose-sm text-gray-mid">
                     Questions?{" "}
-                    <a href="/contact" className="text-primary font-semibold hover:underline">
+                    <a
+                      href="/contact"
+                      className="text-primary font-semibold hover:underline"
+                    >
                       Contact our team
                     </a>
                   </span>
@@ -362,7 +362,6 @@ export default function AboutPage() {
               {/* Download cards */}
               <div className="space-y-4">
                 {loadingResources ? (
-                  /* Skeletons */
                   <>
                     {[1, 2].map((i) => (
                       <div
@@ -381,7 +380,9 @@ export default function AboutPage() {
                 ) : (
                   resources.map((res) => {
                     const Icon = getFileIcon(res.file_name);
-                    const label = res.title ? `Download ${res.title}` : "Download File";
+                    const label = res.title
+                      ? `Download ${res.title}`
+                      : "Download File";
                     return (
                       <a
                         key={res.id}
@@ -391,20 +392,22 @@ export default function AboutPage() {
                         rel="noopener noreferrer"
                         className="group flex items-start gap-5 bg-background border border-line/20 p-6 hover:border-primary/40 hover:shadow-md transition-all duration-300"
                       >
-                        {/* Icon tile */}
                         <div className="w-12 h-12 bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary/15 transition-colors">
-                          <Icon size={20} className="text-primary" strokeWidth={1.75} />
+                          <Icon
+                            size={20}
+                            className="text-primary"
+                            strokeWidth={1.75}
+                          />
                         </div>
 
-                        {/* Text */}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start justify-between gap-3">
                             <div>
-                              <p className="text-sm font-bold text-foreground mb-1">
+                              <p className="mb-1 text-type-prose-sm font-bold text-foreground">
                                 {res.title || res.file_name}
                               </p>
                               {res.description && (
-                                <p className="text-xs text-gray-mid leading-relaxed">
+                                <p className="text-type-eyebrow leading-relaxed text-gray-mid">
                                   {res.description}
                                 </p>
                               )}
@@ -417,12 +420,12 @@ export default function AboutPage() {
                             </div>
                           </div>
                           <div className="flex items-center gap-2 mt-3">
-                            <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-primary bg-primary/8 border border-primary/20 px-2.5 py-1 rounded-full">
+                            <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/8 px-2.5 py-1 text-type-eyebrow font-semibold text-primary">
                               <Download size={9} />
                               {label}
                             </span>
                             {res.file_size && (
-                              <span className="text-[10px] text-gray-mid">
+                              <span className="text-type-eyebrow text-gray-mid">
                                 {res.file_size}
                               </span>
                             )}

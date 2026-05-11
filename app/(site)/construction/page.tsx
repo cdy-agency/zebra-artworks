@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import type { Project } from "@/lib/supabase";
 import { ServiceCard } from "@/components/services/ServiceCard";
 import { constructionServices } from "@/components/services/Services";
-import WhyChooseUs from "@/components/services/Whychooseus";
 import ReadySection from "@/components/ReadToConnect";
 import TestimonialsSection from "@/components/services/Testimonialssection";
 import DepartmentContactStrip from "@/components/DepartmentContactStrip";
@@ -157,38 +156,32 @@ export default function ConstructionPage() {
 
   return (
     <main className="min-h-screen bg-background">
-      <section className="relative w-full py-40 -mt-28 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/construction1.jpg')" }}
+      <section className="relative flex min-h-95 flex-col justify-end overflow-hidden sm:min-h-110">
+        <Image
+          src="/construction1.jpg"
+          alt="Construction hero background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+          style={{ filter: "brightness(0.35)" }}
         />
-        <div className="absolute inset-0 bg-black/65" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/10" />
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-          className="relative z-10 max-w-6xl mx-auto px-6 pt-28 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6"
+          className="relative z-10 mx-auto w-full max-w-6xl pt-28 pb-12"
         >
-          <div>
-            <p className="text-primary text-type-eyebrow font-medium uppercase tracking-[0.2em] mb-4">
-              Our work
-            </p>
-            <h1 className="text-white text-type-hero font-heading font-bold leading-[1.05]">
-              Architecture Construction
-            </h1>
-          </div>
+          <p className="landing-eyebrow mb-4">Our work</p>
+          <h1 className="mb-4 text-type-hero-mega font-bold leading-[1.05] text-white">
+            Architecture Construction
+          </h1>
+          <p className="max-w-7xl text-type-prose-sm leading-relaxed text-white/50">
+            Projects delivered with technical discipline, strong materials, and clear execution.
+          </p>
         </motion.div>
-
-        <div
-          className="absolute bottom-2 right-8 font-bold leading-none select-none pointer-events-none"
-          style={{
-            fontSize: "clamp(80px, 14vw, 160px)",
-            color: "rgba(255,255,255,0.03)",
-          }}
-        >
-          {loading ? "" : projects.length}
-        </div>
       </section>
 
       <motion.div
@@ -200,7 +193,7 @@ export default function ConstructionPage() {
         {stats.map((stat, i) => (
           <div
             key={i}
-            className="text-center py-4 px-3 border-r border-white/15 last:border-r-0"
+            className="text-center py-4 border-r border-white/15 last:border-r-0"
           >
             <p className="text-white font-heading text-type-h3 font-bold leading-none mb-1">
               {loading ? "--" : stat.num}
@@ -212,13 +205,11 @@ export default function ConstructionPage() {
         ))}
       </motion.div>
 
-      <section className="px-6 pt-12">
-        <div className="max-w-6xl mx-auto">
+      <section className="landing-section bg-background">
+        <div className="landing-container">
           <div>
-            <h3 className="font-bold text-[#1a1a1a]">
-              Architecture & Construction
-            </h3>
-            <div className="h-0.5 w-56 bg-accent mt-1 mb-6 rounded-full" />
+            <h2 className="landing-title">Architecture &amp; Construction</h2>
+            <div className="landing-rule mb-6" />
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {constructionServices.map((s) => (
@@ -228,12 +219,10 @@ export default function ConstructionPage() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 pt-10 pb-32">
+      <section className="landing-container px-6 pt-10 pb-32 sm:px-10 lg:px-0">
         <div>
-          <h3 className="font-bold text-[#1a1a1a]">
-            Construction Portfolio
-          </h3>
-          <div className="h-0.5 w-56 bg-accent mt-1 mb-6 rounded-full" />
+          <h2 className="landing-title">Construction Portfolio</h2>
+          <div className="landing-rule mb-6" />
         </div>
         <div className="columns-2 md:columns-3" style={{ columnGap: "8px" }}>
           {projects.map((project, index) => (
@@ -243,7 +232,6 @@ export default function ConstructionPage() {
       </section>
 
       <DepartmentContactStrip department="construction" />
-      <WhyChooseUs />
       <TestimonialsSection category="Architecture & Construction" />
       <ReadySection />
     </main>
