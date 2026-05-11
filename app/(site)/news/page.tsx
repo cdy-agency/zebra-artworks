@@ -89,14 +89,14 @@ function NewsCard({
                 "linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%)",
             }}
           >
-            <p className="mb-3 text-[10px] font-medium uppercase tracking-widest text-primary">
+            <p className="mb-3 text-type-eyebrow font-medium uppercase tracking-widest text-primary">
               {item.tag}
             </p>
-            <h2 className="mb-2 max-w-2xl text-2xl leading-snug text-white sm:text-3xl lg:text-4xl">
+            <h2 className="mb-2 max-w-2xl text-type-h2 leading-snug text-white">
               {item.title}
             </h2>
             <p
-              className="max-w-xl overflow-hidden text-sm font-light leading-relaxed text-white/50 transition-all duration-400"
+              className="max-w-xl overflow-hidden text-type-prose-sm leading-relaxed text-white/50 transition-all duration-400"
               style={{
                 maxHeight: hovered ? "60px" : "0",
                 opacity: hovered ? 1 : 0,
@@ -104,7 +104,7 @@ function NewsCard({
             >
               {item.excerpt}
             </p>
-            <p className="mt-3 text-[10px] font-medium uppercase tracking-widest text-white/35">
+            <p className="mt-3 text-type-eyebrow font-medium uppercase tracking-widest text-white/35">
               {formatDate(item.date)}
             </p>
           </div>
@@ -154,20 +154,20 @@ function NewsCard({
 
         <div className="border-b border-foreground/8 px-0 py-4 transition-colors duration-300">
           <div className="mb-2 flex items-center justify-between gap-4">
-            <p className="text-[9px] font-medium uppercase tracking-widest text-primary">
+            <p className="text-type-eyebrow font-medium uppercase tracking-widest text-primary">
               {item.tag}
             </p>
-            <p className="text-[9px] font-medium uppercase tracking-widest text-gray-mid">
+            <p className="text-type-eyebrow font-medium uppercase tracking-widest text-gray-mid">
               {formatDate(item.date)}
             </p>
           </div>
           <h3
-            className="mb-2 text-base leading-snug text-foreground transition-colors duration-300"
+            className="mb-2 text-type-h5 leading-snug text-foreground transition-colors duration-300"
             style={{ color: hovered ? "#005f75" : "" }}
           >
             {item.title}
           </h3>
-          <p className="line-clamp-2 text-sm font-light leading-relaxed text-gray-mid">
+          <p className="line-clamp-2 text-type-prose-sm leading-relaxed text-gray-mid">
             {item.excerpt}
           </p>
         </div>
@@ -252,39 +252,34 @@ export default function NewsPage() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-          className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-28 pb-12 sm:px-10 lg:px-20"
+          className="relative z-10 mx-auto w-full max-w-6xl pt-10 pb-12"
         >
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.22em] text-primary">
-            Press &amp; Media
-          </p>
+          <p className="landing-eyebrow mb-4">Press &amp; Media</p>
           <h1
-            className="mb-4 font-bold leading-[1.05] text-white"
-            style={{ fontSize: "clamp(38px, 7vw, 80px)" }}
+            className="mb-4 text-type-hero-mega font-bold leading-[1.05] text-white"
           >
             News &amp; Updates
           </h1>
-          <p className="max-w-sm text-sm font-light leading-relaxed text-white/50">
+          <p className="max-w-sm text-type-prose-sm leading-relaxed text-white/50">
             Stories, updates, and insights from the team at ZAG Rwanda.
           </p>
         </motion.div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-12 sm:px-10 sm:py-20 lg:px-20">
+      <section className="mx-auto max-w-6xl py-12 sm:py-20">
         {error ? (
-          <div className="rounded-2xl border border-red-200 bg-red-50 px-6 py-5 text-sm text-red-700">
+          <div className="rounded-2xl border border-red-200 bg-red-50 px-6 py-5 text-type-prose-sm text-red-700">
             {error}
           </div>
         ) : null}
 
         {showEmpty ? (
           <div className="rounded-2xl border border-line/20 bg-subtle px-6 py-16 text-center">
-            <p className="text-xs font-medium uppercase tracking-[0.22em] text-primary">
-              No Articles Yet
-            </p>
-            <h2 className="mt-3 text-2xl font-bold text-foreground">
+            <p className="landing-eyebrow mb-0">No Articles Yet</p>
+            <h2 className="mt-3 text-foreground">
               News will appear here once it is published.
             </h2>
-            <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-gray-mid">
+            <p className="mx-auto mt-3 max-w-xl text-type-prose-sm leading-relaxed text-gray-mid">
               The newsroom is empty right now. Publish articles from the admin
               dashboard to populate this page.
             </p>
