@@ -7,21 +7,21 @@ import { useCallback, useEffect, useState } from "react";
 
 const slides = [
   {
-    image: "/interior1.jpg",
+    image: "/4.jpg",
     tag: "Interior Design",
-    title: "Turning Houses into Homes,",
+    title: "Turning Houses into Homes",
     subtitle: "One Design at a Time",
     desc: "With every project we undertake, we are committed to turning houses into homes, one design at a time.",
   },
   {
-    image: "/interior2.jpg",
+    image: "/3.jpg",
     tag: "Living Spaces",
     title: "Modern Interior Spaces,",
     subtitle: "Designed for Living",
     desc: "We create beautiful and functional spaces tailored for comfort and everyday living.",
   },
   {
-    image: "/interior3.jpg",
+    image: "/2.png",
     tag: "Architecture",
     title: "Architecture That Inspires,",
     subtitle: "Built to Last",

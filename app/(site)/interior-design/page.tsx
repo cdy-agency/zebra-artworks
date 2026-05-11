@@ -134,7 +134,7 @@ export default function InteriorDesignPage() {
     <main className="min-h-screen bg-background">
       <section className="relative flex min-h-95 flex-col justify-end overflow-hidden sm:min-h-110">
         <Image
-          src="/interior2.jpg"
+          src="/hero-interior.JPG"
           alt="Interior design hero background"
           fill
           priority

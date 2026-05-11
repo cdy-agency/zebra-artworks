@@ -41,7 +41,7 @@ export default function ReadySection() {
           }}
           className="mb-5 font-heading text-type-hero text-white"
         >
-          Your Next Project Starts Here
+          LET’S TALK BUSINESS HERE.
         </motion.h2>
 
         <motion.p
@@ -55,10 +55,8 @@ export default function ReadySection() {
           }}
           className="mb-10 text-type-prose text-white/65 sm:text-type-prose-lg"
         >
-          Whether you are planning a commercial, hospitality, office, or
-          residential project, our team is ready to deliver innovative design
-          solutions, quality workmanship, and outstanding results that elevate
-          your space and your brand.
+          We create innovative designs and quality results that elevate your
+          space and identity.
         </motion.p>
 
         <motion.div
@@ -82,7 +80,7 @@ export default function ReadySection() {
               transition-colors duration-300 hover:bg-primary-dark
             "
           >
-            Let’s Discuss Your Project 
+            Discuss with us
             <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
               <path
                 d="M1 7h12M8 3l5 4-5 4"

@@ -151,7 +151,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="relative h-105 sm:h-125 overflow-hidden">
                 <Image
-                  src="/interior1.jpg"
+                  src="/who-we-are.JPG"
                   alt="Our story"
                   fill
                   className="object-cover"
@@ -248,7 +248,7 @@ export default function AboutPage() {
       <section className={`relative ${sectionPy} overflow-hidden`}>
         <div className="absolute inset-0">
           <Image
-            src="/interior1.jpg"
+            src="/IMG_0948.JPG"
             alt="Our vision"
             fill
             className="object-cover object-center"
