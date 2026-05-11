@@ -98,22 +98,6 @@ export default function DepartmentContactStrip({
                 <p>{ZAG_ADDRESS}</p>
               </div>
             </div>
-            <a
-              href={ZAG_WEBSITE}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-start gap-3 group"
-            >
-              <Globe className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              <div>
-                <p className="text-type-eyebrow uppercase tracking-widest text-foreground/40 mb-0.5">
-                  Website
-                </p>
-                <p className="font-medium text-foreground group-hover:text-primary transition-colors underline-offset-2 group-hover:underline">
-                  {ZAG_WEBSITE_LABEL}
-                </p>
-              </div>
-            </a>
           </div>
 
           <div>
@@ -136,7 +120,7 @@ export default function DepartmentContactStrip({
                   href={CONSTRUCTION_INSTAGRAM}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 rounded-xl border-2 border-primary/30 bg-primary/5 px-5 py-4 text-foreground hover:bg-primary/10 hover:border-primary/50 transition-colors"
+                  className="inline-flex items-center gap-3 bg-primary/5 px-5 py-4 text-foreground hover:bg-primary/10 hover:border-primary/50 transition-colors"
                 >
                   <Construction className="w-6 h-6 text-primary shrink-0" />
                   <div className="text-left">

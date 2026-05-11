@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Globe } from "lucide-react";
-import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { Phone, Mail, MapPin } from "lucide-react";
+import { FaInstagram, FaLinkedinIn, FaPinterestP } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import Image from "next/image";
 import {
@@ -11,8 +11,6 @@ import {
   ZAG_EMAIL,
   ZAG_PHONE_DISPLAY,
   ZAG_PHONE_TEL,
-  ZAG_WEBSITE,
-  ZAG_WEBSITE_LABEL,
   INTERIOR_SOCIAL,
   CONSTRUCTION_INSTAGRAM,
 } from "@/lib/zagContact";
@@ -40,12 +38,6 @@ const contactInfo = [
     label: "Our location",
     value: ZAG_ADDRESS,
     href: "#map",
-  },
-  {
-    icon: Globe,
-    label: "Website",
-    value: ZAG_WEBSITE_LABEL,
-    href: ZAG_WEBSITE,
   },
 ];
 
@@ -155,7 +147,7 @@ export default function ContactPage() {
       {/* ── Hero ── */}
       <section className="relative w-full h-[42vh] sm:h-[50vh] overflow-hidden flex items-end">
         <Image
-          src="/interior4.jpg"
+          src="/contact.jpg"
           alt="Contact ZAG Rwanda"
           fill
           priority
@@ -412,6 +404,68 @@ export default function ContactPage() {
                 </motion.a>
               );
             })}
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.49 }}
+              className="px-5 py-5 bg-subtle border-l-[3px] border-transparent hover:border-primary hover:bg-background transition-all duration-300"
+            >
+              <p className="text-foreground/40 text-[10px] font-medium uppercase tracking-widest mb-3">
+                Social media
+              </p>
+
+              <div className="space-y-4">
+                <div className="flex items-center justify-between gap-4 border-b border-foreground/10 pb-4">
+                  <p className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-foreground/60">
+                    Interior &amp; Brand
+                  </p>
+
+                  <div className="flex gap-1.5">
+                    {interiorSocials.map(({ href, icon: Icon, label }) => (
+                      <a
+                        key={label}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={label}
+                        className="flex h-8 w-8 items-center justify-center border border-foreground/10 text-foreground/60 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
+                      >
+                        <Icon className="size-3.5" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between gap-4">
+                  <p className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-foreground/60">
+                    Construction
+                  </p>
+
+                  <div className="flex gap-1.5">
+                    <a
+                      href={CONSTRUCTION_INSTAGRAM}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Construction Instagram"
+                      className="flex h-8 w-8 items-center justify-center border border-foreground/10 text-foreground/60 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
+                    >
+                      <FaInstagram className="size-3.5" />
+                    </a>
+
+                    <a
+                      href="https://pinterest.com/yourpage"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Pinterest"
+                      className="flex h-8 w-8 items-center justify-center border border-foreground/10 text-foreground/60 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
+                    >
+                      <FaPinterestP className="size-3.5" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>

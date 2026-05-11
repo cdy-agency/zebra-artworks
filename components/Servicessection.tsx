@@ -10,7 +10,7 @@ const services: Service[] = [
       "Transform your spaces with our innovative interior design solutions. From concept to completion, we create environments that inspire and function beautifully.",
     href: "/interior-design",
     image:
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=80&auto=format&fit=crop",
+      "/interiro.JPEG",
     imageAlt: "Modern interior design living room with elegant furniture",
   },
   {
@@ -19,7 +19,7 @@ const services: Service[] = [
       "Comprehensive architectural planning and construction services. We bring your vision to life with precision, quality, and attention to detail.",
     href: "/constructions",
     image:
-      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=900&q=80&auto=format&fit=crop",
+      "/1.png",
     imageAlt: "Modern architecture and construction project exterior",
   },
 ];

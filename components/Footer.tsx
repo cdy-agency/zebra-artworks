@@ -326,7 +326,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="mt-12 border-t border-line/15 pt-6 flex flex-col items-center justify-between gap-2 sm:flex-row">
-          <span className="text-type-eyebrow text-gray-mid/50">
+          <span className="text-type-eyebrow text-gray-mid">
             © {year} ZAG Rwanda. All rights reserved.
           </span>
         </div>

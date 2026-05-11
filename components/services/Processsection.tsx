@@ -6,23 +6,23 @@ import { motion } from "framer-motion";
 const steps = [
   {
     num: "01",
-    title: "Consultation",
-    desc: "We meet to understand your vision, needs, budget, and project timeline in full detail.",
+    title: "LISTENING",
+    desc: "We listen carefully to your needs and align with your vision to fully understand your expectations.",
   },
   {
     num: "02",
-    title: "Concept Development",
-    desc: "Our team creates detailed design concepts, mood boards, and 3D visualizations for your approval.",
+    title: "CONSULTATION",
+    desc: "Our team visits the site to collect and analyze all necessary data for the project.",
   },
   {
     num: "03",
-    title: "Execution",
-    desc: "We manage every detail of implementation, coordinating with contractors and suppliers.",
+    title: "CONCEPT DEVELOPMENT",
+    desc: "We brainstorm and transform your ideas into design solutions that match your vision, budget, and timeline.",
   },
   {
     num: "04",
-    title: "Delivery",
-    desc: "Final walkthrough and handover of your beautifully finished space, ready to use.",
+    title: "EXECUTION & DELIVERY",
+    desc: "Our team works hand in hand to deliver the project with quality and precision, ensuring proper inspection and a smooth handover.",
   },
 ];
 
