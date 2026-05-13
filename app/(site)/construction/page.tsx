@@ -176,7 +176,7 @@ export default function ConstructionPage() {
         >
           <p className="landing-eyebrow mb-4">Our work</p>
           <h1 className="mb-4 text-type-hero-mega font-bold leading-[1.05] text-white">
-            Architecture Construction
+            Architecture & Construction
           </h1>
           <p className="max-w-7xl text-type-prose-sm leading-relaxed text-white/50">
             Projects delivered with technical discipline, strong materials, and clear execution.
