@@ -241,14 +241,14 @@ export default function Navbar() {
 
       {/* Main navbar */}
       <div
-        className={`transition-all duration-500 ease-in-out ${
+        className={`transition-all duration-100 ease-in-out py-1 mt-2 ${
           scrolled
-            ? "bg-white/97 backdrop-blur-2xl shadow-[0_1px_0_rgba(0,0,0,0.07),0_4px_24px_rgba(0,0,0,0.06)]"
-            : "bg-transparent"
+            ? "max-w-7xl w-full mx-auto rounded-4xl bg-white/95 backdrop-blur-2xl shadow-[0_1px_0_rgba(0,0,0,0.07),0_4px_24px_rgba(0,0,0,0.06)]"
+            : "w-full bg-transparent"
         }`}
       >
         <nav className="mx-auto flex h-17 max-w-7xl items-center justify-between px-6 sm:px-10">
-          {/* ── Logo ─────────────────────────────────────────── */}
+          {/*  Logo  */}
           <Link
             href="/"
             className="flex shrink-0 items-center gap-3 group transition-opacity duration-200 hover:opacity-80"
