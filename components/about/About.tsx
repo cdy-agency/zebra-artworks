@@ -211,7 +211,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Why Choose Us ─────────────────────────────────────────────────── */}
-      <WhyChooseUs />
+      {/* <WhyChooseUs /> */}
 
       {/* ── Mission ───────────────────────────────────────────────────────── */}
       <section className={`bg-primary ${sectionPy}`}>
