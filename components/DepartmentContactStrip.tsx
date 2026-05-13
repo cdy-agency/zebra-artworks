@@ -2,16 +2,19 @@
 
 import Link from "next/link";
 import { Phone, MapPin, Globe, Construction } from "lucide-react";
-import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaLinkedinIn,
+  FaPinterest,
+  FaPinterestP,
+} from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import {
   ZAG_ADDRESS,
   ZAG_PHONE_DISPLAY,
   ZAG_PHONE_TEL,
-  ZAG_WEBSITE,
-  ZAG_WEBSITE_LABEL,
   INTERIOR_SOCIAL,
-  CONSTRUCTION_INSTAGRAM,
+  CONSTRUCTION_SOCIAL,
 } from "@/lib/zagContact";
 
 const linkBase =
@@ -20,7 +23,7 @@ const linkBase =
 function InteriorSocials() {
   return (
     <div className="flex flex-wrap items-center gap-4 sm:gap-5 pt-2">
-      <a
+      <Link
         href={INTERIOR_SOCIAL.instagram}
         target="_blank"
         rel="noopener noreferrer"
@@ -28,8 +31,8 @@ function InteriorSocials() {
       >
         <FaInstagram className="w-4 h-4 text-primary shrink-0" />
         <span>Instagram</span>
-      </a>
-      <a
+      </Link>
+      <Link
         href={INTERIOR_SOCIAL.linkedin}
         target="_blank"
         rel="noopener noreferrer"
@@ -37,16 +40,50 @@ function InteriorSocials() {
       >
         <FaLinkedinIn className="w-4 h-4 text-primary shrink-0" />
         <span>LinkedIn</span>
-      </a>
-      <a
+      </Link>
+      <Link
         href={INTERIOR_SOCIAL.x}
         target="_blank"
         rel="noopener noreferrer"
         className={linkBase}
       >
         <FaXTwitter className="w-4 h-4 text-primary shrink-0" />
-        <span>X</span>
-      </a>
+        <span>Twitter</span>
+      </Link>
+      <Link
+        href={INTERIOR_SOCIAL.pinterest}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={linkBase}
+      >
+        <FaPinterestP className="w-4 h-4 text-primary shrink-0" />
+        <span>Pinterest</span>
+      </Link>
+    </div>
+  );
+}
+
+function ConstructionSocials() {
+  return (
+    <div className="flex flex-wrap items-center gap-4 sm:gap-5 pt-2">
+      <Link
+        href={CONSTRUCTION_SOCIAL.instagram}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={linkBase}
+      >
+        <FaInstagram className="w-4 h-4 text-primary shrink-0" />
+        <span>Instagram</span>
+      </Link>
+      <Link
+        href={INTERIOR_SOCIAL.pinterest}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={linkBase}
+      >
+        <FaPinterest className="w-4 h-4 text-primary shrink-0" />
+        <span>Pinterest</span>
+      </Link>
     </div>
   );
 }
@@ -71,14 +108,15 @@ export default function DepartmentContactStrip({
           {isInterior ? "Interior design" : "Architecture & construction"}
         </p>
         <h2 className="font-heading text-type-h2 text-foreground max-w-2xl">
-          {isInterior
-            ? "Connect with us"
-            : "Follow our construction work"}
+          {isInterior ? "Connect with us" : "Follow our construction work"}
         </h2>
         <div className="landing-rule mb-6" />
         <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           <div className="space-y-3 text-type-prose text-foreground/85">
-            <a href={`tel:${ZAG_PHONE_TEL}`} className="flex items-start gap-3 group">
+            <a
+              href={`tel:${ZAG_PHONE_TEL}`}
+              className="flex items-start gap-3 group"
+            >
               <Phone className="w-4 h-4 text-primary mt-0.5 shrink-0" />
               <div>
                 <p className="text-type-eyebrow uppercase tracking-widest text-foreground/40 mb-0.5">
@@ -108,39 +146,17 @@ export default function DepartmentContactStrip({
                 </p>
                 <InteriorSocials />
                 <p className="text-type-meta text-foreground/50 mt-4">
-                  @zagrwanda on Instagram, LinkedIn &amp; X
+                  @zagrwanda Interior-design on Social media
                 </p>
               </div>
             ) : (
               <div>
                 <p className="text-type-eyebrow uppercase tracking-widest text-foreground/40 mb-3">
-                  Construction on Instagram
+                  Social
                 </p>
-                <a
-                  href={CONSTRUCTION_INSTAGRAM}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 bg-primary/5 px-5 py-4 text-foreground hover:bg-primary/10 hover:border-primary/50 transition-colors"
-                >
-                  <Construction className="w-6 h-6 text-primary shrink-0" />
-                  <div className="text-left">
-                    <p className="text-type-prose font-semibold">@zagrwandac</p>
-                    <p className="text-type-meta text-foreground/60">
-                      Architecture &amp; build updates
-                    </p>
-                  </div>
-                </a>
+                <ConstructionSocials />
                 <p className="text-type-meta text-foreground/50 mt-4">
-                  General brand &amp; interior:{" "}
-                  <a
-                    href={INTERIOR_SOCIAL.instagram}
-                    className="text-primary hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    @zagrwanda
-                  </a>{" "}
-                  on Instagram
+                  @zagrwanda Construction on Social media
                 </p>
               </div>
             )}

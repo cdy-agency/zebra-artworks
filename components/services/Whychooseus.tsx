@@ -103,7 +103,7 @@ export default function WhyChooseUs() {
             >
               Why Choose
               <br />
-              <span className="text-primary">ZAG</span> Construction?
+              <span className="text-primary">ZAG</span> Rwanda?
             </h2>
             <p className="mb-10 max-w-sm text-type-prose-sm leading-relaxed text-gray-mid">
               Built on precision, trust, and a passion for exceptional spaces —

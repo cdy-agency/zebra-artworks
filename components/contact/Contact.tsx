@@ -12,13 +12,11 @@ import {
   ZAG_PHONE_DISPLAY,
   ZAG_PHONE_TEL,
   INTERIOR_SOCIAL,
-  CONSTRUCTION_INSTAGRAM,
+  CONSTRUCTION_SOCIAL,
 } from "@/lib/zagContact";
+import Link from "next/link";
 
-const services = [
-  "Interior Design",
-  "Architecture & Construction",
-];
+const services = ["Interior Design", "Architecture & Construction"];
 
 const contactInfo = [
   {
@@ -59,6 +57,27 @@ const interiorSocials = [
     label: "Twitter",
     handle: "@zagrwanda",
     href: INTERIOR_SOCIAL.x,
+  },
+  {
+    icon: FaXTwitter,
+    label: "Pinterest",
+    handle: "@zagrwanda",
+    href: INTERIOR_SOCIAL.pinterest,
+  },
+] as const;
+
+const constructionSocials = [
+  {
+    icon: FaInstagram,
+    label: "Instagram",
+    handle: "@zagrwanda",
+    href: CONSTRUCTION_SOCIAL.instagram,
+  },
+  {
+    icon: FaXTwitter,
+    label: "Twitter",
+    handle: "@zagrwanda",
+    href: CONSTRUCTION_SOCIAL.pinterest,
   },
 ] as const;
 
@@ -423,7 +442,7 @@ export default function ContactPage() {
 
                   <div className="flex gap-1.5">
                     {interiorSocials.map(({ href, icon: Icon, label }) => (
-                      <a
+                      <Link
                         key={label}
                         href={href}
                         target="_blank"
@@ -432,36 +451,29 @@ export default function ContactPage() {
                         className="flex h-8 w-8 items-center justify-center border border-foreground/10 text-foreground/60 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
                       >
                         <Icon className="size-3.5" />
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center justify-between gap-4 border-b border-foreground/10 pb-4">
                   <p className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-foreground/60">
-                    Construction
+                    Interior &amp; Brand
                   </p>
 
                   <div className="flex gap-1.5">
-                    <a
-                      href={CONSTRUCTION_INSTAGRAM}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Construction Instagram"
-                      className="flex h-8 w-8 items-center justify-center border border-foreground/10 text-foreground/60 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
-                    >
-                      <FaInstagram className="size-3.5" />
-                    </a>
-
-                    <a
-                      href="https://pinterest.com/yourpage"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Pinterest"
-                      className="flex h-8 w-8 items-center justify-center border border-foreground/10 text-foreground/60 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
-                    >
-                      <FaPinterestP className="size-3.5" />
-                    </a>
+                    {constructionSocials.map(({ href, icon: Icon, label }) => (
+                      <Link
+                        key={label}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={label}
+                        className="flex h-8 w-8 items-center justify-center border border-foreground/10 text-foreground/60 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
+                      >
+                        <Icon className="size-3.5" />
+                      </Link>
+                    ))}
                   </div>
                 </div>
               </div>

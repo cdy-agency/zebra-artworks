@@ -14,7 +14,12 @@ export const INTERIOR_SOCIAL = {
   instagram: "https://www.instagram.com/zagrwanda/",
   linkedin: "https://www.linkedin.com/company/zagrwanda",
   x: "https://x.com/zagrwanda",
+  pinterest: "https://pinterest.com/yourpage",
 } as const;
 
 /** Architecture & Construction – dedicated Instagram */
-export const CONSTRUCTION_INSTAGRAM = "https://www.instagram.com/zagrwandac/";
+export const CONSTRUCTION_SOCIAL = {
+  instagram : "https://www.instagram.com/zagrwandac/",
+  pinterest: "https://pinterest.com/yourpage",
+
+}
