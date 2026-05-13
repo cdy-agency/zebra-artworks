@@ -290,7 +290,7 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* ── Desktop CTA actions ───────────────────────────── */}
+          {/* ── Desktop CTA actions  */}
           <div className="hidden items-center gap-4 md:flex">
             <Link
               href="/login"

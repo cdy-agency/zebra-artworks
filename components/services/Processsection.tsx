@@ -44,6 +44,7 @@ function StepCard({ step, index }: { step: (typeof steps)[0]; index: number }) {
       onMouseLeave={() => setHovered(false)}
     >
       {/* Top accent border — animated on hover */}
+
       <div
         className="absolute top-0 left-0 right-0 h-0.75 transition-colors duration-350"
         style={{ backgroundColor: hovered ? "#005f75" : "rgba(0,95,117,0.2)" }}
@@ -142,15 +143,15 @@ export default function ProcessSection() {
           <div
             aria-hidden
             className="pointer-events-none absolute hidden sm:block"
-            style={{
-              top: 0,
-              left: 0,
-              right: 0,
-              height: "1px",
-              background:
-                "linear-gradient(to right, rgba(0,95,117,0.15), rgba(0,95,117,0.35) 20%, rgba(0,95,117,0.35) 80%, rgba(0,95,117,0.15))",
-            }}
           />
+
+          <div className="mb-10 sm:mb-12">
+              <h2 className="font-heading text-type-h2 text-foreground max-w-2xl">
+                OUR PROCESS TO A SUCCESSFUL PROJECT
+              </h2>
+              <div className="landing-rule mt-4" />
+            </div>
+
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-8 lg:gap-6">
             {steps.map((step, index) => (
