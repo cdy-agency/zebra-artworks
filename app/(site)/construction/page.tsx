@@ -10,6 +10,7 @@ import { constructionServices } from "@/components/services/Services";
 import ReadySection from "@/components/ReadToConnect";
 import TestimonialsSection from "@/components/services/Testimonialssection";
 import DepartmentContactStrip from "@/components/DepartmentContactStrip";
+import ProcessSection from "@/components/services/Processsection";
 
 type ConstructionProject = Project & {
   num: string;
@@ -232,6 +233,7 @@ export default function ConstructionPage() {
       </section>
 
       <DepartmentContactStrip department="construction" />
+      <ProcessSection />
       <TestimonialsSection category="Architecture & Construction" />
       <ReadySection />
     </main>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Phone, MapPin, Globe, Construction } from "lucide-react";
+import { Phone, MapPin } from "lucide-react";
 import {
   FaInstagram,
   FaLinkedinIn,
