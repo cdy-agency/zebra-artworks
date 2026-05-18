@@ -167,7 +167,7 @@ export default function ConstructionPage() {
           className="object-cover object-center"
           style={{ filter: "brightness(0.35)" }}
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/10" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/50 via-black/20 to-black/10" />
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -175,9 +175,8 @@ export default function ConstructionPage() {
           transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
           className="relative z-10 mx-auto w-full max-w-6xl pt-28 pb-12"
         >
-          <p className="landing-eyebrow mb-4">Our work</p>
-          <h1 className="mb-4 text-type-hero-mega font-bold leading-[1.05] text-white">
-            Architecture & Construction
+          <h1 className="mb-4 text-type-hero-mega font-bold leading-[1.05] text-white uppercase">
+            Architecture <br />& Construction
           </h1>
           <p className="max-w-7xl text-type-prose-sm leading-relaxed text-white/50">
             Projects delivered with technical discipline, strong materials, and clear execution.
@@ -191,26 +190,13 @@ export default function ConstructionPage() {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="bg-primary grid grid-cols-4"
       >
-        {stats.map((stat, i) => (
-          <div
-            key={i}
-            className="text-center py-4 border-r border-white/15 last:border-r-0"
-          >
-            <p className="text-white font-heading text-type-h3 font-bold leading-none mb-1">
-              {loading ? "--" : stat.num}
-            </p>
-            <p className="text-white/60 text-type-eyebrow font-medium uppercase tracking-widest">
-              {stat.label}
-            </p>
-          </div>
-        ))}
       </motion.div>
 
       <section className="landing-section bg-background">
         <div className="landing-container">
           <div>
-            <h2 className="landing-title">Architecture &amp; Construction</h2>
-            <div className="landing-rule mb-6" />
+            <h2 className="landing-title uppercase">SERVICES</h2>
+            <div className="landing-rule-small mb-6" />
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {constructionServices.map((s) => (
@@ -222,8 +208,8 @@ export default function ConstructionPage() {
 
       <section className="landing-container px-6 pt-10 pb-32 sm:px-10 lg:px-0">
         <div>
-          <h2 className="landing-title">Construction Portfolio</h2>
-          <div className="landing-rule mb-6" />
+          <h2 className="landing-title uppercase">Portfolio</h2>
+          <div className="landing-rule-small mb-6" />
         </div>
         <div className="columns-2 md:columns-3" style={{ columnGap: "8px" }}>
           {projects.map((project, index) => (
@@ -232,10 +218,10 @@ export default function ConstructionPage() {
         </div>
       </section>
 
-      <DepartmentContactStrip department="construction" />
       <ProcessSection />
-      <TestimonialsSection category="Architecture & Construction" />
+      <DepartmentContactStrip department="construction" />
       <ReadySection />
+      <TestimonialsSection category="Architecture & Construction" />
     </main>
   );
 }

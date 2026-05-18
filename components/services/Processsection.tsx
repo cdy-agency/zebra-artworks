@@ -146,8 +146,8 @@ export default function ProcessSection() {
           />
 
           <div className="mb-10 sm:mb-12">
-              <h2 className="font-heading text-type-h2 text-foreground max-w-2xl">
-                OUR PROCESS TO A SUCCESSFUL PROJECT
+              <h2 className="font-heading text-type-h2 text-foreground max-w-2xl uppercase">
+                OUR WORKFLOW
               </h2>
               <div className="landing-rule mt-4" />
             </div>

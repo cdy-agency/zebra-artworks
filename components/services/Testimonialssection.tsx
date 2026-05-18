@@ -216,9 +216,6 @@ export default function TestimonialsSection({
         className="mb-12 sm:mb-16 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 max-w-6xl mx-auto"
       >
         <div>
-          <p className="text-primary text-xs font-medium uppercase tracking-[0.2em] mb-3">
-            Client testimonials
-          </p>
           <h2 className="text-4xl sm:text-5xl font-bold text-foreground leading-[1.1]">
             What Our Clients Say
           </h2>

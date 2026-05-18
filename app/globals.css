@@ -67,6 +67,10 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background: var(--color-background);
     color: var(--color-foreground);
@@ -133,7 +137,6 @@
 
   .landing-eyebrow {
     margin-bottom: 0.75rem;
-    color: var(--color-primary);
     font-size: var(--text-type-eyebrow);
     font-weight: 500;
     line-height: var(--text-type-eyebrow--line-height);
@@ -148,10 +151,19 @@
   .landing-rule {
     margin-top: 0.25rem;
     height: 0.125rem;
-    width: 14rem;
+    width: 20rem;
     border-radius: 9999px;
     background: var(--color-accent);
   }
+  .landing-rule-small {
+    margin-top: 0.25rem;
+    height: 0.125rem;
+    width: 11rem;
+    border-radius: 9999px;
+    background: var(--color-accent);
+  }
+
+
 
   .landing-link {
     display: inline-flex;

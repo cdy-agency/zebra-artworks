@@ -142,7 +142,7 @@ export default function InteriorDesignPage() {
           className="object-cover object-center"
           style={{ filter: "brightness(0.35)" }}
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/10" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/50 via-black/20 to-black/10" />
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -150,9 +150,8 @@ export default function InteriorDesignPage() {
           transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
           className="relative z-10 mx-auto w-full max-w-6xl px-5 pt-28 pb-12 sm:px-8"
         >
-          <p className="landing-eyebrow mb-4">Portfolio</p>
           <h1 className="mb-4 text-type-hero-mega font-bold leading-[1.05] text-white">
-            Interior Design
+            INTERIOR DESIGN
           </h1>
           <p className="max-w-sm text-type-prose-sm leading-relaxed text-white/50">
             Refined spaces shaped through detail, comfort, and contemporary design.
@@ -163,8 +162,8 @@ export default function InteriorDesignPage() {
       <section className="landing-section bg-background">
         <div className="landing-container">
           <div>
-            <h2 className="landing-title">Interior Design Department</h2>
-            <div className="landing-rule mb-6" />
+            <h2 className="landing-title">SERVICES</h2>
+            <div className="landing-rule-small mb-6" />
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {interiorServices.map((s) => (
@@ -176,8 +175,8 @@ export default function InteriorDesignPage() {
 
       <section className="landing-container px-6 pt-10 pb-32 sm:px-10 lg:px-0">
         <div>
-          <h2 className="landing-title">Interior Design Portfolio</h2>
-          <div className="landing-rule mb-6" />
+          <h2 className="landing-title">PORTFOLIO</h2>
+          <div className="landing-rule-small mb-6" />
         </div>
         <div
           className="columns-2 md:columns-3 gap-2"
@@ -188,10 +187,10 @@ export default function InteriorDesignPage() {
           ))}
         </div>
       </section>
-      <DepartmentContactStrip department="interior" />
       <ProcessSection />
-      <TestimonialsSection category="Interior Design" />
+      <DepartmentContactStrip department="interior" />
       <ReadySection />
+      <TestimonialsSection category="Interior Design" />
     </main>
   );
 }

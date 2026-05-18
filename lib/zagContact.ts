@@ -4,7 +4,7 @@ export const ZAG_PHONE_DISPLAY = "+250 784 843 042";
 export const ZAG_PHONE_TEL = "+250784843042";
 export const ZAG_EMAIL = "office@zagrwanda.rw";
 /** Match Norrsken / KN 78 location */
-export const ZAG_ADDRESS = "Kigali, KN 78 St – Nyarugenge (Norrsken House)";
+export const ZAG_ADDRESS = "Kigali, KN 78 St ";
 
 export const ZAG_WEBSITE = "https://www.zagrwanda.rw";
 export const ZAG_WEBSITE_LABEL = "www.zagrwanda.rw";

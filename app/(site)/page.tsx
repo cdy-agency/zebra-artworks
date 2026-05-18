@@ -5,17 +5,19 @@ import LatestConstruction from "@/components/Construction";
 import ReadySection from "@/components/ReadToConnect";
 import NewsSection from "@/components/NewsSection";
 import PartnersSection from "@/components/PartnersSection";
+import WhyChooseUs from "@/components/services/Whychooseus";
 
 export default function Home() {
   return (
     <main>
       <HeroSection />
       <ServicesSection />
-      <PartnersSection />
       <LatestDesigns />
       <LatestConstruction />
-      <NewsSection />
+      <PartnersSection />
+      <WhyChooseUs />
       <ReadySection />
+      <NewsSection />
     </main>
   );
 }

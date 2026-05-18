@@ -96,8 +96,6 @@ export default function ReadySection() {
           </motion.div>
         </div>
       </section>
-
-      <WhyChooseUs />
     </>
   );
 }
