@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 
 interface ServiceCardProps {
@@ -14,34 +13,16 @@ export function ServiceCard({ title, desc, href = "/" }: ServiceCardProps) {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <Link
-      href={href}
+    <div
       className="relative flex flex-col bg-background border border-foreground/8 p-7 overflow-hidden group cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
 
-      {/* Top accent line sweeps on hover */}
-      <div
-        className="absolute top-0 left-0 right-0 h-0.75 bg-primary origin-left"
-        style={{
-          transform: hovered ? "scaleX(1)" : "scaleX(0)",
-          transition: "transform 0.4s cubic-bezier(0.4,0,0.2,1)",
-        }}
-      />
-
-      <div
-        className="absolute top-0 left-0 w-0.75 bg-primary origin-top"
-        style={{
-          height: hovered ? "100%" : "40px",
-          transition: "height 0.5s cubic-bezier(0.4,0,0.2,1)",
-        }}
-      />
-
       {/* Icon */}
       <div className="w-10 h-10 rounded-xl bg-[#f6f7f9] flex items-center justify-center overflow-hidden transition-all duration-300">
         <Image
-          src="/bg-logo-zaga.png"
+          src="/icon-zaga.png"
           alt="ZAG Rwanda"
           width={28}
           height={28}
@@ -61,6 +42,6 @@ export function ServiceCard({ title, desc, href = "/" }: ServiceCardProps) {
       <p className="text-gray-mid text-sm font-light leading-relaxed flex-1 mb-6">
         {desc}
       </p>
-    </Link>
+    </div>
   );
 }

@@ -89,7 +89,7 @@ function NewsCard({
                 "linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%)",
             }}
           >
-            <p className="mb-3 text-type-eyebrow font-medium uppercase tracking-widest text-primary">
+            <p className="mb-3 text-type-eyebrow font-medium uppercase tracking-widest text-white">
               {item.tag}
             </p>
             <h2 className="mb-2 max-w-2xl text-type-h2 leading-snug text-white">
@@ -246,7 +246,7 @@ export default function NewsPage() {
           className="object-cover object-center"
           style={{ filter: "brightness(0.35)" }}
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/10" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/50 via-black/20 to-black/10" />
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -254,11 +254,10 @@ export default function NewsPage() {
           transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
           className="relative z-10 mx-auto w-full max-w-6xl pt-10 pb-12"
         >
-          <p className="landing-eyebrow mb-4">Press &amp; Media</p>
           <h1
-            className="mb-4 text-type-hero-mega font-bold leading-[1.05] text-white"
+            className="mb-4 text-type-hero-mega font-bold leading-[1.05] text-white uppercase"
           >
-            News &amp; Updates
+            Announcements
           </h1>
           <p className="max-w-sm text-type-prose-sm leading-relaxed text-white/50">
             Stories, updates, and insights from the team at ZAG Rwanda.

@@ -175,7 +175,7 @@ export default function ContactPage() {
           style={{ filter: "brightness(0.38)" }}
         />
 
-        <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/50 via-black/20 to-black/10" />
         <div className="absolute top-0 left-0 right-0 h-0.75 bg-primary z-10" />
 
         <motion.div
@@ -239,14 +239,13 @@ export default function ContactPage() {
                   />
                 </Field>
 
-                <Field label="Email address" required>
+                <Field label="Email address">
                   <input
                     type="email"
                     name="email"
                     value={form.email}
                     onChange={handleChange}
                     placeholder="you@example.com"
-                    required
                     className={inputClass}
                   />
                 </Field>
@@ -312,27 +311,25 @@ export default function ContactPage() {
               </Field>
 
               {/* Subject */}
-              <Field label="Subject" required>
+              <Field label="Subject">
                 <input
                   type="text"
                   name="subject"
                   value={form.subject}
                   onChange={handleChange}
                   placeholder="Brief description of your project"
-                  required
                   className={inputClass}
                 />
               </Field>
 
               {/* Message */}
-              <Field label="Message" required>
+              <Field label="Message">
                 <textarea
                   name="message"
                   value={form.message}
                   onChange={handleChange}
                   placeholder="Tell us about your vision, timeline, and budget..."
                   rows={6}
-                  required
                   className={`${inputClass} resize-none`}
                 />
               </Field>

@@ -117,9 +117,9 @@ export default function NewsSection() {
         className="landing-section-header"
       >
         <div>
-          <p className="landing-eyebrow">Press &amp; Media</p>
-          <h2 className="landing-title">News &amp; Updates</h2>
-          <div className="landing-rule" />
+          <p className="landing-eyebrow">UPDATES</p>
+          <h2 className="landing-title">Announcement</h2>
+          <div className="landing-rule-small" />
         </div>
         <Link href="/news" className="landing-link">
           View all articles

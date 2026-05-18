@@ -109,9 +109,9 @@ export default function LatestDesigns() {
         className="landing-section-header"
       >
         <div>
-          <p className="landing-eyebrow">Portfolio</p>
-          <h2 className="landing-title">Latest Interior Design</h2>
-          <div className="landing-rule" />
+          <p className="landing-eyebrow">OUR WORK</p>
+          <h2 className="landing-title">Interior Trends</h2>
+          <div className="landing-rule-small" />
         </div>
         <Link href="/interior-design" className="landing-link">
           View all projects

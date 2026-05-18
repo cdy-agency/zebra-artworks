@@ -36,8 +36,8 @@ export default function ServicesSection() {
       >
         <div>
           <p className="landing-eyebrow">What we do</p>
-          <h2 className="landing-title">Our Services</h2>
-          <div className="landing-rule" />
+          <h2 className="landing-title ">Our Services</h2>
+          <div className="landing-rule-small" />
         </div>
       </motion.div>
 

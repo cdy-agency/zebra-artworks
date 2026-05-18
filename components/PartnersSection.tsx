@@ -71,8 +71,8 @@ export default function PartnersSection() {
         >
           <div>
             <p className="landing-eyebrow">Partners</p>
-            <h2 className="landing-title">Trusted Collaborations</h2>
-            <div className="landing-rule" />
+            <h2 className="landing-title">Our Partners</h2>
+            <div className="landing-rule-small" />
           </div>
         </motion.div>
 

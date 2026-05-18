@@ -6,14 +6,15 @@ import { useEffect, useState } from "react";
 import {
   ArrowRight,
   Download,
+  Eye,
   FileText,
   BookOpen,
   Sparkles,
   Shield,
   Lightbulb,
   Phone,
+  X,
 } from "lucide-react";
-import WhyChooseUs from "../services/Whychooseus";
 import { motion } from "framer-motion";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -57,10 +58,7 @@ const stats = [
   { value: "2019", label: "Founded" },
   { value: "120+", label: "Projects Completed" },
   { value: "8+", label: "Years of Excellence" },
-  { value: "40+", label: "Expert Team Members" },
 ];
-
-// ─── Helper ───────────────────────────────────────────────────────────────────
 
 function getFileIcon(fileName: string) {
   const ext = fileName.split(".").pop()?.toLowerCase();
@@ -68,10 +66,9 @@ function getFileIcon(fileName: string) {
   return BookOpen;
 }
 
-// ─── Shared layout tokens ─────────────────────────────────────────────────────
-// Use these class strings everywhere so a single edit fixes the whole page.
-// container  → max-w + horizontal px
-// section-py → consistent vertical rhythm for all sections
+function isPdfFile(fileName: string) {
+  return fileName.split(".").pop()?.toLowerCase() === "pdf";
+}
 
 const container = "mx-auto w-full max-w-7xl px-6 sm:px-10";
 const sectionPy = "py-20 sm:py-24";
@@ -81,6 +78,7 @@ const sectionPy = "py-20 sm:py-24";
 export default function AboutPage() {
   const [resources, setResources] = useState<Resource[]>([]);
   const [loadingResources, setLoadingResources] = useState(true);
+  const [activeResource, setActiveResource] = useState<Resource | null>(null);
 
   useEffect(() => {
     fetch("/api/resources")
@@ -89,6 +87,19 @@ export default function AboutPage() {
       .catch(() => {})
       .finally(() => setLoadingResources(false));
   }, []);
+
+  useEffect(() => {
+    if (!activeResource) return;
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveResource(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [activeResource]);
 
   return (
     <main className="bg-subtle">
@@ -112,20 +123,27 @@ export default function AboutPage() {
           className={`relative z-10 ${container} pt-28 pb-12`}
         >
           <p className="landing-eyebrow mb-4">Our work</p>
-          <h1 className="mb-4 text-type-hero-mega font-bold leading-[1.05] text-white">
-            Architecture Construction
+
+          <h1 className="mb-5 text-type-hero-mega font-bold leading-[1.05]">
+            <span className="text-white">ZEBRA ARTWORK </span>
+            <br />
+            <span className="text-white">GROUP LTD </span>
           </h1>
-          <p className="max-w-sm text-type-prose-sm leading-relaxed text-white/50">
-            Projects delivered with technical discipline, strong materials, and
-            clear execution.
-          </p>
+
+          {/* Slogan */}
+          <div className="flex items-center gap-3">
+            <div className="h-px w-8 bg-primary" />
+            <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/60">
+              Best Choice
+            </p>
+          </div>
         </motion.div>
       </section>
 
       {/* ── Stats strip ───────────────────────────────────────────────────── */}
       <section className="bg-background border-y border-line/20">
         <div className={container}>
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-line/20">
+          <div className="grid grid-cols-2 md:grid-cols-3 divide-x divide-y md:divide-y-0 divide-line/20">
             {stats.map((stat) => (
               <div
                 key={stat.label}
@@ -157,13 +175,6 @@ export default function AboutPage() {
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
-              </div>
-              {/* Floating accent card */}
-              <div className="absolute -bottom-5 -right-5 bg-primary text-white px-6 py-4 shadow-xl">
-                <p className="text-2xl font-black leading-none">5+</p>
-                <p className="mt-1 text-type-eyebrow font-medium uppercase tracking-wide text-white/70">
-                  Years registered
-                </p>
               </div>
             </div>
 
@@ -333,7 +344,10 @@ export default function AboutPage() {
 
       {/* ── Company Resources ─────────────────────────────────────────────── */}
       {(loadingResources || resources.length > 0) && (
-        <section className={`${sectionPy} bg-subtle border-t border-line/20`}>
+        <section
+          id="company-resources"
+          className={`${sectionPy} bg-subtle border-t border-line/20`}
+        >
           <div className={container}>
             <div className="grid lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-20 items-start">
               {/* Left copy */}
@@ -360,19 +374,22 @@ export default function AboutPage() {
               </div>
 
               {/* Download cards */}
-              <div className="space-y-4">
+              <div className="grid gap-4 sm:grid-cols-2">
                 {loadingResources ? (
                   <>
                     {[1, 2].map((i) => (
                       <div
                         key={i}
-                        className="flex items-start gap-5 bg-background border border-line/20 p-6 animate-pulse"
+                        className="flex items-center gap-3 border border-primary/15 bg-background px-4 py-3 animate-pulse"
                       >
-                        <div className="w-12 h-12 bg-subtle rounded shrink-0" />
+                        <div className="h-9 w-9 shrink-0 bg-subtle" />
                         <div className="flex-1 space-y-2">
+                          <div className="h-3 w-20 bg-subtle rounded" />
                           <div className="h-4 w-40 bg-subtle rounded" />
-                          <div className="h-3 w-64 bg-subtle rounded" />
-                          <div className="h-6 w-32 bg-subtle rounded-full mt-3" />
+                        </div>
+                        <div className="flex gap-2">
+                          <div className="h-9 w-20 bg-subtle rounded" />
+                          <div className="h-9 w-9 bg-subtle rounded" />
                         </div>
                       </div>
                     ))}
@@ -380,58 +397,88 @@ export default function AboutPage() {
                 ) : (
                   resources.map((res) => {
                     const Icon = getFileIcon(res.file_name);
-                    const label = res.title
-                      ? `Download ${res.title}`
-                      : "Download File";
+                    const isPdf = isPdfFile(res.file_name);
                     return (
-                      <a
+                      <div
                         key={res.id}
-                        href={res.file_url}
-                        download={res.file_name}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-start gap-5 bg-background border border-line/20 p-6 hover:border-primary/40 hover:shadow-md transition-all duration-300"
+                        className="group flex items-center gap-3 border border-primary/15 bg-background px-4 py-3 transition-all duration-200 hover:border-primary/40 hover:bg-primary/[0.02]"
                       >
-                        <div className="w-12 h-12 bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary/15 transition-colors">
-                          <Icon
-                            size={20}
-                            className="text-primary"
-                            strokeWidth={1.75}
-                          />
+                        {isPdf ? (
+                          <div className="flex h-9 w-9 shrink-0 items-center justify-center bg-red-600/90">
+                            <svg
+                              viewBox="0 0 24 24"
+                              className="h-5 w-5"
+                              fill="none"
+                            >
+                              <path
+                                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                                fill="white"
+                                fillOpacity="0.15"
+                                stroke="white"
+                                strokeWidth="1.5"
+                                strokeLinejoin="round"
+                              />
+                              <path
+                                d="M14 2v6h6"
+                                stroke="white"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                              <text
+                                x="5"
+                                y="19"
+                                fontSize="6"
+                                fontWeight="800"
+                                fill="white"
+                                letterSpacing="0.5"
+                                fontFamily="sans-serif"
+                              >
+                                PDF
+                              </text>
+                            </svg>
+                          </div>
+                        ) : (
+                          <div className="flex h-9 w-9 shrink-0 items-center justify-center border border-primary/20 bg-primary/10 text-primary">
+                            <Icon size={16} strokeWidth={1.8} />
+                          </div>
+                        )}
+
+                        <div className="min-w-0 flex-1">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary/50">
+                            {isPdf ? "PDF Document" : "Document"}
+                          </p>
+                          <p className="truncate text-[13px] font-semibold text-foreground">
+                            {res.title || res.file_name}
+                          </p>
+                          {res.file_size && (
+                            <p className="mt-1 text-type-eyebrow text-gray-mid">
+                              {res.file_size}
+                            </p>
+                          )}
                         </div>
 
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-start justify-between gap-3">
-                            <div>
-                              <p className="mb-1 text-type-prose-sm font-bold text-foreground">
-                                {res.title || res.file_name}
-                              </p>
-                              {res.description && (
-                                <p className="text-type-eyebrow leading-relaxed text-gray-mid">
-                                  {res.description}
-                                </p>
-                              )}
-                            </div>
-                            <div className="w-9 h-9 bg-subtle border border-line/20 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:border-primary transition-all duration-300">
-                              <Download
-                                size={14}
-                                className="text-gray-mid group-hover:text-white transition-colors duration-300"
-                              />
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2 mt-3">
-                            <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/8 px-2.5 py-1 text-type-eyebrow font-semibold text-primary">
-                              <Download size={9} />
-                              {label}
-                            </span>
-                            {res.file_size && (
-                              <span className="text-type-eyebrow text-gray-mid">
-                                {res.file_size}
-                              </span>
-                            )}
-                          </div>
+                        <div className="flex shrink-0 items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setActiveResource(res)}
+                            className="inline-flex items-center gap-2 border border-primary/15 bg-white px-3 py-2 text-type-eyebrow font-semibold uppercase tracking-[0.16em] text-primary transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white"
+                          >
+                            <Eye size={13} strokeWidth={1.9} />
+                            View
+                          </button>
+                          <a
+                            href={res.file_url}
+                            download={res.file_name}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex h-9 w-9 items-center justify-center border border-line/20 bg-subtle text-gray-mid transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white"
+                            aria-label={`Download ${res.title || res.file_name}`}
+                          >
+                            <Download size={14} strokeWidth={1.9} />
+                          </a>
                         </div>
-                      </a>
+                      </div>
                     );
                   })
                 )}
@@ -439,6 +486,59 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+      )}
+
+      {activeResource && (
+        <div
+          className="fixed inset-0 z-1000 flex items-center justify-center bg-black/70 px-4 py-8 backdrop-blur-[2px]"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              setActiveResource(null);
+            }
+          }}
+        >
+          <div className="flex max-h-[90vh] w-full max-w-6xl flex-col overflow-hidden border border-line/20 bg-background shadow-2xl">
+            <div className="flex items-center justify-between gap-4 border-b border-line/20 px-5 py-4">
+              <div className="min-w-0">
+                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary/55">
+                  Document Viewer
+                </p>
+                <h3 className="truncate text-type-h5 font-bold text-foreground">
+                  {activeResource.title || activeResource.file_name}
+                </h3>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <a
+                  href={activeResource.file_url}
+                  download={activeResource.file_name}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border border-primary/15 bg-white px-3 py-2 text-type-eyebrow font-semibold uppercase tracking-[0.16em] text-primary transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white"
+                >
+                  <Download size={13} strokeWidth={1.9} />
+                  Download
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setActiveResource(null)}
+                  className="flex h-9 w-9 items-center justify-center border border-line/20 bg-subtle text-gray-mid transition-colors hover:border-primary hover:bg-primary hover:text-white"
+                  aria-label="Close document viewer"
+                >
+                  <X size={15} strokeWidth={1.9} />
+                </button>
+              </div>
+            </div>
+
+            <div className="min-h-[65vh] flex-1 bg-subtle">
+              <iframe
+                src={activeResource.file_url}
+                title={activeResource.title || activeResource.file_name}
+                className="h-full min-h-[65vh] w-full border-0 bg-white"
+              />
+            </div>
+          </div>
+        </div>
       )}
     </main>
   );

@@ -104,11 +104,8 @@ export default function DepartmentContactStrip({
       }
     >
       <div className="max-w-6xl mx-auto py-12 sm:py-14">
-        <p className="text-primary text-type-eyebrow font-medium uppercase tracking-[0.2em] mb-2">
-          {isInterior ? "Interior design" : "Architecture & construction"}
-        </p>
-        <h2 className="font-heading text-type-h2 text-foreground max-w-2xl">
-          {isInterior ? "Connect with us" : "Follow our construction work"}
+        <h2 className="font-heading text-type-h2 text-foreground max-w-2xl uppercase">
+          Connect with us
         </h2>
         <div className="landing-rule mb-6" />
         <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">

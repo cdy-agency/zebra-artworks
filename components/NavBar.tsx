@@ -126,13 +126,6 @@ function DesktopNavItem({
         )}
         {link.label}
       </Link>
-      {/* Active: gold underline */}
-      {active ? (
-        <span className="absolute -bottom-4.75 left-0 right-0 h-0.5 bg-primary rounded-full" />
-      ) : (
-        /* Hover: white ghost underline grows from center */
-        <span className="absolute -bottom-4.75 left-1/2 -translate-x-1/2 h-[1.5px] w-0 group-hover/nav:w-full bg-white/25 rounded-full transition-all duration-300" />
-      )}
     </li>
   );
 }
@@ -243,11 +236,11 @@ export default function Navbar() {
       <div
         className={`transition-all duration-100 ease-in-out py-1 mt-2 ${
           scrolled
-            ? "max-w-7xl w-full mx-auto rounded-4xl bg-white/95 backdrop-blur-2xl shadow-[0_1px_0_rgba(0,0,0,0.07),0_4px_24px_rgba(0,0,0,0.06)]"
+            ? "max-w-6xl w-full mx-auto rounded-full bg-white/95 backdrop-blur-2xl shadow-[0_1px_0_rgba(0,0,0,0.07),0_4px_24px_rgba(0,0,0,0.06)]"
             : "w-full bg-transparent"
         }`}
       >
-        <nav className="mx-auto flex h-17 max-w-7xl items-center justify-between px-6 sm:px-10">
+        <nav className="mx-auto flex h-17 max-w-6xl items-center justify-between px-6">
           {/*  Logo  */}
           <Link
             href="/"
@@ -312,7 +305,7 @@ export default function Navbar() {
 
             <Link
               href="/contact"
-              className={`group inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold tracking-wide transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${
+              className={`group rounded-full inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold tracking-wide transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${
                 scrolled
                   ? "bg-gray-900 text-white hover:bg-primary"
                   : "bg-white/12 text-white border border-white/20 hover:bg-white hover:text-gray-900 backdrop-blur-sm"
