@@ -20,6 +20,12 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Admin account settings
+
+Admins can update their profile name, change their sign-in email, and change their password from `/admin/settings`. Both email and password changes require the current password and do not use OTP verification. From `/login`, users can request a password-recovery code by email and submit that code with a new password.
+
+For login password recovery, configure the Supabase Auth **Reset Password** email template to display `{{ .Token }}`. OTP verification is only used for the `/login` reset-password flow.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

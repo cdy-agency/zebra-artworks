@@ -179,6 +179,8 @@ export default function AdminTopbar({
   pageTitle: string;
 }) {
   const pathname = usePathname();
+  const currentPageTitle =
+    pathname === "/admin/settings" ? "Settings" : pageTitle;
   const [messages, setMessages] = useState<Message[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -235,7 +237,7 @@ export default function AdminTopbar({
 </div>
       
       <h2 className="text-sm font-bold text-foreground truncate">
-        {pageTitle}
+        {currentPageTitle}
       </h2>
 
       {/* Right side */}
